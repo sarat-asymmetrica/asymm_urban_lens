@@ -29,6 +29,7 @@ import (
 	"github.com/asymmetrica/urbanlens/pkg/cultural"
 	"github.com/asymmetrica/urbanlens/pkg/dilr"
 	"github.com/asymmetrica/urbanlens/pkg/media"
+	"github.com/asymmetrica/urbanlens/pkg/ocr"
 	"github.com/asymmetrica/urbanlens/pkg/orchestrator"
 	"github.com/asymmetrica/urbanlens/pkg/reasoning"
 	"github.com/asymmetrica/urbanlens/pkg/research"
@@ -71,6 +72,7 @@ var (
 	healthChecker    *api.HealthChecker
 	whisperClient    *transcription.WhisperClient
 	chatService      *chat.Service
+	ocrService       *ocr.UnifiedOCRService
 )
 
 // ============================================================================
@@ -153,6 +155,9 @@ func initializeComponents() {
 	// Initialize AI chat service
 	chatService = chat.NewService("")
 
+	// Initialize OCR service
+	ocrService, _ = ocr.NewUnifiedOCRService()
+
 	fmt.Println("✅ Components initialized:")
 	fmt.Println("   - Orchestrator (Williams batching enabled)")
 	fmt.Println("   - Reasoning Engine (4-phase transparent thinking)")
@@ -163,6 +168,7 @@ func initializeComponents() {
 	fmt.Println("   - Document Pipeline (unified media/document processing)")
 	fmt.Println("   - Whisper Transcription (audio-to-text)")
 	fmt.Println("   - AI Chat Service (research assistant)")
+	fmt.Println("   - OCR Service (Florence-2 vision)")
 	fmt.Println("   - WebSocket Hub (real-time streaming)")
 
 	// Show document pipeline status
@@ -251,6 +257,10 @@ func setupRoutes() {
 	// AI Chat
 	http.HandleFunc("/api/chat", handleChat)
 	http.HandleFunc("/api/chat/status", handleChatStatus)
+
+	// OCR
+	http.HandleFunc("/api/ocr", handleOCR)
+	http.HandleFunc("/api/ocr/status", handleOCRStatus)
 
 	// WebSocket
 	http.HandleFunc("/ws", handleWebSocket)
@@ -1139,6 +1149,58 @@ func handleChat(w http.ResponseWriter, r *http.Request) {
 
 	api.JSON(w, resp, &api.MetaInfo{
 		ProcessTime: resp.ProcessTime,
+		Version:     Version,
+	})
+}
+
+// ============================================================================
+// OCR HANDLERS
+// ============================================================================
+
+func handleOCRStatus(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(ocrService.GetStatus())
+}
+
+func handleOCR(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		api.MethodNotAllowed(w, "POST")
+		return
+	}
+
+	// Parse multipart form (max 50MB for images)
+	if err := r.ParseMultipartForm(50 << 20); err != nil {
+		api.BadRequest(w, "Failed to parse form: "+err.Error())
+		return
+	}
+
+	// Get file from form
+	file, _, err := r.FormFile("file")
+	if err != nil {
+		api.BadRequest(w, "No file provided")
+		return
+	}
+	defer file.Close()
+
+	// Read file data
+	imageData, err := io.ReadAll(file)
+	if err != nil {
+		api.InternalError(w, "Failed to read file", err)
+		return
+	}
+
+	// Perform OCR
+	result, err := ocrService.OCR(r.Context(), ocr.OCRRequest{
+		ImageData: imageData,
+	})
+
+	if err != nil {
+		api.InternalError(w, "OCR failed", err)
+		return
+	}
+
+	api.JSON(w, result, &api.MetaInfo{
+		ProcessTime: result.ProcessTime,
 		Version:     Version,
 	})
 }
