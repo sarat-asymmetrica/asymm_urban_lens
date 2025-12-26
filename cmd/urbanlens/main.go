@@ -28,8 +28,11 @@ import (
 	"github.com/asymmetrica/urbanlens/pkg/climate"
 	"github.com/asymmetrica/urbanlens/pkg/cultural"
 	"github.com/asymmetrica/urbanlens/pkg/dilr"
+	"github.com/asymmetrica/urbanlens/pkg/ecosystem"
+	"github.com/asymmetrica/urbanlens/pkg/gpu"
 	"github.com/asymmetrica/urbanlens/pkg/media"
 	"github.com/asymmetrica/urbanlens/pkg/ocr"
+	"github.com/asymmetrica/urbanlens/pkg/office"
 	"github.com/asymmetrica/urbanlens/pkg/orchestrator"
 	"github.com/asymmetrica/urbanlens/pkg/reasoning"
 	"github.com/asymmetrica/urbanlens/pkg/research"
@@ -73,6 +76,8 @@ var (
 	whisperClient    *transcription.WhisperClient
 	chatService      *chat.Service
 	ocrService       *ocr.UnifiedOCRService
+	gpuAccelerator   *gpu.Accelerator
+	officeBridge     *office.Bridge
 )
 
 // ============================================================================
@@ -158,6 +163,12 @@ func initializeComponents() {
 	// Initialize OCR service
 	ocrService, _ = ocr.NewUnifiedOCRService()
 
+	// Initialize GPU accelerator
+	gpuAccelerator = gpu.NewAccelerator()
+
+	// Initialize Office bridge (connects to Asymmetrica.Runtime if available)
+	officeBridge = office.NewBridge()
+
 	fmt.Println("✅ Components initialized:")
 	fmt.Println("   - Orchestrator (Williams batching enabled)")
 	fmt.Println("   - Reasoning Engine (4-phase transparent thinking)")
@@ -169,6 +180,8 @@ func initializeComponents() {
 	fmt.Println("   - Whisper Transcription (audio-to-text)")
 	fmt.Println("   - AI Chat Service (research assistant)")
 	fmt.Println("   - OCR Service (Florence-2 vision)")
+	fmt.Println("   - GPU Accelerator (quaternion batch ops)")
+	fmt.Println("   - Office Bridge (Asymmetrica.Runtime)")
 	fmt.Println("   - WebSocket Hub (real-time streaming)")
 
 	// Show document pipeline status
@@ -261,6 +274,11 @@ func setupRoutes() {
 	// OCR
 	http.HandleFunc("/api/ocr", handleOCR)
 	http.HandleFunc("/api/ocr/status", handleOCRStatus)
+
+	// Ecosystem
+	http.HandleFunc("/api/ecosystem/status", handleEcosystemStatus)
+	http.HandleFunc("/api/gpu/status", handleGPUStatus)
+	http.HandleFunc("/api/office/status", handleOfficeStatus)
 
 	// WebSocket
 	http.HandleFunc("/ws", handleWebSocket)
@@ -1160,6 +1178,25 @@ func handleChat(w http.ResponseWriter, r *http.Request) {
 func handleOCRStatus(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(ocrService.GetStatus())
+}
+
+// ============================================================================
+// ECOSYSTEM HANDLERS
+// ============================================================================
+
+func handleEcosystemStatus(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(ecosystem.GetEcosystemStatus())
+}
+
+func handleGPUStatus(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(gpuAccelerator.GetStatus())
+}
+
+func handleOfficeStatus(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(officeBridge.GetStatus())
 }
 
 func handleOCR(w http.ResponseWriter, r *http.Request) {
