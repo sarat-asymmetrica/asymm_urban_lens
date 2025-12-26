@@ -14,6 +14,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -31,6 +32,7 @@ import (
 	"github.com/asymmetrica/urbanlens/pkg/reasoning"
 	"github.com/asymmetrica/urbanlens/pkg/research"
 	"github.com/asymmetrica/urbanlens/pkg/streaming"
+	"github.com/asymmetrica/urbanlens/pkg/transcription"
 	"github.com/asymmetrica/urbanlens/pkg/urban"
 	"github.com/gorilla/websocket"
 )
@@ -66,6 +68,7 @@ var (
 	researchToolkit  *research.Toolkit
 	documentPipeline *media.DocumentPipeline
 	healthChecker    *api.HealthChecker
+	whisperClient    *transcription.WhisperClient
 )
 
 // ============================================================================
@@ -142,6 +145,9 @@ func initializeComponents() {
 	// Initialize health checker
 	healthChecker = api.NewHealthChecker(Version)
 
+	// Initialize Whisper transcription client
+	whisperClient = transcription.NewWhisperClient("")
+
 	fmt.Println("✅ Components initialized:")
 	fmt.Println("   - Orchestrator (Williams batching enabled)")
 	fmt.Println("   - Reasoning Engine (4-phase transparent thinking)")
@@ -150,6 +156,7 @@ func initializeComponents() {
 	fmt.Println("   - Climate Engine (IMD rainfall, monsoon, urban heat)")
 	fmt.Println("   - Research Toolkit (pandoc, imagemagick, ffmpeg, tesseract)")
 	fmt.Println("   - Document Pipeline (unified media/document processing)")
+	fmt.Println("   - Whisper Transcription (audio-to-text)")
 	fmt.Println("   - WebSocket Hub (real-time streaming)")
 
 	// Show document pipeline status
@@ -230,6 +237,10 @@ func setupRoutes() {
 	// Document/Media Pipeline
 	http.HandleFunc("/api/pipeline/status", handlePipelineStatus)
 	http.HandleFunc("/api/pipeline/process", handlePipelineProcess)
+
+	// Transcription (Whisper)
+	http.HandleFunc("/api/transcribe", handleTranscribe)
+	http.HandleFunc("/api/transcribe/status", handleTranscribeStatus)
 
 	// WebSocket
 	http.HandleFunc("/ws", handleWebSocket)
@@ -1073,6 +1084,72 @@ func handleMustardSeed(w http.ResponseWriter, r *http.Request) {
 func handlePipelineStatus(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(documentPipeline.GetStatus())
+}
+
+// ============================================================================
+// TRANSCRIPTION HANDLERS
+// ============================================================================
+
+func handleTranscribeStatus(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(whisperClient.GetStatus())
+}
+
+func handleTranscribe(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		api.MethodNotAllowed(w, "POST")
+		return
+	}
+
+	// Parse multipart form (max 100MB)
+	if err := r.ParseMultipartForm(100 << 20); err != nil {
+		api.BadRequest(w, "Failed to parse form: "+err.Error())
+		return
+	}
+
+	// Get file from form
+	file, header, err := r.FormFile("file")
+	if err != nil {
+		api.BadRequest(w, "No file provided")
+		return
+	}
+	defer file.Close()
+
+	// Save to temp file
+	tempFile, err := os.CreateTemp("", "transcribe_*_"+header.Filename)
+	if err != nil {
+		api.InternalError(w, "Failed to create temp file", err)
+		return
+	}
+	defer os.Remove(tempFile.Name())
+	defer tempFile.Close()
+
+	if _, err := io.Copy(tempFile, file); err != nil {
+		api.InternalError(w, "Failed to save file", err)
+		return
+	}
+	tempFile.Close()
+
+	// Get optional parameters
+	language := r.FormValue("language")
+	prompt := r.FormValue("prompt")
+
+	// Transcribe
+	result, err := whisperClient.Transcribe(r.Context(), transcription.TranscriptionRequest{
+		FilePath: tempFile.Name(),
+		Language: language,
+		Prompt:   prompt,
+	})
+
+	if err != nil {
+		api.InternalError(w, "Transcription failed", err)
+		return
+	}
+
+	api.JSON(w, result, &api.MetaInfo{
+		ProcessTime: float64(result.ProcessTime.Milliseconds()),
+		Version:     Version,
+	})
 }
 
 func handlePipelineProcess(w http.ResponseWriter, r *http.Request) {
