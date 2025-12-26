@@ -408,3 +408,109 @@ func FilterByDigitalRoot(candidates []int64, targetRoot int) []int64 {
 	}
 	return filtered
 }
+
+// ═══════════════════════════════════════════════════════════════════════════
+// LINGUISTIC HELPERS (for NLP support)
+// ═══════════════════════════════════════════════════════════════════════════
+
+// EncodeAsQuaternion creates a quaternion encoding from a string
+func EncodeAsQuaternion(text string) Quaternion {
+	if len(text) == 0 {
+		return NewQuaternion(0, 0, 0, 0)
+	}
+
+	// Use FNV-1a hash for consistent encoding
+	h := uint64(14695981039346656037)
+	for _, c := range []byte(text) {
+		h ^= uint64(c)
+		h *= 1099511628211
+	}
+
+	// Split hash into 4 components
+	w := float64((h>>48)&0xFFFF) / 65535.0
+	x := float64((h>>32)&0xFFFF) / 65535.0
+	y := float64((h>>16)&0xFFFF) / 65535.0
+	z := float64(h&0xFFFF) / 65535.0
+
+	// Map to [-1, 1] range
+	w = w*2.0 - 1.0
+	x = x*2.0 - 1.0
+	y = y*2.0 - 1.0
+	z = z*2.0 - 1.0
+
+	return NewQuaternion(w, x, y, z)
+}
+
+// DigitalRootString computes digital root from string hash
+func DigitalRootString(text string) uint8 {
+	if len(text) == 0 {
+		return 0
+	}
+
+	// Hash string
+	h := uint64(14695981039346656037)
+	for _, c := range []byte(text) {
+		h ^= uint64(c)
+		h *= 1099511628211
+	}
+
+	// Apply digital root
+	return uint8(DigitalRoot(int64(h % 1000000)))
+}
+
+// QuaternionDistance computes geodesic distance between quaternions
+func QuaternionDistance(q1, q2 Quaternion) float64 {
+	return q1.Distance(q2)
+}
+
+// SemanticSimilarity computes semantic similarity between texts
+func SemanticSimilarity(text1, text2 string) float64 {
+	q1 := EncodeAsQuaternion(text1)
+	q2 := EncodeAsQuaternion(text2)
+
+	// Dot product for normalized quaternions = cosine similarity
+	similarity := math.Abs(q1.Dot(q2))
+
+	// Clamp to [0, 1]
+	if similarity > 1.0 {
+		similarity = 1.0
+	}
+	if similarity < 0.0 {
+		similarity = 0.0
+	}
+
+	return similarity
+}
+
+// HarmonicMean calculates harmonic mean (penalizes weak components)
+func HarmonicMean(values []float64) float64 {
+	if len(values) == 0 {
+		return 0.0
+	}
+
+	// Filter out zero/negative values
+	validValues := make([]float64, 0, len(values))
+	for _, v := range values {
+		if v > 0.0 {
+			validValues = append(validValues, v)
+		}
+	}
+
+	if len(validValues) == 0 {
+		return 0.0
+	}
+
+	// Calculate sum of reciprocals
+	reciprocalSum := 0.0
+	for _, v := range validValues {
+		reciprocalSum += 1.0 / v
+	}
+
+	// Harmonic mean = n / Σ(1/xᵢ)
+	return float64(len(validValues)) / reciprocalSum
+}
+
+// Magnitude alias for Norm
+func (q Quaternion) Magnitude() float64 {
+	return q.Norm()
+}

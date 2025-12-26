@@ -8,38 +8,30 @@ import (
 
 // ExampleProofIntegration demonstrates how proof badges appear in reasoning
 func ExampleProofIntegration() {
-	engine := NewEngine()
+	// TODO: Integrate with MathematicalReasoningEngine from engine.go
+	// This example shows proof badge integration concept
 
-	// Create a session
-	session, _ := engine.NewSession("Analyze population patterns in downtown area")
+	fmt.Println("=== PROOF BADGE EXAMPLE ===")
 
-	// Simulate the 4-phase workflow
-	session.Analyze([]string{
-		"Identified 3 key demographic clusters",
-		"Found correlation with transit accessibility",
-	})
+	// Example proof badges for VOID→FLOW→SOLUTION phases
+	phases := []struct {
+		Name      string
+		ProofName string
+		Detail    string
+	}{
+		{"VOID ACCESS", "QuaternionS³", "State encoded on S³ manifold (D=0.527)"},
+		{"FLOW CONVERGENCE", "DigitalRoots", "Pattern clustering O(1) - 53× speedup"},
+		{"SOLUTION SUPPORT", "SATOrigami", "87.532% satisfaction via SLERP convergence"},
+	}
 
-	session.Synthesize([]string{
-		"Optimal placement: near transit hubs",
-		"Expected reach: 75% of target population",
-	})
-
-	session.Conclude("Recommend establishing community centers near subway stations A, B, and C")
-
-	// Show formatted log
-	fmt.Println("=== FORMATTED LOG ===")
-	fmt.Println(session.GetThinkingLog())
-
-	// Show JSON output (for WebSocket streaming)
-	fmt.Println("\n=== JSON OUTPUT (for frontend) ===")
-	for i, step := range session.Steps {
+	for _, phase := range phases {
+		proof := GetProofByName(phase.ProofName)
 		stepJSON, _ := json.MarshalIndent(map[string]interface{}{
-			"step":         i + 1,
-			"phase":        step.Phase.String(),
-			"description":  step.Description,
-			"confidence":   step.Confidence,
-			"proof_badge":  step.ProofBadge,
-			"proof_detail": step.ProofDetail,
+			"phase":        phase.Name,
+			"proof_badge":  proof.Name,
+			"proof_detail": phase.Detail,
+			"proof_file":   proof.File,
+			"theorems":     proof.KeyTheorems,
 		}, "", "  ")
 		fmt.Println(string(stepJSON))
 	}

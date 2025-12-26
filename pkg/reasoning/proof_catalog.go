@@ -110,12 +110,12 @@ func GetProofByName(name string) *ProofCatalog {
 }
 
 // GetProofsForPhase returns all proofs relevant to a reasoning phase
-func GetProofsForPhase(phase Phase) []ProofCatalog {
+func GetProofsForPhase(phaseName string) []ProofCatalog {
 	var relevant []ProofCatalog
 
 	for _, proof := range AvailableProofs {
 		for _, usedIn := range proof.UsedIn {
-			if usedIn == phase.String() {
+			if usedIn == phaseName {
 				relevant = append(relevant, proof)
 				break
 			}
