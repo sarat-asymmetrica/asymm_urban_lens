@@ -22,6 +22,7 @@ import (
 
 	"github.com/asymmetrica/urbanlens/pkg/aiml"
 	"github.com/asymmetrica/urbanlens/pkg/alchemy"
+	"github.com/asymmetrica/urbanlens/pkg/api"
 	"github.com/asymmetrica/urbanlens/pkg/climate"
 	"github.com/asymmetrica/urbanlens/pkg/cultural"
 	"github.com/asymmetrica/urbanlens/pkg/dilr"
@@ -64,6 +65,7 @@ var (
 	climateAnalyzer  *climate.Analyzer
 	researchToolkit  *research.Toolkit
 	documentPipeline *media.DocumentPipeline
+	healthChecker    *api.HealthChecker
 )
 
 // ============================================================================
@@ -136,6 +138,9 @@ func initializeComponents() {
 
 	// Initialize document pipeline
 	documentPipeline = media.NewDocumentPipeline()
+
+	// Initialize health checker
+	healthChecker = api.NewHealthChecker(Version)
 
 	fmt.Println("✅ Components initialized:")
 	fmt.Println("   - Orchestrator (Williams batching enabled)")
@@ -256,13 +261,21 @@ func handleWelcome(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleHealth(w http.ResponseWriter, r *http.Request) {
+	// Check if quick health check requested (for load balancers)
+	if r.URL.Query().Get("quick") == "true" {
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(healthChecker.QuickCheck())
+		return
+	}
+
+	// Full health check with component status
+	health := healthChecker.Check()
+	health.Components["conductor"] = &api.ComponentStatus{
+		Status: "ok",
+	}
+
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]interface{}{
-		"status":    "healthy",
-		"version":   Version,
-		"timestamp": time.Now().Format(time.RFC3339),
-		"metrics":   conductor.Metrics.Stats(),
-	})
+	json.NewEncoder(w).Encode(health)
 }
 
 func handleTools(w http.ResponseWriter, r *http.Request) {
