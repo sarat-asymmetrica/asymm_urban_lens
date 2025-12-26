@@ -25,6 +25,7 @@ import (
 	"github.com/asymmetrica/urbanlens/pkg/climate"
 	"github.com/asymmetrica/urbanlens/pkg/cultural"
 	"github.com/asymmetrica/urbanlens/pkg/dilr"
+	"github.com/asymmetrica/urbanlens/pkg/media"
 	"github.com/asymmetrica/urbanlens/pkg/orchestrator"
 	"github.com/asymmetrica/urbanlens/pkg/reasoning"
 	"github.com/asymmetrica/urbanlens/pkg/research"
@@ -55,13 +56,14 @@ var upgrader = websocket.Upgrader{
 // ============================================================================
 
 var (
-	hub             *streaming.Hub
-	conductor       *orchestrator.Conductor
-	engine          *reasoning.Engine
-	tools           *urban.ToolRegistry
-	aiRouter        *aiml.Router
-	climateAnalyzer *climate.Analyzer
-	researchToolkit *research.Toolkit
+	hub              *streaming.Hub
+	conductor        *orchestrator.Conductor
+	engine           *reasoning.Engine
+	tools            *urban.ToolRegistry
+	aiRouter         *aiml.Router
+	climateAnalyzer  *climate.Analyzer
+	researchToolkit  *research.Toolkit
+	documentPipeline *media.DocumentPipeline
 )
 
 // ============================================================================
@@ -132,6 +134,9 @@ func initializeComponents() {
 	// Initialize WebSocket hub
 	hub = streaming.NewHub()
 
+	// Initialize document pipeline
+	documentPipeline = media.NewDocumentPipeline()
+
 	fmt.Println("✅ Components initialized:")
 	fmt.Println("   - Orchestrator (Williams batching enabled)")
 	fmt.Println("   - Reasoning Engine (4-phase transparent thinking)")
@@ -139,7 +144,22 @@ func initializeComponents() {
 	fmt.Println("   - AI Router (30+ models via AIMLAPI)")
 	fmt.Println("   - Climate Engine (IMD rainfall, monsoon, urban heat)")
 	fmt.Println("   - Research Toolkit (pandoc, imagemagick, ffmpeg, tesseract)")
+	fmt.Println("   - Document Pipeline (unified media/document processing)")
 	fmt.Println("   - WebSocket Hub (real-time streaming)")
+
+	// Show document pipeline status
+	pipelineStatus := documentPipeline.GetStatus()
+	fmt.Println("   Document Pipeline:")
+	if pipelineStatus.Pandoc.Available {
+		fmt.Printf("     ✓ Pandoc: %s\n", pipelineStatus.Pandoc.Version)
+	} else {
+		fmt.Println("     ○ Pandoc: not installed")
+	}
+	if pipelineStatus.FFmpeg.Available {
+		fmt.Println("     ✓ FFmpeg: available")
+	} else {
+		fmt.Println("     ○ FFmpeg: not installed")
+	}
 
 	// Check AI configuration
 	if aiRouter.IsConfigured() {
@@ -201,6 +221,10 @@ func setupRoutes() {
 	http.HandleFunc("/api/dilr/diagnose", handleDiagnoseStuck)
 	http.HandleFunc("/api/dilr/sarat-method", handleSaratMethod)
 	http.HandleFunc("/api/dilr/mustard-seed", handleMustardSeed)
+
+	// Document/Media Pipeline
+	http.HandleFunc("/api/pipeline/status", handlePipelineStatus)
+	http.HandleFunc("/api/pipeline/process", handlePipelineProcess)
 
 	// WebSocket
 	http.HandleFunc("/ws", handleWebSocket)
@@ -1027,6 +1051,42 @@ func handleSaratMethod(w http.ResponseWriter, r *http.Request) {
 func handleMustardSeed(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 	w.Write([]byte(dilr.GetMustardSeedExample()))
+}
+
+// ============================================================================
+// DOCUMENT/MEDIA PIPELINE HANDLERS
+// ============================================================================
+
+func handlePipelineStatus(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(documentPipeline.GetStatus())
+}
+
+func handlePipelineProcess(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var req media.ProcessRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		return
+	}
+
+	result, err := documentPipeline.Process(req)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(map[string]interface{}{
+			"success": false,
+			"error":   err.Error(),
+		})
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(result)
 }
 
 // Suppress unused import warning
