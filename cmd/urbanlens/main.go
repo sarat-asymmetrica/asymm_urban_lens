@@ -24,6 +24,7 @@ import (
 	"github.com/asymmetrica/urbanlens/pkg/aiml"
 	"github.com/asymmetrica/urbanlens/pkg/alchemy"
 	"github.com/asymmetrica/urbanlens/pkg/api"
+	"github.com/asymmetrica/urbanlens/pkg/chat"
 	"github.com/asymmetrica/urbanlens/pkg/climate"
 	"github.com/asymmetrica/urbanlens/pkg/cultural"
 	"github.com/asymmetrica/urbanlens/pkg/dilr"
@@ -69,6 +70,7 @@ var (
 	documentPipeline *media.DocumentPipeline
 	healthChecker    *api.HealthChecker
 	whisperClient    *transcription.WhisperClient
+	chatService      *chat.Service
 )
 
 // ============================================================================
@@ -148,6 +150,9 @@ func initializeComponents() {
 	// Initialize Whisper transcription client
 	whisperClient = transcription.NewWhisperClient("")
 
+	// Initialize AI chat service
+	chatService = chat.NewService("")
+
 	fmt.Println("✅ Components initialized:")
 	fmt.Println("   - Orchestrator (Williams batching enabled)")
 	fmt.Println("   - Reasoning Engine (4-phase transparent thinking)")
@@ -157,6 +162,7 @@ func initializeComponents() {
 	fmt.Println("   - Research Toolkit (pandoc, imagemagick, ffmpeg, tesseract)")
 	fmt.Println("   - Document Pipeline (unified media/document processing)")
 	fmt.Println("   - Whisper Transcription (audio-to-text)")
+	fmt.Println("   - AI Chat Service (research assistant)")
 	fmt.Println("   - WebSocket Hub (real-time streaming)")
 
 	// Show document pipeline status
@@ -241,6 +247,10 @@ func setupRoutes() {
 	// Transcription (Whisper)
 	http.HandleFunc("/api/transcribe", handleTranscribe)
 	http.HandleFunc("/api/transcribe/status", handleTranscribeStatus)
+
+	// AI Chat
+	http.HandleFunc("/api/chat", handleChat)
+	http.HandleFunc("/api/chat/status", handleChatStatus)
 
 	// WebSocket
 	http.HandleFunc("/ws", handleWebSocket)
@@ -1093,6 +1103,44 @@ func handlePipelineStatus(w http.ResponseWriter, r *http.Request) {
 func handleTranscribeStatus(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(whisperClient.GetStatus())
+}
+
+// ============================================================================
+// AI CHAT HANDLERS
+// ============================================================================
+
+func handleChatStatus(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(chatService.GetStatus())
+}
+
+func handleChat(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		api.MethodNotAllowed(w, "POST")
+		return
+	}
+
+	var req chat.ChatRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		api.BadRequest(w, "Invalid request body: "+err.Error())
+		return
+	}
+
+	if req.Message == "" {
+		api.BadRequest(w, "Message is required")
+		return
+	}
+
+	resp, err := chatService.Chat(r.Context(), req)
+	if err != nil {
+		api.InternalError(w, "Chat failed", err)
+		return
+	}
+
+	api.JSON(w, resp, &api.MetaInfo{
+		ProcessTime: resp.ProcessTime,
+		Version:     Version,
+	})
 }
 
 func handleTranscribe(w http.ResponseWriter, r *http.Request) {
