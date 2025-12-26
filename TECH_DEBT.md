@@ -49,6 +49,12 @@
 **Status**: File has `//go:build ignore` tag (excluded from build)
 **Fix Required**: Update MockBridge to match LeanBridge interface
 
+### 4. Integration Test Interface Mismatch
+**Location**: `tests/integration_test.go`
+**Issue**: Uses old conversation.Engine interface (GenerateTheorem, ValidateTheorem)
+**Status**: File has `//go:build ignore` tag (excluded from build)
+**Fix Required**: Update test to use current Engine interface
+
 ---
 
 ### 4. ImageMagick Not Installed

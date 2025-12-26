@@ -2,7 +2,10 @@
 
 > "Her" for Urban Research - A gift for IIHS Urban Informatics Lab
 
-**Version**: 0.1.0
+**Version**: 0.4.0 (December 2025)
+
+[![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?logo=go)](https://go.dev)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 Urban Lens is an AI-powered research assistant designed for urban researchers. It provides transparent reasoning, pattern-based task classification, and specialized tools for census, survey, spatial, document, and flood data analysis.
 
@@ -148,9 +151,24 @@ This tool is designed to support your research on:
 
 The transparent reasoning phases help researchers understand how the AI arrives at its recommendations.
 
+## Quick Start
+
+```bash
+# Clone and build
+git clone https://github.com/sarat-asymmetrica/asymm_urban_lens.git
+cd asymm_urban_lens
+go build -o urbanlens.exe ./cmd/urbanlens
+
+# Run
+./urbanlens.exe
+# Server at http://localhost:8080
+```
+
+For full setup including Pandoc, FFmpeg, and deployment options, see [DEPLOYMENT.md](DEPLOYMENT.md).
+
 ## License
 
-Built with love for researchers.
+MIT License - Built with love for researchers.
 
 ---
 
