@@ -33,6 +33,7 @@ import (
 	"github.com/asymmetrica/urbanlens/pkg/media"
 	"github.com/asymmetrica/urbanlens/pkg/ocr"
 	"github.com/asymmetrica/urbanlens/pkg/office"
+	"github.com/asymmetrica/urbanlens/pkg/opencode"
 	"github.com/asymmetrica/urbanlens/pkg/orchestrator"
 	"github.com/asymmetrica/urbanlens/pkg/reasoning"
 	"github.com/asymmetrica/urbanlens/pkg/research"
@@ -78,6 +79,7 @@ var (
 	ocrService       *ocr.UnifiedOCRService
 	gpuAccelerator   *gpu.Accelerator
 	officeBridge     *office.Bridge
+	opencodePlugin   *opencode.Plugin
 )
 
 // ============================================================================
@@ -169,6 +171,9 @@ func initializeComponents() {
 	// Initialize Office bridge (connects to Asymmetrica.Runtime if available)
 	officeBridge = office.NewBridge()
 
+	// Initialize OpenCode plugin
+	opencodePlugin = opencode.NewPlugin()
+
 	fmt.Println("✅ Components initialized:")
 	fmt.Println("   - Orchestrator (Williams batching enabled)")
 	fmt.Println("   - Reasoning Engine (4-phase transparent thinking)")
@@ -182,6 +187,7 @@ func initializeComponents() {
 	fmt.Println("   - OCR Service (Florence-2 vision)")
 	fmt.Println("   - GPU Accelerator (quaternion batch ops)")
 	fmt.Println("   - Office Bridge (Asymmetrica.Runtime)")
+	fmt.Println("   - OpenCode Plugin (AI development integration)")
 	fmt.Println("   - WebSocket Hub (real-time streaming)")
 
 	// Show document pipeline status
@@ -279,6 +285,9 @@ func setupRoutes() {
 	http.HandleFunc("/api/ecosystem/status", handleEcosystemStatus)
 	http.HandleFunc("/api/gpu/status", handleGPUStatus)
 	http.HandleFunc("/api/office/status", handleOfficeStatus)
+	http.HandleFunc("/api/opencode/status", handleOpenCodeStatus)
+	http.HandleFunc("/api/opencode/manifest", handleOpenCodeManifest)
+	http.HandleFunc("/api/opencode/tools", handleOpenCodeTools)
 
 	// WebSocket
 	http.HandleFunc("/ws", handleWebSocket)
@@ -1197,6 +1206,21 @@ func handleGPUStatus(w http.ResponseWriter, r *http.Request) {
 func handleOfficeStatus(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(officeBridge.GetStatus())
+}
+
+func handleOpenCodeStatus(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(opencodePlugin.GetStatus())
+}
+
+func handleOpenCodeManifest(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(opencodePlugin.GetManifest())
+}
+
+func handleOpenCodeTools(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(opencodePlugin.GetToolDefinitions())
 }
 
 func handleOCR(w http.ResponseWriter, r *http.Request) {
