@@ -1,0 +1,97 @@
+=== RUN   TestGPUQuaternion_Multiply_Correctness
+=== RUN   TestGPUQuaternion_Multiply_Correctness/Identity_multiplication
+=== RUN   TestGPUQuaternion_Multiply_Correctness/i_*_i_=_-1
+=== RUN   TestGPUQuaternion_Multiply_Correctness/j_*_j_=_-1
+=== RUN   TestGPUQuaternion_Multiply_Correctness/k_*_k_=_-1
+=== RUN   TestGPUQuaternion_Multiply_Correctness/i_*_j_=_k_(Hamilton_rule)
+=== RUN   TestGPUQuaternion_Multiply_Correctness/j_*_i_=_-k_(non-commutative!)
+--- PASS: TestGPUQuaternion_Multiply_Correctness (0.00s)
+    --- PASS: TestGPUQuaternion_Multiply_Correctness/Identity_multiplication (0.00s)
+    --- PASS: TestGPUQuaternion_Multiply_Correctness/i_*_i_=_-1 (0.00s)
+    --- PASS: TestGPUQuaternion_Multiply_Correctness/j_*_j_=_-1 (0.00s)
+    --- PASS: TestGPUQuaternion_Multiply_Correctness/k_*_k_=_-1 (0.00s)
+    --- PASS: TestGPUQuaternion_Multiply_Correctness/i_*_j_=_k_(Hamilton_rule) (0.00s)
+    --- PASS: TestGPUQuaternion_Multiply_Correctness/j_*_i_=_-k_(non-commutative!) (0.00s)
+=== RUN   TestGPUQuaternion_Normalize_UnitSphere
+=== RUN   TestGPUQuaternion_Normalize_UnitSphere/Already_normalized
+=== RUN   TestGPUQuaternion_Normalize_UnitSphere/Needs_normalization
+=== RUN   TestGPUQuaternion_Normalize_UnitSphere/Large_values
+=== RUN   TestGPUQuaternion_Normalize_UnitSphere/Small_values
+=== RUN   TestGPUQuaternion_Normalize_UnitSphere/Negative_values
+--- PASS: TestGPUQuaternion_Normalize_UnitSphere (0.00s)
+    --- PASS: TestGPUQuaternion_Normalize_UnitSphere/Already_normalized (0.00s)
+    --- PASS: TestGPUQuaternion_Normalize_UnitSphere/Needs_normalization (0.00s)
+    --- PASS: TestGPUQuaternion_Normalize_UnitSphere/Large_values (0.00s)
+    --- PASS: TestGPUQuaternion_Normalize_UnitSphere/Small_values (0.00s)
+    --- PASS: TestGPUQuaternion_Normalize_UnitSphere/Negative_values (0.00s)
+=== RUN   TestGPUQuaternion_SLERP_Endpoints
+--- PASS: TestGPUQuaternion_SLERP_Endpoints (0.00s)
+=== RUN   TestGPUQuaternion_SLERP_Midpoint
+--- PASS: TestGPUQuaternion_SLERP_Midpoint (0.00s)
+=== RUN   TestGPUQuaternion_DotProduct
+=== RUN   TestGPUQuaternion_DotProduct/Same_quaternion
+=== RUN   TestGPUQuaternion_DotProduct/Opposite_quaternions
+=== RUN   TestGPUQuaternion_DotProduct/Orthogonal_quaternions
+--- PASS: TestGPUQuaternion_DotProduct (0.00s)
+    --- PASS: TestGPUQuaternion_DotProduct/Same_quaternion (0.00s)
+    --- PASS: TestGPUQuaternion_DotProduct/Opposite_quaternions (0.00s)
+    --- PASS: TestGPUQuaternion_DotProduct/Orthogonal_quaternions (0.00s)
+=== RUN   TestGPUQuaternion_Conjugate
+--- PASS: TestGPUQuaternion_Conjugate (0.00s)
+=== RUN   TestGPUQuaternion_BatchMultiply_Performance
+=== RUN   TestGPUQuaternion_BatchMultiply_Performance/size=100
+    quaternion_gpu_test.go:274: BatchMultiply size=100: +Inf ops/sec, duration=0s
+=== RUN   TestGPUQuaternion_BatchMultiply_Performance/size=1000
+    quaternion_gpu_test.go:274: BatchMultiply size=1000: +Inf ops/sec, duration=0s
+=== RUN   TestGPUQuaternion_BatchMultiply_Performance/size=10000
+    quaternion_gpu_test.go:274: BatchMultiply size=10000: 18587360.59 ops/sec, duration=538µs
+--- PASS: TestGPUQuaternion_BatchMultiply_Performance (0.00s)
+    --- PASS: TestGPUQuaternion_BatchMultiply_Performance/size=100 (0.00s)
+    --- PASS: TestGPUQuaternion_BatchMultiply_Performance/size=1000 (0.00s)
+    --- PASS: TestGPUQuaternion_BatchMultiply_Performance/size=10000 (0.00s)
+=== RUN   TestGPUQuaternion_BatchSLERP_Performance
+=== RUN   TestGPUQuaternion_BatchSLERP_Performance/size=100
+    quaternion_gpu_test.go:312: BatchSLERP size=100: +Inf ops/sec, duration=0s
+=== RUN   TestGPUQuaternion_BatchSLERP_Performance/size=1000
+    quaternion_gpu_test.go:312: BatchSLERP size=1000: +Inf ops/sec, duration=0s
+=== RUN   TestGPUQuaternion_BatchSLERP_Performance/size=10000
+    quaternion_gpu_test.go:312: BatchSLERP size=10000: +Inf ops/sec, duration=0s
+--- PASS: TestGPUQuaternion_BatchSLERP_Performance (0.00s)
+    --- PASS: TestGPUQuaternion_BatchSLERP_Performance/size=100 (0.00s)
+    --- PASS: TestGPUQuaternion_BatchSLERP_Performance/size=1000 (0.00s)
+    --- PASS: TestGPUQuaternion_BatchSLERP_Performance/size=10000 (0.00s)
+=== RUN   TestGPUQuaternion_MemoryLayout
+    quaternion_gpu_test.go:333: Quaternion memory layout: 4 × float32 = 16 bytes (GPU-compatible)
+--- PASS: TestGPUQuaternion_MemoryLayout (0.00s)
+=== RUN   TestGPUQuaternion_Throughput
+    quaternion_gpu_test.go:366: Sustained throughput: 7959248.65 ops/sec
+    quaternion_gpu_test.go:367: Total ops: 10100, GPU ops: 0, CPU ops: 10100
+    quaternion_gpu_test.go:369: Backend: CPU (fallback)
+--- PASS: TestGPUQuaternion_Throughput (0.00s)
+=== RUN   TestGPUQuaternion_AccuracyVsCPU
+--- PASS: TestGPUQuaternion_AccuracyVsCPU (0.00s)
+=== RUN   TestGPUQuaternion_LargeScale_1M
+    quaternion_gpu_test.go:412: Testing 1M quaternion operations...
+    quaternion_gpu_test.go:417: Generating 1M random quaternions...
+    quaternion_gpu_test.go:427: Generation took: 130.2674ms
+    quaternion_gpu_test.go:430: Running BatchMultiply on 1M pairs...
+    quaternion_gpu_test.go:440: 1M multiply: 156154843.14 ops/sec, duration=6.4039ms
+    quaternion_gpu_test.go:443: Running BatchSLERP on 1M pairs...
+    quaternion_gpu_test.go:453: 1M SLERP: 59578423.08 ops/sec, duration=16.7846ms
+    quaternion_gpu_test.go:467: Final stats: &{TotalOps:2000000 GPUOps:0 CPUOps:2000000 TotalDuration:23.1885ms OpsPerSecond:8.624964961079845e+07}
+--- PASS: TestGPUQuaternion_LargeScale_1M (0.16s)
+=== RUN   TestGPUQuaternion_Integration_WithVQC
+    quaternion_gpu_test.go:515: VQC integration test passed: 3 quaternions evolved on S³
+--- PASS: TestGPUQuaternion_Integration_WithVQC (0.00s)
+=== RUN   TestGPUQuaternion_RotateVector
+--- PASS: TestGPUQuaternion_RotateVector (0.00s)
+=== RUN   TestGPUQuaternion_Inverse
+--- PASS: TestGPUQuaternion_Inverse (0.00s)
+=== RUN   TestGPUQuaternion_GeodeticDistance
+--- PASS: TestGPUQuaternion_GeodeticDistance (0.00s)
+=== RUN   TestGPUQuaternion_AxisAngleRoundtrip
+--- PASS: TestGPUQuaternion_AxisAngleRoundtrip (0.00s)
+=== RUN   TestGPUQuaternion_BatchRotateVectors
+--- PASS: TestGPUQuaternion_BatchRotateVectors (0.00s)
+PASS
+ok  	github.com/asymmetrica/urbanlens/pkg/gpu	0.793s

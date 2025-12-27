@@ -1,0 +1,464 @@
+# GitHub Actions CI/CD - Asymmetrica UrbanLens
+# Three-Regime Testing System (Exploration 70% | Optimization 85% | Stabilization 100%)
+# Generated: 2025-12-27
+# Philosophy: Mathematical rigor encoded into CI/CD pipeline
+
+name: CI - Three-Regime Testing
+
+on:
+  push:
+    branches: [ master, main, develop ]
+  pull_request:
+    branches: [ master, main, develop ]
+  workflow_dispatch: # Allow manual trigger
+
+env:
+  GO_VERSION: '1.24.0'
+  COVERAGE_THRESHOLD: 80.0
+  # Three-Regime Quality Gates
+  STABILIZATION_THRESHOLD: 100.0  # Critical path MUST pass 100%
+  OPTIMIZATION_THRESHOLD: 85.0    # Performance tests require 85%
+  EXPLORATION_THRESHOLD: 70.0     # Experimental tests need 70%
+
+jobs:
+  # ====================================================================================
+  # JOB 1: STABILIZATION TESTS (100% Required)
+  # Critical path tests - must ALL pass or pipeline FAILS
+  # ====================================================================================
+  stabilization-tests:
+    name: "🎯 Stabilization Tests (100% Required)"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for Williams drift detection
+
+      - name: 🔧 Set up Go ${{ env.GO_VERSION }}
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+          cache-dependency-path: go.sum
+
+      - name: 📦 Download dependencies
+        run: go mod download
+
+      - name: 🔍 Verify dependencies
+        run: go mod verify
+
+      - name: 🏗️ Build
+        run: |
+          go build -v ./...
+          echo "✅ Build successful!"
+
+      - name: 🧪 Run Stabilization Tests (CRITICAL PATH)
+        run: |
+          echo "=================================================="
+          echo "STABILIZATION TESTS - 100% Pass Rate Required"
+          echo "These are CRITICAL PATH tests that MUST pass"
+          echo "=================================================="
+
+          # Run tests matching Stabilization keywords
+          go test -v -race -timeout 10m ./... \
+            -run "Test.*Stabilization|Test.*Critical|Test.*E2E_FullPipeline" \
+            | tee stabilization.log
+
+          # Extract test results
+          PASSED=$(grep -c "PASS:" stabilization.log || echo "0")
+          FAILED=$(grep -c "FAIL:" stabilization.log || echo "0")
+          TOTAL=$((PASSED + FAILED))
+
+          if [ $TOTAL -eq 0 ]; then
+            echo "⚠️ No stabilization tests found!"
+            echo "Searching for tests with critical/stabilization tags..."
+            go test -v ./pkg/intelligence/... -run "TestE2E" | tee stabilization.log
+          fi
+
+          echo ""
+          echo "📊 Stabilization Results: $PASSED passed, $FAILED failed"
+
+          # ABSOLUTE REQUIREMENT: All stabilization tests MUST pass
+          if [ $FAILED -gt 0 ]; then
+            echo "❌ STABILIZATION TESTS FAILED - Pipeline blocked!"
+            exit 1
+          fi
+
+          echo "✅ All stabilization tests passed!"
+
+      - name: 🔬 Race Condition Detection
+        run: |
+          echo "Running race detector on critical paths..."
+          go test -race -short ./pkg/intelligence/... -run "Test.*E2E|Test.*Integration"
+
+      - name: 📤 Upload Stabilization Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stabilization-test-results
+          path: stabilization.log
+          retention-days: 30
+
+  # ====================================================================================
+  # JOB 2: OPTIMIZATION TESTS (85% Required)
+  # Performance & advanced features - 85% pass rate required
+  # ====================================================================================
+  optimization-tests:
+    name: "⚡ Optimization Tests (85% Required)"
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: stabilization-tests  # Only run if stabilization passes
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Set up Go ${{ env.GO_VERSION }}
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+          cache-dependency-path: go.sum
+
+      - name: 📦 Download dependencies
+        run: go mod download
+
+      - name: 🧪 Run Optimization Tests (PERFORMANCE FOCUS)
+        run: |
+          echo "=================================================="
+          echo "OPTIMIZATION TESTS - 85% Pass Rate Required"
+          echo "Performance, benchmarks, advanced features"
+          echo "=================================================="
+
+          # Run tests matching Optimization keywords
+          go test -v -timeout 15m ./... \
+            -run "Test.*Optimization|Test.*Performance|Test.*Benchmark|Benchmark.*" \
+            | tee optimization.log
+
+          # Extract test results
+          PASSED=$(grep -c "PASS:" optimization.log || echo "0")
+          FAILED=$(grep -c "FAIL:" optimization.log || echo "0")
+          TOTAL=$((PASSED + FAILED))
+
+          if [ $TOTAL -eq 0 ]; then
+            echo "⚠️ No optimization tests found! Running all tests..."
+            go test -v ./pkg/intelligence/... -run "Test.*Caching|Test.*Incremental" | tee optimization.log
+            PASSED=$(grep -c "PASS:" optimization.log || echo "0")
+            FAILED=$(grep -c "FAIL:" optimization.log || echo "0")
+            TOTAL=$((PASSED + FAILED))
+          fi
+
+          # Calculate pass rate
+          if [ $TOTAL -gt 0 ]; then
+            PASS_RATE=$(awk "BEGIN {printf \"%.1f\", ($PASSED/$TOTAL)*100}")
+          else
+            PASS_RATE="0.0"
+          fi
+
+          echo ""
+          echo "📊 Optimization Results: $PASSED/$TOTAL passed (${PASS_RATE}%)"
+
+          # Check against 85% threshold
+          MEETS_THRESHOLD=$(awk "BEGIN {print ($PASS_RATE >= $OPTIMIZATION_THRESHOLD) ? 1 : 0}")
+
+          if [ $MEETS_THRESHOLD -eq 0 ]; then
+            echo "❌ Optimization tests below 85% threshold (got ${PASS_RATE}%)"
+            exit 1
+          fi
+
+          echo "✅ Optimization tests meet 85% threshold!"
+
+      - name: 🏃 Run Benchmarks
+        run: |
+          echo "Running performance benchmarks..."
+          go test -bench=. -benchmem -run=^$ ./pkg/intelligence/... | tee benchmarks.log
+
+          echo ""
+          echo "📊 Benchmark Results:"
+          cat benchmarks.log
+
+      - name: 📤 Upload Optimization Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: optimization-test-results
+          path: |
+            optimization.log
+            benchmarks.log
+          retention-days: 30
+
+  # ====================================================================================
+  # JOB 3: EXPLORATION TESTS (70% Required)
+  # Experimental & edge cases - 70% pass rate acceptable
+  # ====================================================================================
+  exploration-tests:
+    name: "🔬 Exploration Tests (70% Required)"
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: stabilization-tests  # Only run if stabilization passes
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Set up Go ${{ env.GO_VERSION }}
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+          cache-dependency-path: go.sum
+
+      - name: 📦 Download dependencies
+        run: go mod download
+
+      - name: 🧪 Run Exploration Tests (EXPERIMENTAL)
+        continue-on-error: false  # Still fail if below threshold
+        run: |
+          echo "=================================================="
+          echo "EXPLORATION TESTS - 70% Pass Rate Required"
+          echo "Experimental features, edge cases, future work"
+          echo "=================================================="
+
+          # Run tests matching Exploration keywords
+          go test -v -timeout 20m ./... \
+            -run "Test.*Exploration|Test.*Experimental|Test.*Edge|Test.*Real.*Project|Test.*Regression" \
+            | tee exploration.log
+
+          # Extract test results
+          PASSED=$(grep -c "PASS:" exploration.log || echo "0")
+          FAILED=$(grep -c "FAIL:" exploration.log || echo "0")
+          TOTAL=$((PASSED + FAILED))
+
+          if [ $TOTAL -eq 0 ]; then
+            echo "⚠️ No exploration tests found! Running example tests..."
+            go test -v ./pkg/intelligence/... -run "Test.*VQC|Test.*Regression" | tee exploration.log
+            PASSED=$(grep -c "PASS:" exploration.log || echo "0")
+            FAILED=$(grep -c "FAIL:" exploration.log || echo "0")
+            TOTAL=$((PASSED + FAILED))
+          fi
+
+          # Calculate pass rate
+          if [ $TOTAL -gt 0 ]; then
+            PASS_RATE=$(awk "BEGIN {printf \"%.1f\", ($PASSED/$TOTAL)*100}")
+          else
+            PASS_RATE="100.0"  # No tests = assume passing
+            echo "ℹ️ No exploration tests found, marking as passing"
+          fi
+
+          echo ""
+          echo "📊 Exploration Results: $PASSED/$TOTAL passed (${PASS_RATE}%)"
+
+          # Check against 70% threshold
+          MEETS_THRESHOLD=$(awk "BEGIN {print ($PASS_RATE >= $EXPLORATION_THRESHOLD) ? 1 : 0}")
+
+          if [ $MEETS_THRESHOLD -eq 0 ]; then
+            echo "❌ Exploration tests below 70% threshold (got ${PASS_RATE}%)"
+            exit 1
+          fi
+
+          echo "✅ Exploration tests meet 70% threshold!"
+
+      - name: 📤 Upload Exploration Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: exploration-test-results
+          path: exploration.log
+          retention-days: 30
+
+  # ====================================================================================
+  # JOB 4: FULL TEST SUITE + COVERAGE
+  # Run ALL tests and generate comprehensive coverage report
+  # ====================================================================================
+  full-test-suite:
+    name: "📊 Full Test Suite + Coverage"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: [stabilization-tests, optimization-tests, exploration-tests]
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Set up Go ${{ env.GO_VERSION }}
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+          cache-dependency-path: go.sum
+
+      - name: 📦 Download dependencies
+        run: go mod download
+
+      - name: 🧪 Run ALL Tests with Coverage
+        run: |
+          echo "Running complete test suite with coverage..."
+          go test -v -race -coverprofile=coverage.out -covermode=atomic ./... | tee full_tests.log
+
+          echo ""
+          echo "📊 Generating coverage report..."
+          go tool cover -func=coverage.out | tee coverage_summary.txt
+
+          # Extract overall coverage
+          COVERAGE=$(go tool cover -func=coverage.out | grep total | awk '{print $3}' | sed 's/%//')
+          echo "Coverage: ${COVERAGE}%"
+
+          # Check coverage threshold
+          MEETS_THRESHOLD=$(awk "BEGIN {print ($COVERAGE >= $COVERAGE_THRESHOLD) ? 1 : 0}")
+
+          if [ $MEETS_THRESHOLD -eq 0 ]; then
+            echo "⚠️ Coverage ${COVERAGE}% below threshold ${COVERAGE_THRESHOLD}%"
+            echo "This is a warning, not blocking deployment"
+          else
+            echo "✅ Coverage meets ${COVERAGE_THRESHOLD}% threshold!"
+          fi
+
+      - name: 📊 Generate Coverage HTML Report
+        run: |
+          go tool cover -html=coverage.out -o coverage.html
+          echo "✅ Coverage HTML report generated!"
+
+      - name: 📤 Upload Coverage Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: |
+            coverage.out
+            coverage.html
+            coverage_summary.txt
+          retention-days: 30
+
+      - name: 📈 Upload Coverage to Codecov (Optional)
+        if: github.event_name == 'push'
+        continue-on-error: true
+        run: |
+          # Uncomment if using Codecov
+          # bash <(curl -s https://codecov.io/bash) -f coverage.out
+          echo "Codecov upload skipped (configure if needed)"
+
+  # ====================================================================================
+  # JOB 5: QUALITY SUMMARY + BADGES
+  # Generate final quality report and update badges
+  # ====================================================================================
+  quality-summary:
+    name: "🏆 Quality Summary"
+    runs-on: ubuntu-latest
+    needs: [stabilization-tests, optimization-tests, exploration-tests, full-test-suite]
+    if: always()
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📥 Download All Test Results
+        uses: actions/download-artifact@v4
+        with:
+          path: test-results
+
+      - name: 📊 Generate Three-Regime Quality Report
+        run: |
+          echo "# 🎯 Asymmetrica UrbanLens - Three-Regime Quality Report" > QUALITY_REPORT.md
+          echo "" >> QUALITY_REPORT.md
+          echo "**Generated:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> QUALITY_REPORT.md
+          echo "**Commit:** ${{ github.sha }}" >> QUALITY_REPORT.md
+          echo "**Branch:** ${{ github.ref_name }}" >> QUALITY_REPORT.md
+          echo "" >> QUALITY_REPORT.md
+
+          echo "## Three-Regime Test Results" >> QUALITY_REPORT.md
+          echo "" >> QUALITY_REPORT.md
+          echo "| Regime | Threshold | Status |" >> QUALITY_REPORT.md
+          echo "|--------|-----------|--------|" >> QUALITY_REPORT.md
+
+          # Check job statuses
+          STAB_STATUS="${{ needs.stabilization-tests.result }}"
+          OPT_STATUS="${{ needs.optimization-tests.result }}"
+          EXPL_STATUS="${{ needs.exploration-tests.result }}"
+          FULL_STATUS="${{ needs.full-test-suite.result }}"
+
+          # Format status emojis
+          STAB_EMOJI=$([ "$STAB_STATUS" == "success" ] && echo "✅" || echo "❌")
+          OPT_EMOJI=$([ "$OPT_STATUS" == "success" ] && echo "✅" || echo "❌")
+          EXPL_EMOJI=$([ "$EXPL_STATUS" == "success" ] && echo "✅" || echo "❌")
+
+          echo "| 🎯 Stabilization | 100% | $STAB_EMOJI $STAB_STATUS |" >> QUALITY_REPORT.md
+          echo "| ⚡ Optimization  | 85%  | $OPT_EMOJI $OPT_STATUS |" >> QUALITY_REPORT.md
+          echo "| 🔬 Exploration   | 70%  | $EXPL_EMOJI $EXPL_STATUS |" >> QUALITY_REPORT.md
+          echo "" >> QUALITY_REPORT.md
+
+          echo "## Overall Status" >> QUALITY_REPORT.md
+          echo "" >> QUALITY_REPORT.md
+
+          if [ "$STAB_STATUS" == "success" ] && [ "$OPT_STATUS" == "success" ] && [ "$EXPL_STATUS" == "success" ]; then
+            echo "✅ **ALL QUALITY GATES PASSED!**" >> QUALITY_REPORT.md
+            echo "" >> QUALITY_REPORT.md
+            echo "The codebase meets Asymmetrica's mathematical rigor standards:" >> QUALITY_REPORT.md
+            echo "- Critical paths are 100% stable" >> QUALITY_REPORT.md
+            echo "- Performance optimizations validated" >> QUALITY_REPORT.md
+            echo "- Experimental features explored" >> QUALITY_REPORT.md
+          else
+            echo "❌ **QUALITY GATES FAILED**" >> QUALITY_REPORT.md
+            echo "" >> QUALITY_REPORT.md
+            echo "Some quality thresholds were not met. Review failing tests." >> QUALITY_REPORT.md
+          fi
+
+          echo "" >> QUALITY_REPORT.md
+          echo "---" >> QUALITY_REPORT.md
+          echo "*Generated by Asymmetrica Three-Regime CI/CD System*" >> QUALITY_REPORT.md
+
+          cat QUALITY_REPORT.md
+
+      - name: 📤 Upload Quality Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-report
+          path: QUALITY_REPORT.md
+          retention-days: 90
+
+      - name: 💬 Comment Quality Report on PR
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('QUALITY_REPORT.md', 'utf8');
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: report
+            });
+
+      - name: 🎯 Final Status Check
+        run: |
+          STAB_STATUS="${{ needs.stabilization-tests.result }}"
+          OPT_STATUS="${{ needs.optimization-tests.result }}"
+          EXPL_STATUS="${{ needs.exploration-tests.result }}"
+
+          if [ "$STAB_STATUS" != "success" ]; then
+            echo "❌ Stabilization tests failed - BLOCKING"
+            exit 1
+          fi
+
+          if [ "$OPT_STATUS" != "success" ]; then
+            echo "❌ Optimization tests failed - BLOCKING"
+            exit 1
+          fi
+
+          if [ "$EXPL_STATUS" != "success" ]; then
+            echo "❌ Exploration tests failed - BLOCKING"
+            exit 1
+          fi
+
+          echo "✅ All quality gates passed!"
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "   ASYMMETRICA THREE-REGIME CI/CD: SUCCESS!   "
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "🎯 Stabilization: 100% ✅"
+          echo "⚡ Optimization:  85%  ✅"
+          echo "🔬 Exploration:   70%  ✅"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

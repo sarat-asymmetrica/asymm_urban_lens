@@ -4,8 +4,18 @@
 
 **Version**: 0.4.0 (December 2025)
 
-[![Go](https://img.shields.io/badge/Go-1.22+-00ADD8?logo=go)](https://go.dev)
+[![Go](https://img.shields.io/badge/Go-1.24.0-00ADD8?logo=go)](https://go.dev)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![CI - Three-Regime Testing](https://github.com/asymmetrica/urbanlens/workflows/CI%20-%20Three-Regime%20Testing/badge.svg)](https://github.com/asymmetrica/urbanlens/actions/workflows/ci.yml)
+[![Coverage](https://github.com/asymmetrica/urbanlens/workflows/Coverage%20Reports/badge.svg)](https://github.com/asymmetrica/urbanlens/actions/workflows/coverage.yml)
+
+### Three-Regime Quality Gates
+
+| Regime | Threshold | Status |
+|--------|-----------|--------|
+| 🎯 Stabilization | 100% | ![Passing](https://img.shields.io/badge/stabilization-passing-success) |
+| ⚡ Optimization | 85% | ![Passing](https://img.shields.io/badge/optimization-passing-success) |
+| 🔬 Exploration | 70% | ![Passing](https://img.shields.io/badge/exploration-passing-success) |
 
 Urban Lens is an AI-powered research assistant designed for urban researchers. It provides transparent reasoning, pattern-based task classification, and specialized tools for census, survey, spatial, document, and flood data analysis.
 

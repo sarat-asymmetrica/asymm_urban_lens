@@ -1,0 +1,328 @@
+# GitHub Actions - Advanced Coverage Reporting
+# Generates detailed coverage reports with historical tracking
+# Generated: 2025-12-27
+
+name: Coverage Reports
+
+on:
+  push:
+    branches: [ master, main, develop ]
+  pull_request:
+    branches: [ master, main, develop ]
+  schedule:
+    # Run coverage report daily at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+env:
+  GO_VERSION: '1.24.0'
+  COVERAGE_THRESHOLD: 80.0
+
+jobs:
+  coverage:
+    name: "📊 Generate Coverage Report"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for trend analysis
+
+      - name: 🔧 Set up Go ${{ env.GO_VERSION }}
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+          cache-dependency-path: go.sum
+
+      - name: 📦 Download dependencies
+        run: go mod download
+
+      - name: 🧪 Run Tests with Coverage
+        run: |
+          echo "Running complete test suite with coverage..."
+          go test -v -race -coverprofile=coverage.out -covermode=atomic ./...
+
+      - name: 📊 Generate Coverage Report
+        run: |
+          echo "Generating coverage reports..."
+
+          # Text summary
+          go tool cover -func=coverage.out > coverage_summary.txt
+
+          # HTML report
+          go tool cover -html=coverage.out -o coverage.html
+
+          # Extract overall coverage
+          COVERAGE=$(go tool cover -func=coverage.out | grep total | awk '{print $3}')
+          echo "COVERAGE_PERCENT=$COVERAGE" >> $GITHUB_ENV
+          echo "Overall Coverage: $COVERAGE"
+
+          echo "" >> coverage_summary.txt
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" >> coverage_summary.txt
+          echo "COVERAGE SUMMARY" >> coverage_summary.txt
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" >> coverage_summary.txt
+          echo "Overall Coverage: $COVERAGE" >> coverage_summary.txt
+          echo "Threshold: ${COVERAGE_THRESHOLD}%" >> coverage_summary.txt
+          echo "Generated: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> coverage_summary.txt
+          echo "Commit: ${{ github.sha }}" >> coverage_summary.txt
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" >> coverage_summary.txt
+
+          cat coverage_summary.txt
+
+      - name: 📊 Generate Package-Level Coverage Breakdown
+        run: |
+          echo "# Package-Level Coverage Breakdown" > coverage_by_package.md
+          echo "" >> coverage_by_package.md
+          echo "| Package | Coverage |" >> coverage_by_package.md
+          echo "|---------|----------|" >> coverage_by_package.md
+
+          # Extract coverage per package
+          go tool cover -func=coverage.out | grep -v "total:" | awk '{
+            # Extract package from filename
+            split($1, parts, "/");
+            pkg = "";
+            for (i = 1; i <= length(parts) - 1; i++) {
+              if (i > 1) pkg = pkg "/";
+              pkg = pkg parts[i];
+            }
+            if (pkg != "") {
+              coverage[pkg] += $3;
+              count[pkg]++;
+            }
+          } END {
+            for (pkg in coverage) {
+              avg = coverage[pkg] / count[pkg];
+              printf "| %s | %.1f%% |\n", pkg, avg;
+            }
+          }' | sort -t'|' -k2 -n >> coverage_by_package.md
+
+          echo "" >> coverage_by_package.md
+          echo "**Generated:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> coverage_by_package.md
+
+          cat coverage_by_package.md
+
+      - name: 🎯 Check Coverage Threshold
+        run: |
+          COVERAGE=$(echo "${{ env.COVERAGE_PERCENT }}" | sed 's/%//')
+
+          echo "Coverage: ${COVERAGE}%"
+          echo "Threshold: ${COVERAGE_THRESHOLD}%"
+
+          # Compare using awk (handles floating point)
+          MEETS_THRESHOLD=$(awk "BEGIN {print ($COVERAGE >= $COVERAGE_THRESHOLD) ? 1 : 0}")
+
+          if [ $MEETS_THRESHOLD -eq 1 ]; then
+            echo "✅ Coverage meets ${COVERAGE_THRESHOLD}% threshold!"
+            echo "COVERAGE_STATUS=✅ Passing" >> $GITHUB_ENV
+            echo "COVERAGE_COLOR=green" >> $GITHUB_ENV
+          else
+            echo "⚠️ Coverage ${COVERAGE}% below threshold ${COVERAGE_THRESHOLD}%"
+            echo "COVERAGE_STATUS=⚠️ Below Threshold" >> $GITHUB_ENV
+            echo "COVERAGE_COLOR=yellow" >> $GITHUB_ENV
+            # Don't fail - just warn
+          fi
+
+      - name: 📊 Generate Coverage Badge
+        run: |
+          COVERAGE=$(echo "${{ env.COVERAGE_PERCENT }}" | sed 's/%//')
+          COLOR="${{ env.COVERAGE_COLOR }}"
+
+          # Create badge JSON for shields.io
+          cat > coverage_badge.json <<EOF
+          {
+            "schemaVersion": 1,
+            "label": "coverage",
+            "message": "${COVERAGE}%",
+            "color": "$COLOR"
+          }
+          EOF
+
+          echo "Coverage badge generated:"
+          cat coverage_badge.json
+
+      - name: 📈 Track Coverage Trend
+        run: |
+          echo "# Coverage Trend" > coverage_trend.md
+          echo "" >> coverage_trend.md
+          echo "| Date | Commit | Coverage | Status |" >> coverage_trend.md
+          echo "|------|--------|----------|--------|" >> coverage_trend.md
+
+          COVERAGE="${{ env.COVERAGE_PERCENT }}"
+          STATUS="${{ env.COVERAGE_STATUS }}"
+          DATE=$(date -u +"%Y-%m-%d %H:%M UTC")
+          COMMIT="${{ github.sha }}"
+          SHORT_COMMIT=$(echo "$COMMIT" | cut -c1-7)
+
+          echo "| $DATE | \`$SHORT_COMMIT\` | $COVERAGE | $STATUS |" >> coverage_trend.md
+
+          cat coverage_trend.md
+
+      - name: 📤 Upload Coverage Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports-${{ github.sha }}
+          path: |
+            coverage.out
+            coverage.html
+            coverage_summary.txt
+            coverage_by_package.md
+            coverage_badge.json
+            coverage_trend.md
+          retention-days: 90
+
+      - name: 💬 Comment Coverage on PR
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const coverage = process.env.COVERAGE_PERCENT;
+            const status = process.env.COVERAGE_STATUS;
+
+            const comment = `## 📊 Coverage Report
+
+            **Overall Coverage:** ${coverage}
+            **Status:** ${status}
+            **Threshold:** ${process.env.COVERAGE_THRESHOLD}%
+
+            <details>
+            <summary>📦 Package-Level Coverage</summary>
+
+            ${fs.readFileSync('coverage_by_package.md', 'utf8')}
+
+            </details>
+
+            <details>
+            <summary>📄 Detailed Coverage Summary</summary>
+
+            \`\`\`
+            ${fs.readFileSync('coverage_summary.txt', 'utf8')}
+            \`\`\`
+
+            </details>
+
+            ---
+            *Generated by Asymmetrica Coverage CI/CD*
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  # ====================================================================================
+  # Package-Specific Coverage Analysis
+  # ====================================================================================
+  package-coverage:
+    name: "📦 Package Coverage Analysis"
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    strategy:
+      matrix:
+        package:
+          - ./pkg/intelligence/...
+          - ./pkg/learning/...
+          - ./pkg/gpu/...
+          - ./pkg/vqc/...
+          - ./pkg/aimlapi/...
+          - ./pkg/conversation/...
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Set up Go ${{ env.GO_VERSION }}
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+          cache-dependency-path: go.sum
+
+      - name: 📦 Download dependencies
+        run: go mod download
+
+      - name: 🧪 Run Package Tests with Coverage
+        run: |
+          PACKAGE="${{ matrix.package }}"
+          PACKAGE_NAME=$(echo "$PACKAGE" | sed 's/\.\/pkg\///' | sed 's/\/\.\.\.//')
+
+          echo "Testing package: $PACKAGE_NAME"
+
+          go test -v -race -coverprofile="${PACKAGE_NAME}_coverage.out" -covermode=atomic $PACKAGE
+
+          # Generate package report
+          go tool cover -func="${PACKAGE_NAME}_coverage.out" > "${PACKAGE_NAME}_coverage.txt"
+
+          COVERAGE=$(go tool cover -func="${PACKAGE_NAME}_coverage.out" | grep total | awk '{print $3}')
+
+          echo "Package: $PACKAGE_NAME"
+          echo "Coverage: $COVERAGE"
+
+      - name: 📤 Upload Package Coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-coverage-${{ strategy.job-index }}
+          path: |
+            *_coverage.out
+            *_coverage.txt
+          retention-days: 30
+
+  # ====================================================================================
+  # Historical Coverage Tracking
+  # ====================================================================================
+  coverage-history:
+    name: "📈 Coverage History"
+    runs-on: ubuntu-latest
+    needs: coverage
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages  # Coverage history branch
+          fetch-depth: 0
+
+      - name: 📥 Download Coverage Report
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-reports-${{ github.sha }}
+          path: latest-coverage
+
+      - name: 📊 Update Coverage History
+        run: |
+          # Create coverage history directory if not exists
+          mkdir -p coverage-history
+
+          # Add latest coverage to history
+          DATE=$(date -u +"%Y-%m-%d")
+          COVERAGE=$(cat latest-coverage/coverage_summary.txt | grep "Overall Coverage" | awk '{print $3}')
+
+          echo "$DATE,$COVERAGE,${{ github.sha }}" >> coverage-history/coverage.csv
+
+          # Generate coverage chart (simple text-based for now)
+          echo "# Coverage History" > coverage-history/README.md
+          echo "" >> coverage-history/README.md
+          echo "| Date | Coverage | Commit |" >> coverage-history/README.md
+          echo "|------|----------|--------|" >> coverage-history/README.md
+
+          tail -30 coverage-history/coverage.csv | while IFS=, read -r date cov commit; do
+            short_commit=$(echo "$commit" | cut -c1-7)
+            echo "| $date | $cov | \`$short_commit\` |" >> coverage-history/README.md
+          done
+
+      - name: 📤 Commit Coverage History
+        continue-on-error: true
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add coverage-history/
+          git commit -m "Update coverage history: ${{ github.sha }}"
+          git push origin gh-pages
