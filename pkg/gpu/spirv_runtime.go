@@ -1,0 +1,532 @@
+// Package gpu - SPIR-V Runtime with GPU/CPU Abstraction
+// Provides unified interface for SPIR-V kernel execution
+// GPU path: Level Zero (future), CPU path: Emulated (now)
+//
+// Philosophy:
+//   - Same interface for GPU/CPU = portable code
+//   - CPU emulation = development without GPU hardware
+//   - Performance metrics = observability regardless of backend
+//
+// Built: 2025-12-27 (Wave 4, SPIR-V Integration)
+// Foundation: Intel Level Zero SPIR-V standard
+package gpu
+
+import (
+	"encoding/binary"
+	"fmt"
+	"math"
+	"sync"
+)
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SPIR-V KERNEL REPRESENTATION
+// ═══════════════════════════════════════════════════════════════════════════
+
+// Kernel represents a loaded SPIR-V kernel ready for execution
+type Kernel struct {
+	Name     string           // Kernel name (e.g., "slerp_evolution")
+	Data     []byte           // SPIR-V binary data
+	Type     KernelType       // What kind of operation
+	Backend  ComputeBackend   // GPU or CPU emulation
+	Metadata *KernelMetadata  // Performance hints, params
+	mu       sync.RWMutex
+}
+
+// KernelType categorizes kernels by their mathematical operation
+type KernelType string
+
+const (
+	KernelTypeSLERP      KernelType = "slerp"           // Spherical interpolation
+	KernelTypeMultiply   KernelType = "multiply"        // Quaternion multiplication
+	KernelTypeNormalize  KernelType = "normalize"       // Unit sphere projection
+	KernelTypeDistance   KernelType = "distance"        // Geodesic distance
+	KernelTypeSparseMatMul KernelType = "sparse_matmul" // Sparse matrix ops
+	KernelTypeActivation KernelType = "activation"      // Neural activations
+)
+
+// ComputeBackend specifies execution environment
+type ComputeBackend string
+
+const (
+	BackendGPU      ComputeBackend = "GPU"      // Intel Level Zero GPU
+	BackendCPU      ComputeBackend = "CPU"      // CPU emulation
+	BackendUnknown  ComputeBackend = "Unknown"
+)
+
+// KernelMetadata provides execution hints and parameters
+type KernelMetadata struct {
+	WorkGroupSize   int     // Optimal work group size
+	MaxWorkItems    int     // Maximum parallel work items
+	MemoryFootprint int64   // Estimated memory usage
+	TargetThroughput float64 // Expected ops/sec (for validation)
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SPIR-V RUNTIME
+// ═══════════════════════════════════════════════════════════════════════════
+
+// SPIRVRuntime manages kernel loading and execution
+type SPIRVRuntime struct {
+	loader   *KernelLoader
+	kernels  map[string]*Kernel
+	backend  ComputeBackend
+	stats    *RuntimeStats
+	mu       sync.RWMutex
+}
+
+// RuntimeStats tracks execution metrics
+type RuntimeStats struct {
+	KernelsLoaded    int64
+	ExecutionsGPU    int64
+	ExecutionsCPU    int64
+	TotalOperations  int64
+	AverageThroughput float64
+}
+
+// NewSPIRVRuntime creates a new SPIR-V runtime
+func NewSPIRVRuntime() *SPIRVRuntime {
+	backend := BackendCPU // Default to CPU emulation
+	if GPUAvailable() {
+		backend = BackendGPU
+	}
+
+	return &SPIRVRuntime{
+		loader:  GetKernelLoader(),
+		kernels: make(map[string]*Kernel),
+		backend: backend,
+		stats:   &RuntimeStats{},
+	}
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// KERNEL LOADING
+// ═══════════════════════════════════════════════════════════════════════════
+
+// LoadSPIRVKernel loads a SPIR-V kernel from file
+// Returns: Kernel handle ready for execution
+func (r *SPIRVRuntime) LoadSPIRVKernel(filename string) (*Kernel, error) {
+	// Check if already loaded
+	r.mu.RLock()
+	if kernel, ok := r.kernels[filename]; ok {
+		r.mu.RUnlock()
+		return kernel, nil
+	}
+	r.mu.RUnlock()
+
+	// Load SPIR-V binary
+	data, err := r.loader.LoadKernel(filename)
+	if err != nil {
+		return nil, fmt.Errorf("failed to load kernel %s: %w", filename, err)
+	}
+
+	// Validate SPIR-V magic number
+	if len(data) < 4 {
+		return nil, fmt.Errorf("invalid SPIR-V: file too small")
+	}
+
+	magic := binary.LittleEndian.Uint32(data[0:4])
+	const spirvMagic = 0x07230203
+	if magic != spirvMagic {
+		return nil, fmt.Errorf("invalid SPIR-V magic: got 0x%08X, want 0x%08X", magic, spirvMagic)
+	}
+
+	// Determine kernel type and metadata
+	kernelType := r.inferKernelType(filename)
+	metadata := r.inferMetadata(kernelType, len(data))
+
+	kernel := &Kernel{
+		Name:     filename,
+		Data:     data,
+		Type:     kernelType,
+		Backend:  r.backend,
+		Metadata: metadata,
+	}
+
+	// Cache kernel
+	r.mu.Lock()
+	r.kernels[filename] = kernel
+	r.stats.KernelsLoaded++
+	r.mu.Unlock()
+
+	return kernel, nil
+}
+
+// inferKernelType determines kernel type from filename
+func (r *SPIRVRuntime) inferKernelType(filename string) KernelType {
+	switch filename {
+	case "slerp_evolution":
+		return KernelTypeSLERP
+	case "sparse_matmul_core":
+		return KernelTypeSparseMatMul
+	default:
+		return KernelType(filename)
+	}
+}
+
+// inferMetadata creates metadata based on kernel type
+func (r *SPIRVRuntime) inferMetadata(kernelType KernelType, dataSize int) *KernelMetadata {
+	switch kernelType {
+	case KernelTypeSLERP:
+		return &KernelMetadata{
+			WorkGroupSize:   64,
+			MaxWorkItems:    1048576, // 1M quaternions
+			MemoryFootprint: 16,      // 16 bytes per quaternion
+			TargetThroughput: 50e6,   // 50M ops/sec on GPU
+		}
+	case KernelTypeSparseMatMul:
+		return &KernelMetadata{
+			WorkGroupSize:   128,
+			MaxWorkItems:    10000,
+			MemoryFootprint: 8,       // 8 bytes per float
+			TargetThroughput: 5e9,    // 5 Gops/sec on GPU
+		}
+	default:
+		return &KernelMetadata{
+			WorkGroupSize:   64,
+			MaxWorkItems:    100000,
+			MemoryFootprint: 16,
+			TargetThroughput: 1e6,
+		}
+	}
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// KERNEL EXECUTION
+// ═══════════════════════════════════════════════════════════════════════════
+
+// ExecuteKernel executes a kernel with given input
+// Dispatches to GPU or CPU based on availability
+//
+// Input format:
+//   - []float32: Raw float array for quaternions (w,x,y,z,w,x,y,z,...)
+//   - Assumes 4 floats per quaternion
+//
+// Returns:
+//   - []float32: Output quaternions in same format
+//   - error: Execution error if any
+func (r *SPIRVRuntime) ExecuteKernel(kernel *Kernel, input []float32) ([]float32, error) {
+	if kernel == nil {
+		return nil, fmt.Errorf("kernel is nil")
+	}
+
+	if len(input) == 0 {
+		return []float32{}, nil
+	}
+
+	// Validate input size (must be multiple of 4 for quaternions)
+	if len(input)%4 != 0 {
+		return nil, fmt.Errorf("input size must be multiple of 4 (quaternion components)")
+	}
+
+	r.mu.Lock()
+	r.stats.TotalOperations += int64(len(input) / 4)
+	r.mu.Unlock()
+
+	// Dispatch based on backend
+	var output []float32
+	var err error
+
+	if r.backend == BackendGPU && GPUAvailable() {
+		output, err = r.executeGPU(kernel, input)
+		if err == nil {
+			r.mu.Lock()
+			r.stats.ExecutionsGPU++
+			r.mu.Unlock()
+			return output, nil
+		}
+		// GPU failed - fallback to CPU
+		fmt.Printf("[GPU→CPU Fallback] GPU execution failed: %v\n", err)
+	}
+
+	// CPU emulation path
+	output, err = r.executeCPU(kernel, input)
+	if err == nil {
+		r.mu.Lock()
+		r.stats.ExecutionsCPU++
+		r.mu.Unlock()
+	}
+
+	return output, err
+}
+
+// executeGPU executes kernel on GPU (future implementation)
+func (r *SPIRVRuntime) executeGPU(kernel *Kernel, input []float32) ([]float32, error) {
+	// TODO: Implement Level Zero GPU execution
+	// For now, return error to trigger CPU fallback
+	return nil, fmt.Errorf("GPU execution not yet implemented (Level Zero bindings required)")
+}
+
+// executeCPU executes kernel via CPU emulation
+// Emulates the SPIR-V operations in Go
+func (r *SPIRVRuntime) executeCPU(kernel *Kernel, input []float32) ([]float32, error) {
+	switch kernel.Type {
+	case KernelTypeSLERP:
+		return r.emulateSLERP(input)
+	case KernelTypeMultiply:
+		return r.emulateMultiply(input)
+	case KernelTypeNormalize:
+		return r.emulateNormalize(input)
+	case KernelTypeDistance:
+		return r.emulateDistance(input)
+	default:
+		return nil, fmt.Errorf("unsupported kernel type: %s", kernel.Type)
+	}
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CPU EMULATION IMPLEMENTATIONS
+// ═══════════════════════════════════════════════════════════════════════════
+
+// emulateSLERP emulates the slerp_evolution kernel
+// Input: pairs of quaternions [q0.w, q0.x, q0.y, q0.z, q1.w, q1.x, q1.y, q1.z, ...]
+// Output: interpolated quaternions at t=0.5
+func (r *SPIRVRuntime) emulateSLERP(input []float32) ([]float32, error) {
+	if len(input)%8 != 0 {
+		return nil, fmt.Errorf("SLERP requires pairs of quaternions (8 floats each)")
+	}
+
+	numPairs := len(input) / 8
+	output := make([]float32, numPairs*4)
+
+	const t = 0.5 // Default interpolation parameter
+
+	for i := 0; i < numPairs; i++ {
+		base := i * 8
+		outBase := i * 4
+
+		// Extract quaternions
+		q0 := Quaternion{
+			W: float32(input[base+0]),
+			X: float32(input[base+1]),
+			Y: float32(input[base+2]),
+			Z: float32(input[base+3]),
+		}
+		q1 := Quaternion{
+			W: float32(input[base+4]),
+			X: float32(input[base+5]),
+			Y: float32(input[base+6]),
+			Z: float32(input[base+7]),
+		}
+
+		// Perform SLERP
+		result := SLERP(q0, q1, t)
+
+		// Store result
+		output[outBase+0] = float32(result.W)
+		output[outBase+1] = float32(result.X)
+		output[outBase+2] = float32(result.Y)
+		output[outBase+3] = float32(result.Z)
+	}
+
+	return output, nil
+}
+
+// emulateMultiply emulates quaternion multiplication kernel
+func (r *SPIRVRuntime) emulateMultiply(input []float32) ([]float32, error) {
+	if len(input)%8 != 0 {
+		return nil, fmt.Errorf("multiply requires pairs of quaternions")
+	}
+
+	numPairs := len(input) / 8
+	output := make([]float32, numPairs*4)
+
+	for i := 0; i < numPairs; i++ {
+		base := i * 8
+		outBase := i * 4
+
+		q1 := Quaternion{
+			W: float32(input[base+0]),
+			X: float32(input[base+1]),
+			Y: float32(input[base+2]),
+			Z: float32(input[base+3]),
+		}
+		q2 := Quaternion{
+			W: float32(input[base+4]),
+			X: float32(input[base+5]),
+			Y: float32(input[base+6]),
+			Z: float32(input[base+7]),
+		}
+
+		result := q1.Multiply(q2)
+
+		output[outBase+0] = float32(result.W)
+		output[outBase+1] = float32(result.X)
+		output[outBase+2] = float32(result.Y)
+		output[outBase+3] = float32(result.Z)
+	}
+
+	return output, nil
+}
+
+// emulateNormalize emulates normalization kernel
+func (r *SPIRVRuntime) emulateNormalize(input []float32) ([]float32, error) {
+	if len(input)%4 != 0 {
+		return nil, fmt.Errorf("normalize requires quaternions (4 floats each)")
+	}
+
+	numQuats := len(input) / 4
+	output := make([]float32, len(input))
+
+	for i := 0; i < numQuats; i++ {
+		base := i * 4
+
+		q := Quaternion{
+			W: float32(input[base+0]),
+			X: float32(input[base+1]),
+			Y: float32(input[base+2]),
+			Z: float32(input[base+3]),
+		}
+
+		result := q.Normalize()
+
+		output[base+0] = float32(result.W)
+		output[base+1] = float32(result.X)
+		output[base+2] = float32(result.Y)
+		output[base+3] = float32(result.Z)
+	}
+
+	return output, nil
+}
+
+// emulateDistance emulates distance computation kernel
+func (r *SPIRVRuntime) emulateDistance(input []float32) ([]float32, error) {
+	if len(input)%8 != 0 {
+		return nil, fmt.Errorf("distance requires pairs of quaternions")
+	}
+
+	numPairs := len(input) / 8
+	output := make([]float32, numPairs)
+
+	for i := 0; i < numPairs; i++ {
+		base := i * 8
+
+		q1 := Quaternion{
+			W: float32(input[base+0]),
+			X: float32(input[base+1]),
+			Y: float32(input[base+2]),
+			Z: float32(input[base+3]),
+		}
+		q2 := Quaternion{
+			W: float32(input[base+4]),
+			X: float32(input[base+5]),
+			Y: float32(input[base+6]),
+			Z: float32(input[base+7]),
+		}
+
+		dot := q1.Dot(q2)
+		absDot := float32(math.Abs(float64(dot)))
+		if absDot > 1.0 {
+			absDot = 1.0
+		}
+
+		distance := float32(math.Acos(float64(absDot)))
+		output[i] = distance
+	}
+
+	return output, nil
+}
+
+// slerpCPU performs SLERP on CPU (matches OpenCL kernel logic)
+func slerpCPU(q0, q1 Quaternion, t float64) Quaternion {
+	dot := q0.Dot(q1)
+
+	// Antipodal adjustment
+	if dot < 0.0 {
+		q1.W = -q1.W
+		q1.X = -q1.X
+		q1.Y = -q1.Y
+		q1.Z = -q1.Z
+		dot = -dot
+	}
+
+	// Clamp for numerical stability
+	if dot > 1.0 {
+		dot = 1.0
+	}
+	if dot < -1.0 {
+		dot = -1.0
+	}
+
+	// Linear fallback for nearly parallel quaternions
+	if dot > 0.9995 {
+		t32 := float32(t)
+		result := Quaternion{
+			W: q0.W + t32*(q1.W-q0.W),
+			X: q0.X + t32*(q1.X-q0.X),
+			Y: q0.Y + t32*(q1.Y-q0.Y),
+			Z: q0.Z + t32*(q1.Z-q0.Z),
+		}
+		return result.Normalize()
+	}
+
+	// Spherical interpolation
+	theta := math.Acos(float64(dot))
+	sinTheta := math.Sin(theta)
+
+	w0 := math.Sin((1-t)*theta) / sinTheta
+	w1 := math.Sin(t*theta) / sinTheta
+
+	return Quaternion{
+		W: float32(w0)*q0.W + float32(w1)*q1.W,
+		X: float32(w0)*q0.X + float32(w1)*q1.X,
+		Y: float32(w0)*q0.Y + float32(w1)*q1.Y,
+		Z: float32(w0)*q0.Z + float32(w1)*q1.Z,
+	}
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// KERNEL INTROSPECTION
+// ═══════════════════════════════════════════════════════════════════════════
+
+// GetKernelInfo returns information about a loaded kernel
+func (r *SPIRVRuntime) GetKernelInfo(kernel *Kernel) KernelInfo {
+	if kernel == nil {
+		return KernelInfo{
+			Name:      "unknown",
+			Available: false,
+		}
+	}
+
+	kernel.mu.RLock()
+	defer kernel.mu.RUnlock()
+
+	return KernelInfo{
+		Name:        kernel.Name,
+		Size:        len(kernel.Data),
+		Description: string(kernel.Type),
+		Available:   true,
+	}
+}
+
+// GetStats returns runtime statistics
+func (r *SPIRVRuntime) GetStats() *RuntimeStats {
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+
+	stats := *r.stats
+	if stats.TotalOperations > 0 {
+		stats.AverageThroughput = float64(stats.TotalOperations) / float64(stats.ExecutionsCPU+stats.ExecutionsGPU)
+	}
+
+	return &stats
+}
+
+// GetBackend returns current compute backend
+func (r *SPIRVRuntime) GetBackend() ComputeBackend {
+	return r.backend
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GLOBAL RUNTIME INSTANCE
+// ═══════════════════════════════════════════════════════════════════════════
+
+var globalRuntime *SPIRVRuntime
+var runtimeOnce sync.Once
+
+// GetRuntime returns the global SPIR-V runtime instance
+func GetRuntime() *SPIRVRuntime {
+	runtimeOnce.Do(func() {
+		globalRuntime = NewSPIRVRuntime()
+	})
+	return globalRuntime
+}

@@ -1,0 +1,18 @@
+goos: windows
+goarch: amd64
+pkg: benchmarks
+cpu: Intel(R) N100
+Benchmark_Warm_SimpleCompute-4      	    8266	    149398 ns/op	       0 B/op	       0 allocs/op
+Benchmark_Cold_SimpleCompute-4      	      19	  74152489 ns/op	16777232 B/op	       1 allocs/op
+Benchmark_Warm_ArraySum-4           	   22458	     56645 ns/op	       0 B/op	       0 allocs/op
+Benchmark_Cold_ArraySum-4           	      19	  70139221 ns/op	16777216 B/op	       1 allocs/op
+Benchmark_Warm_RandomAccess-4       	   97470	     13095 ns/op	       0 B/op	       0 allocs/op
+Benchmark_Cold_RandomAccess-4       	      15	 202900393 ns/op	16777222 B/op	       1 allocs/op
+Benchmark_Warm_StructProcessing-4   	  427482	      2613 ns/op	       0 B/op	       0 allocs/op
+Benchmark_Cold_StructProcessing-4   	      16	  64969862 ns/op	16777216 B/op	       1 allocs/op
+Benchmark_Warm_MapLookup-4          	   92902	     13106 ns/op	       0 B/op	       0 allocs/op
+Benchmark_Cold_MapLookup-4          	     182	   6822958 ns/op	 1751467 B/op	       0 allocs/op
+Benchmark_Warm_Allocation-4         	 2220756	       784.1 ns/op	       0 B/op	       0 allocs/op
+Benchmark_Cold_Allocation-4         	     111	   9632245 ns/op	 1813753 B/op	       0 allocs/op
+PASS
+ok  	benchmarks	20.706s

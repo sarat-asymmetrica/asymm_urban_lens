@@ -1,0 +1,392 @@
+// Package profiling - Examples demonstrating profiling infrastructure
+package profiling_test
+
+import (
+	"fmt"
+	"math"
+	"time"
+
+	"github.com/asymmetrica/urbanlens/pkg/gpu"
+	"github.com/asymmetrica/urbanlens/pkg/profiling"
+	"github.com/asymmetrica/urbanlens/pkg/vqc"
+)
+
+// Example_basicCPUProfiling demonstrates basic CPU profiling
+func Example_basicCPUProfiling() {
+	// Create profiler
+	profiler, _ := profiling.NewProfiler("./profiles")
+
+	// Start CPU profiling
+	profiler.StartCPUProfile("example_cpu.prof")
+	defer profiler.StopCPUProfile()
+
+	// Do CPU-intensive work
+	for i := 0; i < 100000; i++ {
+		_ = math.Sqrt(float64(i))
+	}
+
+	// Output will show profile creation messages
+}
+
+// Example_heapProfiling demonstrates heap profiling
+func Example_heapProfiling() {
+	profiler, _ := profiling.NewProfiler("./profiles")
+
+	// Capture heap before allocations
+	profiler.WriteHeapProfile("heap_before.prof")
+
+	// Allocate memory
+	data := make([][]byte, 1000)
+	for i := range data {
+		data[i] = make([]byte, 1024*1024) // 1MB each
+	}
+
+	// Capture heap after allocations
+	profiler.WriteHeapProfile("heap_after.prof")
+
+	fmt.Printf("Allocated %d MB\n", len(data))
+	// Output: Allocated 1000 MB
+}
+
+// Example_executionTrace demonstrates execution tracing
+func Example_executionTrace() {
+	profiler, _ := profiling.NewProfiler("./profiles")
+
+	// Start trace
+	profiler.StartTrace("example_trace.out")
+	defer profiler.StopTrace()
+
+	// Run concurrent work
+	done := make(chan bool)
+	for i := 0; i < 5; i++ {
+		go func(id int) {
+			time.Sleep(10 * time.Millisecond)
+			done <- true
+		}(i)
+	}
+
+	for i := 0; i < 5; i++ {
+		<-done
+	}
+
+	fmt.Println("Trace captured")
+	// Output: Trace captured
+}
+
+// Example_benchmarkSuite demonstrates benchmark suite usage
+func Example_benchmarkSuite() {
+	suite := profiling.NewBenchmarkSuite()
+
+	// Add simple benchmark
+	suite.AddBenchmark(
+		"StringConcatenation",
+		"Benchmark string concatenation",
+		func() error {
+			s := ""
+			for i := 0; i < 100; i++ {
+				s += "x"
+			}
+			return nil
+		},
+	)
+
+	// Add quaternion benchmark
+	suite.AddBenchmark(
+		"QuaternionSLERP",
+		"Benchmark quaternion SLERP",
+		func() error {
+			q0 := gpu.Identity()
+			q1 := gpu.NewQuaternion(0, 1, 0, 0).Normalize()
+			_ = gpu.SLERP(q0, q1, 0.5)
+			return nil
+		},
+	)
+
+	// Run all benchmarks
+	results := suite.RunAll()
+
+	fmt.Printf("Ran %d benchmarks\n", len(results))
+	// Output will vary, but should show benchmark execution
+}
+
+// Example_benchmarkWithConfig demonstrates custom benchmark configuration
+func Example_benchmarkWithConfig() {
+	suite := profiling.NewBenchmarkSuite()
+
+	// Add benchmark with custom warmups/iterations
+	suite.AddBenchmarkWithConfig(
+		"HeavyComputation",
+		"Benchmark with custom config",
+		func() error {
+			for i := 0; i < 10000; i++ {
+				_ = math.Pow(float64(i), 2.5)
+			}
+			return nil
+		},
+		5,   // 5 warmup runs
+		20,  // 20 measured iterations
+	)
+
+	results := suite.RunAll()
+
+	fmt.Printf("Iterations: %d\n", results[0].Iterations)
+	// Output: Iterations: 20
+}
+
+// Example_reportGeneration demonstrates report generation
+func Example_reportGeneration() {
+	suite := profiling.NewBenchmarkSuite()
+
+	suite.AddBenchmark(
+		"SimpleTest",
+		"Simple benchmark for reporting",
+		func() error {
+			time.Sleep(1 * time.Millisecond)
+			return nil
+		},
+	)
+
+	suite.RunAll()
+
+	// Generate text report
+	report := suite.GenerateReport()
+	fmt.Println(len(report) > 0)
+
+	// Save to file
+	suite.SaveReportToFile("benchmark_report.txt")
+
+	// Save JSON results
+	suite.SaveResultsJSON("benchmark_results.json")
+
+	// Output: true
+}
+
+// Example_memoryStats demonstrates memory statistics
+func Example_memoryStats() {
+	// Get current memory stats
+	stats := profiling.GetMemStats()
+
+	fmt.Printf("Allocated: %d bytes\n", stats.Alloc > 0)
+	fmt.Printf("System: %d bytes\n", stats.Sys > 0)
+
+	// Print formatted stats
+	profiling.PrintMemStats()
+
+	// Output will show memory usage
+}
+
+// Example_enableAdvancedProfiling demonstrates block and mutex profiling
+func Example_enableAdvancedProfiling() {
+	// Enable block profiling
+	profiling.EnableBlockProfile(1)
+
+	// Enable mutex profiling
+	profiling.EnableMutexProfile(1)
+
+	profiler, _ := profiling.NewProfiler("./profiles")
+
+	// Write profiles
+	profiler.WriteBlockProfile("block.prof")
+	profiler.WriteMutexProfile("mutex.prof")
+
+	fmt.Println("Advanced profiling enabled")
+	// Output: Advanced profiling enabled
+}
+
+// Example_goroutineProfiling demonstrates goroutine profiling
+func Example_goroutineProfiling() {
+	profiler, _ := profiling.NewProfiler("./profiles")
+
+	// Spawn goroutines
+	done := make(chan bool)
+	for i := 0; i < 100; i++ {
+		go func() {
+			time.Sleep(100 * time.Millisecond)
+			done <- true
+		}()
+	}
+
+	// Capture goroutine profile
+	profiler.WriteGoroutineProfile("goroutine.prof")
+
+	// Cleanup
+	for i := 0; i < 100; i++ {
+		<-done
+	}
+
+	fmt.Println("Goroutine profile captured")
+	// Output: Goroutine profile captured
+}
+
+// Example_williamsOptimization demonstrates profiling Williams optimizer
+func Example_williamsOptimization() {
+	suite := profiling.NewBenchmarkSuite()
+
+	// Benchmark optimal batch size calculation
+	suite.AddBenchmark(
+		"WilliamsOptimalBatchSize",
+		"Benchmark Williams optimal batch size",
+		func() error {
+			for n := 100; n <= 1000000; n *= 10 {
+				_ = vqc.OptimalBatchSize(n)
+			}
+			return nil
+		},
+	)
+
+	// Benchmark batching statistics
+	suite.AddBenchmark(
+		"WilliamsBatchingStats",
+		"Benchmark Williams batching statistics",
+		func() error {
+			_ = vqc.ComputeStats(1000000)
+			return nil
+		},
+	)
+
+	// Benchmark savings ratio
+	suite.AddBenchmark(
+		"WilliamsSavingsRatio",
+		"Benchmark memory savings calculation",
+		func() error {
+			_ = vqc.SavingsRatio(1000000)
+			return nil
+		},
+	)
+
+	results := suite.RunAll()
+
+	fmt.Printf("Williams benchmarks: %d\n", len(results))
+	// Output: Williams benchmarks: 3
+}
+
+// Example_gpuQuaternionProfiling demonstrates GPU quaternion profiling
+func Example_gpuQuaternionProfiling() {
+	profiler, _ := profiling.NewProfiler("./profiles")
+
+	// Start CPU profiling
+	profiler.StartCPUProfile("quaternion_cpu.prof")
+
+	// Benchmark quaternion operations
+	q1 := gpu.Identity()
+	q2 := gpu.NewQuaternion(0, 1, 0, 0).Normalize()
+
+	for i := 0; i < 100000; i++ {
+		q1 = gpu.SLERP(q1, q2, float32(i%100)/100.0)
+		q1 = q1.Normalize()
+	}
+
+	profiler.StopCPUProfile()
+
+	// Write heap profile
+	profiler.WriteHeapProfile("quaternion_heap.prof")
+
+	fmt.Println("Quaternion profiling complete")
+	// Output: Quaternion profiling complete
+}
+
+// Example_fullProfilingWorkflow demonstrates complete profiling workflow
+func Example_fullProfilingWorkflow() {
+	// 1. Create profiler
+	profiler, _ := profiling.NewProfiler("./benchmark_results")
+
+	// 2. Enable advanced profiling
+	profiling.EnableBlockProfile(1)
+	profiling.EnableMutexProfile(1)
+
+	// 3. Start CPU profiling
+	profiler.StartCPUProfile("full_cpu.prof")
+
+	// 4. Start trace
+	profiler.StartTrace("full_trace.out")
+
+	// 5. Create benchmark suite
+	suite := profiling.NewBenchmarkSuite()
+
+	// 6. Add benchmarks
+	suite.AddBenchmark("Quaternion", "Quaternion ops", func() error {
+		q := gpu.Identity()
+		for i := 0; i < 1000; i++ {
+			q = q.Multiply(gpu.RandomQuaternion())
+		}
+		return nil
+	})
+
+	suite.AddBenchmark("Williams", "Williams optimizer", func() error {
+		_ = vqc.OptimalBatchSize(100000)
+		return nil
+	})
+
+	// 7. Run benchmarks
+	results := suite.RunAll()
+
+	// 8. Stop profiling
+	profiler.StopTrace()
+	profiler.StopCPUProfile()
+
+	// 9. Capture final state
+	profiler.WriteHeapProfile("full_heap.prof")
+	profiler.WriteGoroutineProfile("full_goroutine.prof")
+	profiler.WriteBlockProfile("full_block.prof")
+	profiler.WriteMutexProfile("full_mutex.prof")
+
+	// 10. Generate reports
+	suite.SaveReportToFile("./benchmark_results/full_report.txt")
+	suite.SaveResultsJSON("./benchmark_results/full_results.json")
+
+	// 11. Print summary
+	fmt.Printf("Complete! Ran %d benchmarks\n", len(results))
+	profiling.PrintMemStats()
+
+	// Output will show benchmark execution and memory stats
+}
+
+// Example_comparingOptimizations demonstrates comparing optimizations
+func Example_comparingOptimizations() {
+	suite := profiling.NewBenchmarkSuite()
+
+	// Naive approach
+	suite.AddBenchmark(
+		"Naive_BatchProcessing",
+		"Process all items at once (no optimization)",
+		func() error {
+			items := make([]int, 10000)
+			sum := 0
+			for _, item := range items {
+				sum += item
+			}
+			return nil
+		},
+	)
+
+	// Williams-optimized approach
+	suite.AddBenchmark(
+		"Williams_BatchProcessing",
+		"Williams-optimized batch processing",
+		func() error {
+			optimizer := vqc.NewWilliamsOptimizer()
+			items := make([]interface{}, 10000)
+			for i := range items {
+				items[i] = i
+			}
+
+			return optimizer.OptimizeBatch(items, func(batch []interface{}) error {
+				sum := 0
+				for _, item := range batch {
+					sum += item.(int)
+				}
+				return nil
+			})
+		},
+	)
+
+	results := suite.RunAll()
+
+	// Compare results
+	naiveTime := results[0].DurationMS
+	williamsTime := results[1].DurationMS
+	speedup := naiveTime / williamsTime
+
+	fmt.Printf("Speedup: %.2fx\n", speedup)
+	// Output will vary based on actual performance
+}

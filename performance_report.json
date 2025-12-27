@@ -1,0 +1,154 @@
+{
+  "GeneratedAt": "2025-12-27T09:42:22.4840098+05:30",
+  "Operations": {
+    "digital_root": {
+      "Name": "digital_root",
+      "Stats": {
+        "Name": "digital_root",
+        "Count": 100000,
+        "TotalDuration": 21010300,
+        "MinDuration": 0,
+        "MaxDuration": 3352200,
+        "AvgDuration": 210,
+        "P50": 0,
+        "P95": 0,
+        "P99": 0,
+        "TotalAllocs": 0,
+        "AvgAllocsPerOp": 0,
+        "OpsPerSecond": 4761904.761904762,
+        "LastUpdate": "2025-12-27T09:42:22.4774735+05:30"
+      },
+      "Target": {
+        "Name": "Digital Root Filter",
+        "TargetOpsPerSec": 100000000,
+        "TargetP95": 10,
+        "TargetP99": 15,
+        "Description": "Vedic digital root (53× speedup)"
+      },
+      "ThroughputGap": -95.23809523809524,
+      "P95Gap": -10,
+      "P99Gap": -15,
+      "Status": "CRITICAL",
+      "Recommendations": [
+        "CRITICAL: 95.2% below target (4.76 M ops/sec vs 100.00 M ops/sec)",
+        "Consider GPU acceleration (50-100× speedup)",
+        "Apply Williams batching O(√n × log₂n)",
+        "Use object pooling to eliminate allocations"
+      ]
+    },
+    "quaternion_multiply": {
+      "Name": "quaternion_multiply",
+      "Stats": {
+        "Name": "quaternion_multiply",
+        "Count": 10000,
+        "TotalDuration": 0,
+        "MinDuration": 0,
+        "MaxDuration": 0,
+        "AvgDuration": 0,
+        "P50": 0,
+        "P95": 0,
+        "P99": 0,
+        "TotalAllocs": 0,
+        "AvgAllocsPerOp": 0,
+        "OpsPerSecond": 0,
+        "LastUpdate": "2025-12-27T09:41:01.0810123+05:30"
+      },
+      "Target": {
+        "Name": "Quaternion Multiply (CPU)",
+        "TargetOpsPerSec": 1000000,
+        "TargetP95": 1000,
+        "TargetP99": 2000,
+        "Description": "CPU-only quaternion multiplication"
+      },
+      "ThroughputGap": -100,
+      "P95Gap": -1000,
+      "P99Gap": -2000,
+      "Status": "CRITICAL",
+      "Recommendations": [
+        "CRITICAL: 100.0% below target (0.00 M ops/sec vs 1.00 M ops/sec)",
+        "Consider GPU acceleration (50-100× speedup)",
+        "Apply Williams batching O(√n × log₂n)",
+        "Use object pooling to eliminate allocations"
+      ]
+    },
+    "quaternion_slerp": {
+      "Name": "quaternion_slerp",
+      "Stats": {
+        "Name": "quaternion_slerp",
+        "Count": 5000,
+        "TotalDuration": 0,
+        "MinDuration": 0,
+        "MaxDuration": 0,
+        "AvgDuration": 0,
+        "P50": 0,
+        "P95": 0,
+        "P99": 0,
+        "TotalAllocs": 0,
+        "AvgAllocsPerOp": 0,
+        "OpsPerSecond": 0,
+        "LastUpdate": "2025-12-27T09:41:01.1627829+05:30"
+      },
+      "Target": {
+        "Name": "Quaternion SLERP (CPU)",
+        "TargetOpsPerSec": 500000,
+        "TargetP95": 2000,
+        "TargetP99": 4000,
+        "Description": "Spherical linear interpolation"
+      },
+      "ThroughputGap": -100,
+      "P95Gap": -2000,
+      "P99Gap": -4000,
+      "Status": "CRITICAL",
+      "Recommendations": [
+        "CRITICAL: 100.0% below target (0.00 M ops/sec vs 0.50 M ops/sec)",
+        "Consider GPU acceleration (50-100× speedup)",
+        "Apply Williams batching O(√n × log₂n)",
+        "Use object pooling to eliminate allocations"
+      ]
+    },
+    "vqc_engine": {
+      "Name": "vqc_engine",
+      "Stats": {
+        "Name": "vqc_engine",
+        "Count": 1000,
+        "TotalDuration": 0,
+        "MinDuration": 0,
+        "MaxDuration": 0,
+        "AvgDuration": 0,
+        "P50": 0,
+        "P95": 0,
+        "P99": 0,
+        "TotalAllocs": 0,
+        "AvgAllocsPerOp": 0,
+        "OpsPerSecond": 0,
+        "LastUpdate": "2025-12-27T09:42:22.4830045+05:30"
+      },
+      "Target": {
+        "Name": "VQC Engine",
+        "TargetOpsPerSec": 71000000,
+        "TargetP95": 14,
+        "TargetP99": 20,
+        "Description": "Quaternion operations on GPU (71M ops/sec target)"
+      },
+      "ThroughputGap": -100,
+      "P95Gap": -14,
+      "P99Gap": -20,
+      "Status": "CRITICAL",
+      "Recommendations": [
+        "CRITICAL: 100.0% below target (0.00 M ops/sec vs 71.00 M ops/sec)",
+        "Consider GPU acceleration (50-100× speedup)",
+        "Apply Williams batching O(√n × log₂n)",
+        "Use object pooling to eliminate allocations"
+      ]
+    }
+  },
+  "Summary": {
+    "TotalOperations": 4,
+    "TotalSamples": 116000,
+    "ExcellentCount": 0,
+    "GoodCount": 0,
+    "NeedsWorkCount": 0,
+    "CriticalCount": 4,
+    "OverallStatus": "CRITICAL"
+  }
+}
