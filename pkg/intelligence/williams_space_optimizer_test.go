@@ -256,7 +256,7 @@ func TestFormatSpaceBound(t *testing.T) {
 	}
 
 	for _, exp := range expected {
-		if !stringContains(output, exp) {
+		if !williamsTestStringContains(output, exp) {
 			t.Errorf("Output missing expected string: %s\nOutput: %s", exp, output)
 		}
 	}
@@ -395,4 +395,20 @@ func BenchmarkOptimizeBatchSize(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_ = optimizer.OptimizeBatchSize(1000, 64, 1024)
 	}
+}
+
+// williamsTestStringContains checks if haystack contains needle (simple substring check)
+func williamsTestStringContains(haystack, needle string) bool {
+	if len(needle) == 0 {
+		return true
+	}
+	if len(haystack) < len(needle) {
+		return false
+	}
+	for i := 0; i <= len(haystack)-len(needle); i++ {
+		if haystack[i:i+len(needle)] == needle {
+			return true
+		}
+	}
+	return false
 }

@@ -280,7 +280,10 @@ func (ux *UXSonar) measureCLS(app *AppState) map[string]float64 {
 // measurePageLoad simulates page load measurement
 func (ux *UXSonar) measurePageLoad(app *AppState) map[string]float64 {
 	// Estimate based on component count
-	componentCount := len(app.Frontend.Components)
+	componentCount := 0
+	if app.Frontend != nil {
+		componentCount = len(app.Frontend.Components)
+	}
 	baseLoad := 500.0 + float64(componentCount)*50.0
 
 	return map[string]float64{

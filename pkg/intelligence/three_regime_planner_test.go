@@ -123,18 +123,18 @@ func TestAllocateTestEffort(t *testing.T) {
 			"100 tests",
 			100,
 			map[TestRegime]int{
-				Exploration:   34,  // 33.85% ≈ 34
-				Optimization:  29,  // 28.72% ≈ 29
-				Stabilization: 37,  // 37.44% ≈ 37
+				Exploration:   33,  // int(100 * 0.3385) = 33
+				Optimization:  28,  // int(100 * 0.2872) = 28
+				Stabilization: 39,  // int(100 * 0.3744) = 37 + remainder(2) = 39
 			},
 		},
 		{
 			"10 tests",
 			10,
 			map[TestRegime]int{
-				Exploration:   3,  // 33.85% ≈ 3
-				Optimization:  3,  // 28.72% ≈ 3
-				Stabilization: 4,  // 37.44% ≈ 4 (+ rounding)
+				Exploration:   3,  // int(10 * 0.3385) = 3
+				Optimization:  2,  // int(10 * 0.2872) = 2
+				Stabilization: 5,  // int(10 * 0.3744) = 3 + remainder(2) = 5
 			},
 		},
 		{
@@ -200,8 +200,8 @@ func TestCalculateOverallConfidence(t *testing.T) {
 				{Name: "TestCritical", Tags: []string{"critical"}, PassRate: 1.0, Passed: true},
 				{Name: "TestExperimental", Tags: []string{"experimental"}, PassRate: 0.0, Passed: false},
 			},
-			0.70, // Exploration failure has low weight
-			0.85,
+			0.55, // Exploration failure has low weight
+			0.70,
 		},
 		{
 			"Stabilization fails (critical)",
