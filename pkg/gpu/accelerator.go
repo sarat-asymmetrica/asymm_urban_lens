@@ -3,6 +3,7 @@
 package gpu
 
 import (
+	"log"
 	"sync"
 	"time"
 )
@@ -10,6 +11,7 @@ import (
 // Accelerator provides GPU-accelerated quaternion operations
 type Accelerator struct {
 	gpuAvailable bool
+	qosAdapter   *QOSAdapter // Real GPU adapter (when available)
 	stats        *AcceleratorStats
 	mu           sync.RWMutex
 }
@@ -24,21 +26,25 @@ type AcceleratorStats struct {
 }
 
 // NewAccelerator creates a new GPU accelerator
-// Automatically detects GPU availability
+// Automatically detects GPU availability and initializes QOS adapter
 func NewAccelerator() *Accelerator {
+	gpuAvailable := GPUAvailable() // Use fallback.go's detection
+
+	var adapter *QOSAdapter
+	if gpuAvailable {
+		// Try to create QOS adapter (may fail even if detection succeeded)
+		adapter, _ = GetQOSAdapter()
+	}
+
 	return &Accelerator{
-		gpuAvailable: detectGPU(),
+		gpuAvailable: gpuAvailable && adapter != nil,
+		qosAdapter:   adapter,
 		stats:        &AcceleratorStats{},
 	}
 }
 
-// detectGPU checks if GPU acceleration is available
-// Currently returns false - GPU support requires Level Zero bindings
-func detectGPU() bool {
-	// TODO: Implement Level Zero GPU detection
-	// For now, use CPU fallback
-	return false
-}
+// detectGPU is now in fallback.go - it's the centralized GPU detection
+// This accelerator uses GPUAvailable() from fallback.go
 
 // IsGPUAvailable returns true if GPU acceleration is available
 func (a *Accelerator) IsGPUAvailable() bool {
@@ -123,7 +129,17 @@ func (a *Accelerator) BatchRotateVectors(q Quaternion, vectors [][3]float32) [][
 // GPU implementations (stubs for now)
 
 func (a *Accelerator) batchSLERPGPU(pairs [][2]Quaternion, t float32) []Quaternion {
-	// TODO: Implement with Level Zero SPIR-V kernel
+	// Use QOS adapter for real GPU execution
+	if a.qosAdapter != nil {
+		results, err := a.qosAdapter.BatchSLERP(pairs, t)
+		if err == nil {
+			return results
+		}
+		// GPU failed - fall through to CPU
+		log.Printf("[GPU→CPU] QOS SLERP failed: %v", err)
+	}
+
+	// CPU fallback
 	results := make([]Quaternion, len(pairs))
 	for i, pair := range pairs {
 		results[i] = SLERP(pair[0], pair[1], t)
@@ -132,7 +148,16 @@ func (a *Accelerator) batchSLERPGPU(pairs [][2]Quaternion, t float32) []Quaterni
 }
 
 func (a *Accelerator) batchMultiplyGPU(pairs [][2]Quaternion) []Quaternion {
-	// TODO: Implement with Level Zero SPIR-V kernel
+	// Use QOS adapter for real GPU execution
+	if a.qosAdapter != nil {
+		results, err := a.qosAdapter.BatchMultiply(pairs)
+		if err == nil {
+			return results
+		}
+		log.Printf("[GPU→CPU] QOS Multiply failed: %v", err)
+	}
+
+	// CPU fallback
 	results := make([]Quaternion, len(pairs))
 	for i, pair := range pairs {
 		results[i] = pair[0].Multiply(pair[1])
@@ -141,7 +166,16 @@ func (a *Accelerator) batchMultiplyGPU(pairs [][2]Quaternion) []Quaternion {
 }
 
 func (a *Accelerator) batchNormalizeGPU(quaternions []Quaternion) []Quaternion {
-	// TODO: Implement with Level Zero SPIR-V kernel
+	// Use QOS adapter for real GPU execution
+	if a.qosAdapter != nil {
+		results, err := a.qosAdapter.BatchNormalize(quaternions)
+		if err == nil {
+			return results
+		}
+		log.Printf("[GPU→CPU] QOS Normalize failed: %v", err)
+	}
+
+	// CPU fallback
 	results := make([]Quaternion, len(quaternions))
 	for i, q := range quaternions {
 		results[i] = q.Normalize()

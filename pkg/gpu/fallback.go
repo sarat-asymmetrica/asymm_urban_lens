@@ -15,7 +15,10 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"sync"
 	"sync/atomic"
+
+	"github.com/asymmetrica/urbanlens/pkg/qos"
 )
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -271,4 +274,56 @@ func ExecuteWithFallback[T any](
 	}
 	atomic.AddInt64(&globalFallbackStats.CPUFallbacks, 1)
 	return result, ComputeModeCPU, nil
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GPU DETECTION (Using qos Intel Level Zero)
+// ═══════════════════════════════════════════════════════════════════════════
+
+var (
+	gpuDetected     bool
+	gpuCheckDone    bool
+	gpuCheckMutex   sync.Mutex
+)
+
+// detectGPU checks if GPU is available via qos Intel Level Zero
+// Caches result to avoid repeated initialization attempts
+//
+// Implementation:
+//   - Tries qos.InitializeGPU() once
+//   - Caches result (success or failure)
+//   - Returns cached value on subsequent calls
+//
+// Returns:
+//   - true if GPU available and initialized
+//   - false if GPU unavailable (CPU fallback)
+func detectGPU() bool {
+	gpuCheckMutex.Lock()
+	defer gpuCheckMutex.Unlock()
+
+	// Return cached result if already checked
+	if gpuCheckDone {
+		return gpuDetected
+	}
+
+	// First time - try to initialize GPU
+	gpu, err := qos.InitializeGPU()
+	if err != nil {
+		// GPU not available - this is NOT an error, just means we use CPU
+		log.Printf("[GPU Detection] GPU not available: %v (using CPU fallback)", err)
+		gpuDetected = false
+		gpuCheckDone = true
+		return false
+	}
+
+	// GPU available!
+	// Clean up the test GPU (we'll reinitialize when actually needed)
+	defer gpu.Destroy()
+
+	props, _ := gpu.GetDeviceProperties()
+	log.Printf("[GPU Detection] GPU available: %v", props)
+
+	gpuDetected = true
+	gpuCheckDone = true
+	return true
 }
