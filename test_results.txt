@@ -1,0 +1,2742 @@
+# github.com/asymmetrica/urbanlens/cmd/aimlapi_demo
+cmd\aimlapi_demo\main.go:21:3: fmt.Println arg list ends with redundant newline
+cmd\aimlapi_demo\main.go:33:2: fmt.Println arg list ends with redundant newline
+cmd\aimlapi_demo\main.go:95:2: fmt.Println arg list ends with redundant newline
+cmd\aimlapi_demo\main.go:101:2: fmt.Println arg list ends with redundant newline
+cmd\aimlapi_demo\main.go:111:2: fmt.Println arg list ends with redundant newline
+cmd\aimlapi_demo\main.go:224:2: fmt.Println arg list ends with redundant newline
+FAIL	github.com/asymmetrica/urbanlens/cmd/aimlapi_demo [build failed]
+# github.com/asymmetrica/urbanlens/pkg/streaming
+pkg\streaming\websocket.go:222:27: h.Engine.NewSession undefined (type *reasoning.Engine has no field or method NewSession)
+# github.com/asymmetrica/urbanlens/cmd/asya
+cmd\asya\main.go:107:2: fmt.Println arg list ends with redundant newline
+FAIL	github.com/asymmetrica/urbanlens/cmd/asya [build failed]
+?   	github.com/asymmetrica/urbanlens/cmd/quality-gate	[no test files]
+FAIL	github.com/asymmetrica/urbanlens/cmd/urbanlens [build failed]
+?   	github.com/asymmetrica/urbanlens/pkg/aiml	[no test files]
+# github.com/asymmetrica/urbanlens/pkg/cognition_test
+# [github.com/asymmetrica/urbanlens/pkg/cognition_test]
+pkg\cognition\example_test.go:14:1: ExampleBasicObservation refers to unknown identifier: BasicObservation
+pkg\cognition\example_test.go:152:1: ExampleIntervention refers to unknown identifier: Intervention
+=== RUN   TestNewClient
+--- PASS: TestNewClient (0.00s)
+=== RUN   TestDefaultConfig
+--- PASS: TestDefaultConfig (0.00s)
+=== RUN   TestSetRegime
+--- PASS: TestSetRegime (0.00s)
+=== RUN   TestListModels
+--- PASS: TestListModels (0.00s)
+=== RUN   TestGetModel
+--- PASS: TestGetModel (0.00s)
+=== RUN   TestSelectModel
+--- PASS: TestSelectModel (0.00s)
+=== RUN   TestConversation
+--- PASS: TestConversation (0.00s)
+=== RUN   TestEstimateTokens
+--- PASS: TestEstimateTokens (0.00s)
+=== RUN   TestWilliamsBatchSize
+--- PASS: TestWilliamsBatchSize (0.00s)
+=== RUN   TestRateLimiter
+--- PASS: TestRateLimiter (0.00s)
+=== RUN   TestValidateRequest
+--- PASS: TestValidateRequest (0.00s)
+=== RUN   TestIntegrationSimpleChat
+    client_test.go:249: AIMLAPI_KEY not set, skipping integration test
+--- SKIP: TestIntegrationSimpleChat (0.00s)
+=== RUN   TestIntegrationHealthCheck
+    client_test.go:270: AIMLAPI_KEY not set, skipping integration test
+--- SKIP: TestIntegrationHealthCheck (0.00s)
+PASS
+ok  	github.com/asymmetrica/urbanlens/pkg/aimlapi	3.006s
+?   	github.com/asymmetrica/urbanlens/pkg/alchemy	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/algorithms	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/api	[no test files]
+=== RUN   TestService_Status
+--- PASS: TestService_Status (0.00s)
+=== RUN   TestService_SystemPrompt
+--- PASS: TestService_SystemPrompt (0.00s)
+=== RUN   TestDefaultSystemPrompt
+--- PASS: TestDefaultSystemPrompt (0.00s)
+PASS
+ok  	github.com/asymmetrica/urbanlens/pkg/chat	1.646s
+?   	github.com/asymmetrica/urbanlens/pkg/climate	[no test files]
+FAIL	github.com/asymmetrica/urbanlens/pkg/cognition [build failed]
+?   	github.com/asymmetrica/urbanlens/pkg/config	[no test files]
+=== RUN   TestNewEngine
+--- PASS: TestNewEngine (0.00s)
+=== RUN   TestNewConversation
+--- PASS: TestNewConversation (0.00s)
+=== RUN   TestGreetingState
+--- PASS: TestGreetingState (0.00s)
+=== RUN   TestIntelligenceDetection
+=== RUN   TestIntelligenceDetection/Kinesthetic
+=== RUN   TestIntelligenceDetection/Visual
+=== RUN   TestIntelligenceDetection/Spatial
+=== RUN   TestIntelligenceDetection/Logical
+=== RUN   TestIntelligenceDetection/Auditory
+--- PASS: TestIntelligenceDetection (0.00s)
+    --- PASS: TestIntelligenceDetection/Kinesthetic (0.00s)
+    --- PASS: TestIntelligenceDetection/Visual (0.00s)
+    --- PASS: TestIntelligenceDetection/Spatial (0.00s)
+    --- PASS: TestIntelligenceDetection/Logical (0.00s)
+    --- PASS: TestIntelligenceDetection/Auditory (0.00s)
+=== RUN   TestPhaseDetection
+=== RUN   TestPhaseDetection/Void_-_Uncertain
+    engine_test.go:217: Void: 0.20, Flow: 0.00, Solution: 0.25
+=== RUN   TestPhaseDetection/Flow_-_Connection
+    engine_test.go:217: Void: 0.10, Flow: 0.25, Solution: 0.12
+=== RUN   TestPhaseDetection/Solution_-_Confident
+    engine_test.go:217: Void: 0.00, Flow: 0.12, Solution: 0.62
+--- PASS: TestPhaseDetection (0.00s)
+    --- PASS: TestPhaseDetection/Void_-_Uncertain (0.00s)
+    --- PASS: TestPhaseDetection/Flow_-_Connection (0.00s)
+    --- PASS: TestPhaseDetection/Solution_-_Confident (0.00s)
+=== RUN   TestWhyChaining
+    engine_test.go:257: State is ANCHORING, manually setting to WHY_CHAINING for test
+    engine_test.go:280: Step 1: Depth=0, State=WHY_CHAINING
+    engine_test.go:280: Step 2: Depth=0, State=WHY_CHAINING
+    engine_test.go:280: Step 3: Depth=0, State=WHY_CHAINING
+    engine_test.go:280: Step 4: Depth=0, State=WHY_CHAINING
+    engine_test.go:280: Step 5: Depth=0, State=WHY_CHAINING
+    engine_test.go:286: Note: State = WHY_CHAINING after 0 steps (may transition early due to physics keywords)
+--- PASS: TestWhyChaining (0.00s)
+=== RUN   TestSophisticationDetection
+=== RUN   TestSophisticationDetection/Child_level
+    engine_test.go:321: Detected level: 4
+=== RUN   TestSophisticationDetection/Technical_level
+    engine_test.go:321: Detected level: 10
+=== RUN   TestSophisticationDetection/General_level
+    engine_test.go:321: Detected level: 6
+--- PASS: TestSophisticationDetection (0.00s)
+    --- PASS: TestSophisticationDetection/Child_level (0.00s)
+    --- PASS: TestSophisticationDetection/Technical_level (0.00s)
+    --- PASS: TestSophisticationDetection/General_level (0.00s)
+=== RUN   TestFrustrationDetection
+--- PASS: TestFrustrationDetection (0.00s)
+=== RUN   TestQuitDetection
+--- PASS: TestQuitDetection (0.00s)
+=== RUN   TestEmotionDetection
+=== RUN   TestEmotionDetection/excited
+    engine_test.go:373: Message: Wow, this is amazing! I love it! -> Emotion: excited
+=== RUN   TestEmotionDetection/frustrated
+    engine_test.go:373: Message: I'm stuck and can't figure this out -> Emotion: frustrated
+=== RUN   TestEmotionDetection/curious
+    engine_test.go:373: Message: I wonder what would happen if... -> Emotion: curious
+=== RUN   TestEmotionDetection/confident
+    engine_test.go:373: Message: Yes, I definitely understand now -> Emotion: confident
+--- PASS: TestEmotionDetection (0.00s)
+    --- PASS: TestEmotionDetection/excited (0.00s)
+    --- PASS: TestEmotionDetection/frustrated (0.00s)
+    --- PASS: TestEmotionDetection/curious (0.00s)
+    --- PASS: TestEmotionDetection/confident (0.00s)
+=== RUN   TestConversationPaceDetection
+=== RUN   TestConversationPaceDetection/Fast_pace_(short_responses)
+=== RUN   TestConversationPaceDetection/Slow_pace_(long_responses)
+    engine_test.go:409: Expected slow, got medium (heuristic, not critical)
+--- PASS: TestConversationPaceDetection (0.00s)
+    --- PASS: TestConversationPaceDetection/Fast_pace_(short_responses) (0.00s)
+    --- PASS: TestConversationPaceDetection/Slow_pace_(long_responses) (0.00s)
+=== RUN   TestFullConversationFlow
+    engine_test.go:444: Step 1: State=ANCHORING, Phase=VOID, Response length=94
+    engine_test.go:444: Step 2: State=ANCHORING, Phase=VOID, Response length=137
+    engine_test.go:444: Step 3: State=WHY_CHAINING, Phase=VOID, Response length=92
+    engine_test.go:444: Step 4: State=SYNTHESIZING, Phase=FLOW, Response length=169
+    engine_test.go:444: Step 5: State=SYNTHESIZING, Phase=VOID, Response length=134
+    engine_test.go:444: Step 6: State=SYNTHESIZING, Phase=VOID, Response length=25
+    engine_test.go:444: Step 7: State=SYNTHESIZING, Phase=FLOW, Response length=134
+--- PASS: TestFullConversationFlow (0.00s)
+PASS
+ok  	github.com/asymmetrica/urbanlens/pkg/conversation	1.007s
+?   	github.com/asymmetrica/urbanlens/pkg/cultural	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/dilr	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/ecosystem	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/generation	[no test files]
+=== RUN   TestKernelLoader_New
+--- PASS: TestKernelLoader_New (0.00s)
+=== RUN   TestKernelLoader_LoadFromFilesystem
+--- PASS: TestKernelLoader_LoadFromFilesystem (0.00s)
+=== RUN   TestKernelLoader_ListKernels
+--- PASS: TestKernelLoader_ListKernels (0.00s)
+=== RUN   TestKernelLoader_GetStatus
+--- PASS: TestKernelLoader_GetStatus (0.00s)
+=== RUN   TestGetKernelLoader
+--- PASS: TestGetKernelLoader (0.00s)
+=== RUN   TestGPUQuaternion_Multiply_Correctness
+=== RUN   TestGPUQuaternion_Multiply_Correctness/Identity_multiplication
+=== RUN   TestGPUQuaternion_Multiply_Correctness/i_*_i_=_-1
+=== RUN   TestGPUQuaternion_Multiply_Correctness/j_*_j_=_-1
+=== RUN   TestGPUQuaternion_Multiply_Correctness/k_*_k_=_-1
+=== RUN   TestGPUQuaternion_Multiply_Correctness/i_*_j_=_k_(Hamilton_rule)
+=== RUN   TestGPUQuaternion_Multiply_Correctness/j_*_i_=_-k_(non-commutative!)
+--- PASS: TestGPUQuaternion_Multiply_Correctness (0.00s)
+    --- PASS: TestGPUQuaternion_Multiply_Correctness/Identity_multiplication (0.00s)
+    --- PASS: TestGPUQuaternion_Multiply_Correctness/i_*_i_=_-1 (0.00s)
+    --- PASS: TestGPUQuaternion_Multiply_Correctness/j_*_j_=_-1 (0.00s)
+    --- PASS: TestGPUQuaternion_Multiply_Correctness/k_*_k_=_-1 (0.00s)
+    --- PASS: TestGPUQuaternion_Multiply_Correctness/i_*_j_=_k_(Hamilton_rule) (0.00s)
+    --- PASS: TestGPUQuaternion_Multiply_Correctness/j_*_i_=_-k_(non-commutative!) (0.00s)
+=== RUN   TestGPUQuaternion_Normalize_UnitSphere
+=== RUN   TestGPUQuaternion_Normalize_UnitSphere/Already_normalized
+=== RUN   TestGPUQuaternion_Normalize_UnitSphere/Needs_normalization
+=== RUN   TestGPUQuaternion_Normalize_UnitSphere/Large_values
+=== RUN   TestGPUQuaternion_Normalize_UnitSphere/Small_values
+=== RUN   TestGPUQuaternion_Normalize_UnitSphere/Negative_values
+--- PASS: TestGPUQuaternion_Normalize_UnitSphere (0.00s)
+    --- PASS: TestGPUQuaternion_Normalize_UnitSphere/Already_normalized (0.00s)
+    --- PASS: TestGPUQuaternion_Normalize_UnitSphere/Needs_normalization (0.00s)
+    --- PASS: TestGPUQuaternion_Normalize_UnitSphere/Large_values (0.00s)
+    --- PASS: TestGPUQuaternion_Normalize_UnitSphere/Small_values (0.00s)
+    --- PASS: TestGPUQuaternion_Normalize_UnitSphere/Negative_values (0.00s)
+=== RUN   TestGPUQuaternion_SLERP_Endpoints
+--- PASS: TestGPUQuaternion_SLERP_Endpoints (0.00s)
+=== RUN   TestGPUQuaternion_SLERP_Midpoint
+--- PASS: TestGPUQuaternion_SLERP_Midpoint (0.00s)
+=== RUN   TestGPUQuaternion_DotProduct
+=== RUN   TestGPUQuaternion_DotProduct/Same_quaternion
+=== RUN   TestGPUQuaternion_DotProduct/Opposite_quaternions
+=== RUN   TestGPUQuaternion_DotProduct/Orthogonal_quaternions
+--- PASS: TestGPUQuaternion_DotProduct (0.00s)
+    --- PASS: TestGPUQuaternion_DotProduct/Same_quaternion (0.00s)
+    --- PASS: TestGPUQuaternion_DotProduct/Opposite_quaternions (0.00s)
+    --- PASS: TestGPUQuaternion_DotProduct/Orthogonal_quaternions (0.00s)
+=== RUN   TestGPUQuaternion_Conjugate
+--- PASS: TestGPUQuaternion_Conjugate (0.00s)
+=== RUN   TestGPUQuaternion_BatchMultiply_Performance
+=== RUN   TestGPUQuaternion_BatchMultiply_Performance/size=100
+    quaternion_gpu_test.go:274: BatchMultiply size=100: +Inf ops/sec, duration=0s
+=== RUN   TestGPUQuaternion_BatchMultiply_Performance/size=1000
+    quaternion_gpu_test.go:274: BatchMultiply size=1000: +Inf ops/sec, duration=0s
+=== RUN   TestGPUQuaternion_BatchMultiply_Performance/size=10000
+    quaternion_gpu_test.go:274: BatchMultiply size=10000: +Inf ops/sec, duration=0s
+--- PASS: TestGPUQuaternion_BatchMultiply_Performance (0.00s)
+    --- PASS: TestGPUQuaternion_BatchMultiply_Performance/size=100 (0.00s)
+    --- PASS: TestGPUQuaternion_BatchMultiply_Performance/size=1000 (0.00s)
+    --- PASS: TestGPUQuaternion_BatchMultiply_Performance/size=10000 (0.00s)
+=== RUN   TestGPUQuaternion_BatchSLERP_Performance
+=== RUN   TestGPUQuaternion_BatchSLERP_Performance/size=100
+    quaternion_gpu_test.go:312: BatchSLERP size=100: +Inf ops/sec, duration=0s
+=== RUN   TestGPUQuaternion_BatchSLERP_Performance/size=1000
+    quaternion_gpu_test.go:312: BatchSLERP size=1000: 990687.54 ops/sec, duration=1.0094ms
+=== RUN   TestGPUQuaternion_BatchSLERP_Performance/size=10000
+    quaternion_gpu_test.go:312: BatchSLERP size=10000: 15642108.56 ops/sec, duration=639.3µs
+--- PASS: TestGPUQuaternion_BatchSLERP_Performance (0.00s)
+    --- PASS: TestGPUQuaternion_BatchSLERP_Performance/size=100 (0.00s)
+    --- PASS: TestGPUQuaternion_BatchSLERP_Performance/size=1000 (0.00s)
+    --- PASS: TestGPUQuaternion_BatchSLERP_Performance/size=10000 (0.00s)
+=== RUN   TestGPUQuaternion_MemoryLayout
+    quaternion_gpu_test.go:333: Quaternion memory layout: 4 × float32 = 16 bytes (GPU-compatible)
+--- PASS: TestGPUQuaternion_MemoryLayout (0.00s)
+=== RUN   TestGPUQuaternion_Throughput
+    quaternion_gpu_test.go:366: Sustained throughput: 9892175.29 ops/sec
+    quaternion_gpu_test.go:367: Total ops: 10100, GPU ops: 0, CPU ops: 10100
+    quaternion_gpu_test.go:369: Backend: CPU (fallback)
+--- PASS: TestGPUQuaternion_Throughput (0.00s)
+=== RUN   TestGPUQuaternion_AccuracyVsCPU
+--- PASS: TestGPUQuaternion_AccuracyVsCPU (0.00s)
+=== RUN   TestGPUQuaternion_LargeScale_1M
+    quaternion_gpu_test.go:412: Testing 1M quaternion operations...
+    quaternion_gpu_test.go:417: Generating 1M random quaternions...
+    quaternion_gpu_test.go:427: Generation took: 157.6884ms
+    quaternion_gpu_test.go:430: Running BatchMultiply on 1M pairs...
+    quaternion_gpu_test.go:440: 1M multiply: 72308671.26 ops/sec, duration=13.8296ms
+    quaternion_gpu_test.go:443: Running BatchSLERP on 1M pairs...
+    quaternion_gpu_test.go:453: 1M SLERP: 38413078.89 ops/sec, duration=26.0328ms
+    quaternion_gpu_test.go:467: Final stats: &{TotalOps:2000000 GPUOps:0 CPUOps:2000000 TotalDuration:39.8624ms OpsPerSecond:5.0172593722405076e+07}
+--- PASS: TestGPUQuaternion_LargeScale_1M (0.20s)
+=== RUN   TestGPUQuaternion_Integration_WithVQC
+    quaternion_gpu_test.go:515: VQC integration test passed: 3 quaternions evolved on S³
+--- PASS: TestGPUQuaternion_Integration_WithVQC (0.00s)
+=== RUN   TestGPUQuaternion_RotateVector
+--- PASS: TestGPUQuaternion_RotateVector (0.00s)
+=== RUN   TestGPUQuaternion_Inverse
+--- PASS: TestGPUQuaternion_Inverse (0.00s)
+=== RUN   TestGPUQuaternion_GeodeticDistance
+--- PASS: TestGPUQuaternion_GeodeticDistance (0.00s)
+=== RUN   TestGPUQuaternion_AxisAngleRoundtrip
+--- PASS: TestGPUQuaternion_AxisAngleRoundtrip (0.00s)
+=== RUN   TestGPUQuaternion_BatchRotateVectors
+--- PASS: TestGPUQuaternion_BatchRotateVectors (0.00s)
+=== RUN   TestQuaternionIdentity
+--- PASS: TestQuaternionIdentity (0.00s)
+=== RUN   TestQuaternionNorm
+--- PASS: TestQuaternionNorm (0.00s)
+=== RUN   TestQuaternionNormalize
+--- PASS: TestQuaternionNormalize (0.00s)
+=== RUN   TestQuaternionMultiply
+--- PASS: TestQuaternionMultiply (0.00s)
+=== RUN   TestSLERP
+--- PASS: TestSLERP (0.00s)
+=== RUN   TestGeodeticDistance
+--- PASS: TestGeodeticDistance (0.00s)
+=== RUN   TestRotateVector
+--- PASS: TestRotateVector (0.00s)
+=== RUN   TestValidate
+--- PASS: TestValidate (0.00s)
+=== RUN   TestSPIRV_KernelLoader_Initialization
+    spirv_kernel_test.go:25: ✅ Kernel loader initialized successfully
+--- PASS: TestSPIRV_KernelLoader_Initialization (0.00s)
+=== RUN   TestSPIRV_KernelLoader_LoadsSLERP
+    spirv_kernel_test.go:48: ✅ SLERP kernel loaded: 19508 bytes
+--- PASS: TestSPIRV_KernelLoader_LoadsSLERP (0.00s)
+=== RUN   TestSPIRV_KernelLoader_LoadsMatMul
+    spirv_kernel_test.go:71: ✅ MatMul kernel loaded: 12952 bytes
+--- PASS: TestSPIRV_KernelLoader_LoadsMatMul (0.00s)
+=== RUN   TestSPIRV_KernelExists_SLERPEvolution
+    spirv_kernel_test.go:99: ✅ SLERP kernel found: ../../kernels/slerp_evolution.spv (19508 bytes)
+--- PASS: TestSPIRV_KernelExists_SLERPEvolution (0.00s)
+=== RUN   TestSPIRV_KernelExists_SparseMatMul
+    spirv_kernel_test.go:142: ✅ MatMul kernel found: ../../kernels/sparse_matmul_core.spv (12952 bytes)
+--- PASS: TestSPIRV_KernelExists_SparseMatMul (0.00s)
+=== RUN   TestSPIRV_KernelValidation
+    spirv_kernel_test.go:180: ✅ Kernel slerp_evolution is valid SPIR-V (19508 bytes)
+    spirv_kernel_test.go:180: ✅ Kernel sparse_matmul_core is valid SPIR-V (12952 bytes)
+--- PASS: TestSPIRV_KernelValidation (0.00s)
+=== RUN   TestSPIRV_SLERPKernel_Correctness
+    spirv_kernel_test.go:228: ✅ SLERP correctness validated:
+    spirv_kernel_test.go:229:    - Endpoints preserved: t=0 and t=1
+    spirv_kernel_test.go:230:    - Result on S³: ||Q|| = 1.000000
+    spirv_kernel_test.go:231:    - Geodesic path: dist(q0,mid)=0.392699, dist(mid,q1)=0.392699
+--- PASS: TestSPIRV_SLERPKernel_Correctness (0.00s)
+=== RUN   TestSPIRV_MatMulKernel_Correctness
+    spirv_kernel_test.go:266: ✅ Sparse matmul correctness validated:
+    spirv_kernel_test.go:267:    - Input:  [1, 0, 2]
+    spirv_kernel_test.go:268:    - Result: [5.0, 0.0, 14.0]
+    spirv_kernel_test.go:269:    - Expected: [5, 0, 14]
+--- PASS: TestSPIRV_MatMulKernel_Correctness (0.00s)
+=== RUN   TestSPIRV_KernelPerformance_SLERP
+    spirv_kernel_test.go:291: ✅ SLERP Performance (CPU):
+    spirv_kernel_test.go:292:    - Operations: 100000
+    spirv_kernel_test.go:293:    - Duration:   9.130 ms
+    spirv_kernel_test.go:294:    - Throughput: 10953.38 Kops/sec
+    spirv_kernel_test.go:295:    - Target:     50-100 Mops/sec on GPU (N100 @ 24 EU)
+--- PASS: TestSPIRV_KernelPerformance_SLERP (0.22s)
+=== RUN   TestSPIRV_KernelPerformance_MatMul
+    spirv_kernel_test.go:341: ✅ Sparse MatMul Performance (CPU):
+    spirv_kernel_test.go:342:    - Matrix size: 1000x1000 (80% sparse)
+    spirv_kernel_test.go:343:    - Non-zeros:   200000
+    spirv_kernel_test.go:344:    - Iterations:  100
+    spirv_kernel_test.go:345:    - Duration:    30.860 ms
+    spirv_kernel_test.go:346:    - Throughput:  648.09 Mops/sec
+--- PASS: TestSPIRV_KernelPerformance_MatMul (0.45s)
+=== RUN   TestSPIRV_GPUExecution_IfAvailable
+    spirv_kernel_test.go:358: ⚠️  GPU not available - skipping GPU execution test
+--- SKIP: TestSPIRV_GPUExecution_IfAvailable (0.00s)
+=== RUN   TestSPIRV_FallbackToCPU
+    spirv_kernel_test.go:396: ✅ Testing CPU fallback path (GPU not available)
+    spirv_kernel_test.go:425: ✅ CPU fallback validated:
+    spirv_kernel_test.go:426:    - CPU ops:    2
+    spirv_kernel_test.go:427:    - Throughput: 0.00 ops/sec
+--- PASS: TestSPIRV_FallbackToCPU (0.00s)
+=== RUN   TestSPIRV_Integration_WithAccelerator
+    spirv_kernel_test.go:437: Kernel loader status: 2/5 loaded
+    spirv_kernel_test.go:442: Accelerator backend: CPU (fallback)
+    spirv_kernel_test.go:465: ✅ Full integration validated:
+    spirv_kernel_test.go:466:    - Kernels loaded:  2
+    spirv_kernel_test.go:467:    - Backend:         CPU (fallback)
+    spirv_kernel_test.go:468:    - Total ops:       1
+    spirv_kernel_test.go:469:    - GPU utilization: 0/1 ops
+--- PASS: TestSPIRV_Integration_WithAccelerator (0.00s)
+PASS
+ok  	github.com/asymmetrica/urbanlens/pkg/gpu	1.970s
+?   	github.com/asymmetrica/urbanlens/pkg/healing	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/healing/parsers	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/i18n	[no test files]
+=== RUN   TestTeslaFrequency_Constant
+--- PASS: TestTeslaFrequency_Constant (0.00s)
+=== RUN   TestBasePeriod_Calculation
+    harmonic_timer_exhaustive_test.go:88: ✓ BasePeriod validated: 203.707 ms (from 1/4.909 Hz)
+--- PASS: TestBasePeriod_Calculation (0.00s)
+=== RUN   TestHarmonicDelay_1x
+    harmonic_timer_exhaustive_test.go:107: ✓ 1× harmonic delay: 203.00 ms
+--- PASS: TestHarmonicDelay_1x (0.00s)
+=== RUN   TestHarmonicDelay_2x
+    harmonic_timer_exhaustive_test.go:126: ✓ 2× harmonic delay: 407.00 ms
+--- PASS: TestHarmonicDelay_2x (0.00s)
+=== RUN   TestHarmonicDelay_4x
+    harmonic_timer_exhaustive_test.go:145: ✓ 4× harmonic delay: 814.00 ms
+--- PASS: TestHarmonicDelay_4x (0.00s)
+=== RUN   TestHarmonicDelay_8x
+    harmonic_timer_exhaustive_test.go:164: ✓ 8× harmonic delay: 1629.00 ms
+--- PASS: TestHarmonicDelay_8x (0.00s)
+=== RUN   TestHarmonicDelay_16x
+    harmonic_timer_exhaustive_test.go:183: ✓ 16× harmonic delay: 3259.00 ms
+--- PASS: TestHarmonicDelay_16x (0.00s)
+=== RUN   TestHarmonicMean_Derivation
+    harmonic_timer_exhaustive_test.go:221: ✓ Harmonic mean derivation validated:
+    harmonic_timer_exhaustive_test.go:222:   Frequencies: [3 6 9] Hz
+    harmonic_timer_exhaustive_test.go:223:   Sum reciprocals: 1/3 + 1/6 + 1/9 = 0.611111
+    harmonic_timer_exhaustive_test.go:224:   Harmonic mean: 3 / 0.611111 = 4.909091 Hz
+--- PASS: TestHarmonicMean_Derivation (0.00s)
+=== RUN   TestBackoffSequence_Exponential
+    harmonic_timer_exhaustive_test.go:261: ✓ Exponential backoff sequence validated: [1 2 4 8 16 32 64]
+--- PASS: TestBackoffSequence_Exponential (0.00s)
+=== RUN   TestTimingVariance_LessThan50ms
+=== RUN   TestTimingVariance_LessThan50ms/1×_harmonic
+    harmonic_timer_exhaustive_test.go:309: ✓ 1.0× harmonic: expected 203.71ms, actual 206.00ms, variance 2.29ms (< 50ms)
+=== RUN   TestTimingVariance_LessThan50ms/2×_harmonic
+    harmonic_timer_exhaustive_test.go:309: ✓ 2.0× harmonic: expected 407.41ms, actual 410.00ms, variance 2.59ms (< 50ms)
+=== RUN   TestTimingVariance_LessThan50ms/4×_harmonic
+    harmonic_timer_exhaustive_test.go:309: ✓ 4.0× harmonic: expected 814.83ms, actual 816.00ms, variance 1.17ms (< 50ms)
+--- PASS: TestTimingVariance_LessThan50ms (1.43s)
+    --- PASS: TestTimingVariance_LessThan50ms/1×_harmonic (0.21s)
+    --- PASS: TestTimingVariance_LessThan50ms/2×_harmonic (0.41s)
+    --- PASS: TestTimingVariance_LessThan50ms/4×_harmonic (0.82s)
+=== RUN   TestRateLimiting_5RequestsPerSecond
+    harmonic_timer_exhaustive_test.go:353: ✓ Rate limiting: 4.95 req/sec achieved (expected 5.00), delay 200.00ms
+--- PASS: TestRateLimiting_5RequestsPerSecond (2.02s)
+=== RUN   TestBackoffRetry_Success
+=== RUN   TestBackoffRetry_Success/Success_on_first_attempt
+    harmonic_timer_exhaustive_test.go:398: ✓ Retry succeeded after 1 attempts (duration: 0s)
+=== RUN   TestBackoffRetry_Success/Success_on_second_attempt
+    harmonic_timer_exhaustive_test.go:398: ✓ Retry succeeded after 2 attempts (duration: 211.7008ms)
+=== RUN   TestBackoffRetry_Success/Success_on_third_attempt
+    harmonic_timer_exhaustive_test.go:398: ✓ Retry succeeded after 3 attempts (duration: 614.1195ms)
+=== RUN   TestBackoffRetry_Success/Success_on_fourth_attempt
+    harmonic_timer_exhaustive_test.go:398: ✓ Retry succeeded after 4 attempts (duration: 1.4335095s)
+--- PASS: TestBackoffRetry_Success (2.26s)
+    --- PASS: TestBackoffRetry_Success/Success_on_first_attempt (0.00s)
+    --- PASS: TestBackoffRetry_Success/Success_on_second_attempt (0.21s)
+    --- PASS: TestBackoffRetry_Success/Success_on_third_attempt (0.61s)
+    --- PASS: TestBackoffRetry_Success/Success_on_fourth_attempt (1.43s)
+=== RUN   TestBackoffRetry_MaxAttempts
+=== RUN   TestBackoffRetry_MaxAttempts/1ns_max_attempts
+    harmonic_timer_exhaustive_test.go:439: ✓ Failed after 1 attempts as expected (duration: 0s)
+=== RUN   TestBackoffRetry_MaxAttempts/3ns_max_attempts
+    harmonic_timer_exhaustive_test.go:439: ✓ Failed after 3 attempts as expected (duration: 616.4668ms)
+=== RUN   TestBackoffRetry_MaxAttempts/5ns_max_attempts
+    harmonic_timer_exhaustive_test.go:439: ✓ Failed after 5 attempts as expected (duration: 3.0651816s)
+=== RUN   TestBackoffRetry_MaxAttempts/10ns_max_attempts
+    harmonic_timer_exhaustive_test.go:439: ✓ Failed after 10 attempts as expected (duration: 51.9580541s)
+--- PASS: TestBackoffRetry_MaxAttempts (55.64s)
+    --- PASS: TestBackoffRetry_MaxAttempts/1ns_max_attempts (0.00s)
+    --- PASS: TestBackoffRetry_MaxAttempts/3ns_max_attempts (0.62s)
+    --- PASS: TestBackoffRetry_MaxAttempts/5ns_max_attempts (3.07s)
+    --- PASS: TestBackoffRetry_MaxAttempts/10ns_max_attempts (51.96s)
+=== RUN   TestHarmonicTimer_Integration_WithContext
+=== RUN   TestHarmonicTimer_Integration_WithContext/Timeout_during_backoff
+    harmonic_timer_exhaustive_test.go:488: ✓ Context timeout: stopped after 2 attempts in 500.1156ms
+=== RUN   TestHarmonicTimer_Integration_WithContext/Immediate_cancellation
+    harmonic_timer_exhaustive_test.go:509: ✓ Immediate cancellation handled correctly
+=== RUN   TestHarmonicTimer_Integration_WithContext/Context_passed_to_operation
+    harmonic_timer_exhaustive_test.go:538: ✓ Context properly passed to operation
+--- PASS: TestHarmonicTimer_Integration_WithContext (0.50s)
+    --- PASS: TestHarmonicTimer_Integration_WithContext/Timeout_during_backoff (0.50s)
+    --- PASS: TestHarmonicTimer_Integration_WithContext/Immediate_cancellation (0.00s)
+    --- PASS: TestHarmonicTimer_Integration_WithContext/Context_passed_to_operation (0.00s)
+=== RUN   TestHarmonicTimer_Concurrent_Safety
+    harmonic_timer_exhaustive_test.go:602: ✓ Concurrent safety: 10 goroutines completed successfully
+--- PASS: TestHarmonicTimer_Concurrent_Safety (0.01s)
+=== RUN   TestHarmonicTimer_EdgeCases
+=== RUN   TestHarmonicTimer_EdgeCases/Zero_delay
+=== RUN   TestHarmonicTimer_EdgeCases/Negative_delay_(clamped_to_zero)
+=== RUN   TestHarmonicTimer_EdgeCases/Very_large_multiple
+=== RUN   TestHarmonicTimer_EdgeCases/Fractional_multiple
+=== RUN   TestHarmonicTimer_EdgeCases/Zero_max_attempts_(uses_default)
+=== RUN   TestHarmonicTimer_EdgeCases/Rate_limit_with_zero/negative_rate
+=== NAME  TestHarmonicTimer_EdgeCases
+    harmonic_timer_exhaustive_test.go:681: ✓ Edge cases handled correctly
+--- PASS: TestHarmonicTimer_EdgeCases (0.00s)
+    --- PASS: TestHarmonicTimer_EdgeCases/Zero_delay (0.00s)
+    --- PASS: TestHarmonicTimer_EdgeCases/Negative_delay_(clamped_to_zero) (0.00s)
+    --- PASS: TestHarmonicTimer_EdgeCases/Very_large_multiple (0.00s)
+    --- PASS: TestHarmonicTimer_EdgeCases/Fractional_multiple (0.00s)
+    --- PASS: TestHarmonicTimer_EdgeCases/Zero_max_attempts_(uses_default) (0.00s)
+    --- PASS: TestHarmonicTimer_EdgeCases/Rate_limit_with_zero/negative_rate (0.00s)
+=== RUN   TestHarmonicTimer_Getters
+    harmonic_timer_exhaustive_test.go:698: ✓ Getters validated: 4.909 Hz, 204ms period
+--- PASS: TestHarmonicTimer_Getters (0.00s)
+=== RUN   TestTesla_369_Harmonics
+    harmonic_timer_exhaustive_test.go:779: ✓ Tesla 3-6-9 electromagnetic harmonics validated:
+    harmonic_timer_exhaustive_test.go:780:   Sacred frequencies: [3 6 9] Hz
+    harmonic_timer_exhaustive_test.go:781:   Harmonic mean: 4.909091 Hz (base timing frequency)
+    harmonic_timer_exhaustive_test.go:782:   'If you only knew the magnificence of the 3, 6 and 9...' - Tesla
+--- PASS: TestTesla_369_Harmonics (0.00s)
+=== RUN   TestNewHarmonicTimer
+--- PASS: TestNewHarmonicTimer (0.00s)
+=== RUN   TestCalculateDelay
+=== RUN   TestCalculateDelay/1x_harmonic
+=== RUN   TestCalculateDelay/2x_harmonic
+=== RUN   TestCalculateDelay/4x_harmonic
+=== RUN   TestCalculateDelay/8x_harmonic
+=== RUN   TestCalculateDelay/Zero
+=== RUN   TestCalculateDelay/Negative_(clamped)
+--- PASS: TestCalculateDelay (0.00s)
+    --- PASS: TestCalculateDelay/1x_harmonic (0.00s)
+    --- PASS: TestCalculateDelay/2x_harmonic (0.00s)
+    --- PASS: TestCalculateDelay/4x_harmonic (0.00s)
+    --- PASS: TestCalculateDelay/8x_harmonic (0.00s)
+    --- PASS: TestCalculateDelay/Zero (0.00s)
+    --- PASS: TestCalculateDelay/Negative_(clamped) (0.00s)
+=== RUN   TestRetryWithBackoff
+=== RUN   TestRetryWithBackoff/Success_on_first_attempt
+=== RUN   TestRetryWithBackoff/Success_on_third_attempt
+=== RUN   TestRetryWithBackoff/All_attempts_fail
+--- PASS: TestRetryWithBackoff (1.22s)
+    --- PASS: TestRetryWithBackoff/Success_on_first_attempt (0.00s)
+    --- PASS: TestRetryWithBackoff/Success_on_third_attempt (0.61s)
+    --- PASS: TestRetryWithBackoff/All_attempts_fail (0.61s)
+=== RUN   TestRetryWithBackoffContext
+=== RUN   TestRetryWithBackoffContext/Context_timeout
+=== RUN   TestRetryWithBackoffContext/Context_cancellation
+--- PASS: TestRetryWithBackoffContext (0.30s)
+    --- PASS: TestRetryWithBackoffContext/Context_timeout (0.30s)
+    --- PASS: TestRetryWithBackoffContext/Context_cancellation (0.00s)
+=== RUN   TestRateLimit
+=== RUN   TestRateLimit/5_req/sec_(1×_harmonic)
+=== RUN   TestRateLimit/2.45_req/sec_(2×_harmonic)
+=== RUN   TestRateLimit/1_req/sec_(5×_harmonic)
+=== RUN   TestRateLimit/Zero_(no_limit)
+=== RUN   TestRateLimit/Negative_(no_limit)
+--- PASS: TestRateLimit (0.00s)
+    --- PASS: TestRateLimit/5_req/sec_(1×_harmonic) (0.00s)
+    --- PASS: TestRateLimit/2.45_req/sec_(2×_harmonic) (0.00s)
+    --- PASS: TestRateLimit/1_req/sec_(5×_harmonic) (0.00s)
+    --- PASS: TestRateLimit/Zero_(no_limit) (0.00s)
+    --- PASS: TestRateLimit/Negative_(no_limit) (0.00s)
+=== RUN   TestSleepHarmonic
+=== RUN   TestSleepHarmonic/1_period_sleep
+=== RUN   TestSleepHarmonic/Zero_periods_(no_sleep)
+--- PASS: TestSleepHarmonic (0.21s)
+    --- PASS: TestSleepHarmonic/1_period_sleep (0.20s)
+    --- PASS: TestSleepHarmonic/Zero_periods_(no_sleep) (0.00s)
+=== RUN   TestSleepHarmonicContext
+=== RUN   TestSleepHarmonicContext/Normal_sleep_completes
+=== RUN   TestSleepHarmonicContext/Context_cancelled_during_sleep
+--- PASS: TestSleepHarmonicContext (0.25s)
+    --- PASS: TestSleepHarmonicContext/Normal_sleep_completes (0.20s)
+    --- PASS: TestSleepHarmonicContext/Context_cancelled_during_sleep (0.05s)
+=== RUN   TestTimingVariance
+=== RUN   TestTimingVariance/Exact_match
+=== RUN   TestTimingVariance/Small_variance
+=== RUN   TestTimingVariance/At_threshold
+=== RUN   TestTimingVariance/Exceeds_threshold
+=== RUN   TestTimingVariance/Negative_difference
+--- PASS: TestTimingVariance (0.00s)
+    --- PASS: TestTimingVariance/Exact_match (0.00s)
+    --- PASS: TestTimingVariance/Small_variance (0.00s)
+    --- PASS: TestTimingVariance/At_threshold (0.00s)
+    --- PASS: TestTimingVariance/Exceeds_threshold (0.00s)
+    --- PASS: TestTimingVariance/Negative_difference (0.00s)
+=== RUN   TestBackoffSequence
+--- PASS: TestBackoffSequence (0.00s)
+=== RUN   TestTeslaConstants
+--- PASS: TestTeslaConstants (0.00s)
+=== RUN   TestIntegration_DriftDetection_ZeroDrift
+=== PAUSE TestIntegration_DriftDetection_ZeroDrift
+=== RUN   TestIntegration_DriftDetection_SmallDrift_AutoApprove
+=== PAUSE TestIntegration_DriftDetection_SmallDrift_AutoApprove
+=== RUN   TestIntegration_DriftDetection_LargeDrift_Reject
+=== PAUSE TestIntegration_DriftDetection_LargeDrift_Reject
+=== RUN   TestIntegration_WilliamsThreshold_AtScale
+=== PAUSE TestIntegration_WilliamsThreshold_AtScale
+=== RUN   TestIntegration_Baseline_InitialSetup
+=== PAUSE TestIntegration_Baseline_InitialSetup
+=== RUN   TestIntegration_Baseline_Update
+=== PAUSE TestIntegration_Baseline_Update
+=== RUN   TestIntegration_Baseline_History
+=== PAUSE TestIntegration_Baseline_History
+=== RUN   TestIntegration_MultiTeam_GlobalWeight
+=== PAUSE TestIntegration_MultiTeam_GlobalWeight
+=== RUN   TestIntegration_MultiTeam_TeamWeight
+=== PAUSE TestIntegration_MultiTeam_TeamWeight
+=== RUN   TestIntegration_MultiTeam_Blending
+=== PAUSE TestIntegration_MultiTeam_Blending
+=== RUN   TestIntegration_DriftOverTime_IncreasingCommits
+=== PAUSE TestIntegration_DriftOverTime_IncreasingCommits
+=== RUN   TestIntegration_CrossTeamNotification
+=== PAUSE TestIntegration_CrossTeamNotification
+=== RUN   TestIntegration_BaselineRecovery_AfterDrift
+=== PAUSE TestIntegration_BaselineRecovery_AfterDrift
+=== RUN   TestIntegration_EndToEnd_PRWorkflow
+=== PAUSE TestIntegration_EndToEnd_PRWorkflow
+=== RUN   TestIntegration_MultiTeam_NoTeamBaseline
+=== PAUSE TestIntegration_MultiTeam_NoTeamBaseline
+=== RUN   TestIntegration_ConfidenceRelaxation
+=== PAUSE TestIntegration_ConfidenceRelaxation
+=== RUN   TestIntegration_BaselineManager_ThreadSafety
+=== PAUSE TestIntegration_BaselineManager_ThreadSafety
+=== RUN   TestE2E_FullPipeline_HealthyProject
+    integration_e2e_pipeline_test.go:69: ✅ Healthy project: SHM=0.659, Regime=EXPLORATION, Duration=2.7908ms
+--- PASS: TestE2E_FullPipeline_HealthyProject (0.00s)
+=== RUN   TestE2E_FullPipeline_UnhealthyProject
+    integration_e2e_pipeline_test.go:113: ✅ Unhealthy project: SHM=0.653, Regime=EXPLORATION, Weakest=state (0.412)
+--- PASS: TestE2E_FullPipeline_UnhealthyProject (0.00s)
+=== RUN   TestE2E_FullPipeline_MixedProject
+    integration_e2e_pipeline_test.go:165: ✅ Mixed project: SHM=0.659, Regime=EXPLORATION, Strongest=journey (0.940), Weakest=design (0.500)
+--- PASS: TestE2E_FullPipeline_MixedProject (0.00s)
+=== RUN   TestE2E_Dashboard_GeneratesCorrectly
+    integration_e2e_pipeline_test.go:215: ✅ Dashboard generated: 2549 characters
+    integration_e2e_pipeline_test.go:216: 
+        
+        ┌─────────────────────────────────────────────────────────────┐
+        │           UNIFIED INTELLIGENCE MONITORING SYSTEM             │
+        │                  (Ananta Sonar Suite)                        │
+        └─────────────────────────────────────────────────────────────┘
+        
+        🎯 System Health Metric (SHM): 0.659
+        📊 Regime: EXPLORATION
+        ⏱️  Analysis Duration: 4.0003ms
+        
+        Regime Guide:
+          • EXPLORATION   (< 0.70): Experimenting with features, high churn expected
+          • OPTIMIZATION  (0.70-0.85): Improving quality, moderate stability
+          • STABILIZATION (≥ 0.85): Production-ready, high reliability
+        
+        ┌─────────────────────────────────────────────────────────────┐
+        │                      SIX SONAR ENGINES                       │
+        ├────────────────────┬────────┬────────┬─────────────────────┤
+        │ Sonar              │ Score  │ Weight │ Status              │
+        ├────────────────────┼────────┼────────┼─────────────────────┤
+        │ UX Sonar           │ 0.552  │ 0.250  │ WARNING     ████     │
+        │ Design Sonar       │ 0.500  │ 0.250  │ WARNING     ████     │
+        │ Code Sonar         │ 0.882  │ 0.125  │ EXCELLENT   ████████ │
+        │ Semantic Sonar     │ 0.843  │ 0.125  │ OK          ██████   │
+        │ Journey Sonar      │ 0.940  │ 0.125  │ EXCELLENT   ████████ │
+        │ State Sonar        │ 0.502  │ 0.125  │ WARNING     ████     │
+        └────────────────────┴────────┴────────┴─────────────────────┘
+        
+        💪 Strongest Dimension: Journey Sonar (0.940)
+        ⚠️  Weakest Dimension: Design Sonar (0.500)
+        
+        🔧 Top Recommendations:
+           1. Increase contrast ratio to 4.5:1 minimum (WCAG AA)
+           2. Use color contrast checker (WebAIM, Stark, etc.)
+           3. Provide high-contrast mode for low-vision users
+        
+--- PASS: TestE2E_Dashboard_GeneratesCorrectly (0.00s)
+=== RUN   TestE2E_Alerts_CriticalTriggered
+    integration_e2e_pipeline_test.go:253: ✅ Critical project analyzed: SHM=0.667, Regime=EXPLORATION
+--- PASS: TestE2E_Alerts_CriticalTriggered (0.00s)
+=== RUN   TestE2E_Alerts_WarningTriggered
+    integration_e2e_pipeline_test.go:277: ✅ Warning project: SHM=0.653, Regime=EXPLORATION
+--- PASS: TestE2E_Alerts_WarningTriggered (0.00s)
+=== RUN   TestE2E_Praise_WhenExcellent
+    integration_e2e_pipeline_test.go:311: ✅ Praise detection tested (has praise: true)
+--- PASS: TestE2E_Praise_WhenExcellent (0.00s)
+=== RUN   TestE2E_Performance_UnderLoad
+    integration_e2e_pipeline_test.go:348: ✅ Performance test: 100 components analyzed in 56.1562ms (SHM=0.577)
+--- PASS: TestE2E_Performance_UnderLoad (0.06s)
+=== RUN   TestE2E_Incremental_OnlyChanged
+    integration_e2e_pipeline_test.go:379: ✅ Incremental analysis: Baseline SHM=0.659, Updated SHM=0.659, Diff=0.000
+--- PASS: TestE2E_Incremental_OnlyChanged (0.01s)
+=== RUN   TestE2E_Caching_ReusesResults
+    integration_e2e_pipeline_test.go:411: ✅ Caching test: Run1=2.8324ms, Run2=3.5023ms (SHM=0.659)
+--- PASS: TestE2E_Caching_ReusesResults (0.01s)
+=== RUN   TestE2E_Report_JSONFormat
+    integration_e2e_pipeline_test.go:448: ✅ JSON-ready result: SHM=0.659, Regime=EXPLORATION, Sonars=6
+--- PASS: TestE2E_Report_JSONFormat (0.00s)
+=== RUN   TestE2E_Report_HumanReadable
+    integration_e2e_pipeline_test.go:487: ✅ Human-readable report: 37 lines
+--- PASS: TestE2E_Report_HumanReadable (0.00s)
+=== RUN   TestE2E_RealProject_SmallGoPackage
+    integration_e2e_pipeline_test.go:527: ✅ Real Go project: SHM=0.667, Regime=EXPLORATION
+--- PASS: TestE2E_RealProject_SmallGoPackage (0.00s)
+=== RUN   TestE2E_RealProject_IntegrationWithVQC
+    integration_e2e_pipeline_test.go:551: ✅ VQC integration ready: SHM=0.659
+--- PASS: TestE2E_RealProject_IntegrationWithVQC (0.00s)
+=== RUN   TestE2E_Regression_DetectsDecline
+    integration_e2e_pipeline_test.go:578: Note: Regressed project scored higher (0.664 vs 0.659) - regression not detected by sonars
+    integration_e2e_pipeline_test.go:582: ✅ Regression test: Baseline=0.659, Regressed=0.664, Decline=-0.005
+--- PASS: TestE2E_Regression_DetectsDecline (0.00s)
+=== RUN   TestE2E_WilliamsDrift_AutoApprove
+    integration_e2e_pipeline_test.go:614: ✅ Williams drift: Approved=true, Drift=0.00%
+--- PASS: TestE2E_WilliamsDrift_AutoApprove (0.00s)
+=== RUN   TestE2E_WilliamsDrift_RequiresReview
+    integration_e2e_pipeline_test.go:641: ✅ Williams drift review: Approved=false, Drift=0.97%
+--- PASS: TestE2E_WilliamsDrift_RequiresReview (0.00s)
+=== RUN   TestIntegration_AllSonars_FeedIntoSHM
+    integration_sonar_shm_regime_test.go:60: SUCCESS: All 6 sonars produced valid scores → SHM = 0.654
+--- PASS: TestIntegration_AllSonars_FeedIntoSHM (0.00s)
+=== RUN   TestIntegration_SHM_WeightsAppliedCorrectly
+    integration_sonar_shm_regime_test.go:108: SUCCESS: Weights applied correctly (UX+Design = 50%, Internal = 50%)
+--- PASS: TestIntegration_SHM_WeightsAppliedCorrectly (0.00s)
+=== RUN   TestIntegration_SHM_ExplorationRegime
+    integration_sonar_shm_regime_test.go:140: SUCCESS: SHM < 0.70 correctly maps to Exploration regime
+    integration_sonar_shm_regime_test.go:141: Actual app SHM: 0.664 → EXPLORATION
+--- PASS: TestIntegration_SHM_ExplorationRegime (0.00s)
+=== RUN   TestIntegration_SHM_OptimizationRegime
+    integration_sonar_shm_regime_test.go:170: SUCCESS: 0.70 ≤ SHM < 0.85 correctly maps to Optimization regime
+--- PASS: TestIntegration_SHM_OptimizationRegime (0.00s)
+=== RUN   TestIntegration_SHM_StabilizationRegime
+    integration_sonar_shm_regime_test.go:193: SUCCESS: SHM ≥ 0.85 correctly maps to Stabilization regime
+--- PASS: TestIntegration_SHM_StabilizationRegime (0.00s)
+=== RUN   TestIntegration_SonarEngine_RunsAllSonars
+    integration_sonar_shm_regime_test.go:270: SUCCESS: Sonar engine orchestrated all 6 sonars correctly
+    integration_sonar_shm_regime_test.go:271: Weakest: design (0.500), Strongest: journey (0.926)
+--- PASS: TestIntegration_SonarEngine_RunsAllSonars (0.00s)
+=== RUN   TestIntegration_RegimeDetermination_Boundaries
+    integration_sonar_shm_regime_test.go:308: SUCCESS: All boundary conditions validated
+    integration_sonar_shm_regime_test.go:309: Exploration: [0.0, 0.70), Optimization: [0.70, 0.85), Stabilization: [0.85, 1.0]
+--- PASS: TestIntegration_RegimeDetermination_Boundaries (0.00s)
+=== RUN   TestIntegration_SonarEngine_ParallelExecution
+    integration_sonar_shm_regime_test.go:355: SUCCESS: Sonar execution is deterministic across 5 iterations
+    integration_sonar_shm_regime_test.go:356: Consistent SHM: 0.654, Regime: EXPLORATION
+--- PASS: TestIntegration_SonarEngine_ParallelExecution (0.02s)
+=== RUN   TestIntegration_SHM_UpdatesOnChange
+    integration_sonar_shm_regime_test.go:389: SUCCESS: SHM updated on app change (0.662 → 0.654)
+    integration_sonar_shm_regime_test.go:397: Sonar ux changed: 0.558 → 0.540
+    integration_sonar_shm_regime_test.go:397: Sonar semantic changed: 0.845 → 0.842
+    integration_sonar_shm_regime_test.go:397: Sonar journey changed: 0.947 → 0.926
+    integration_sonar_shm_regime_test.go:405: Changed sonars: 3/6
+--- PASS: TestIntegration_SHM_UpdatesOnChange (0.01s)
+=== RUN   TestIntegration_RegimeTransition_ExplorationToOptimization
+    integration_sonar_shm_regime_test.go:432: SUCCESS: Regime transitioned correctly
+    integration_sonar_shm_regime_test.go:433: SHM 0.65 → EXPLORATION
+    integration_sonar_shm_regime_test.go:434: SHM 0.75 → OPTIMIZATION (transition!)
+--- PASS: TestIntegration_RegimeTransition_ExplorationToOptimization (0.00s)
+=== RUN   TestIntegration_RegimeTransition_OptimizationToStabilization
+    integration_sonar_shm_regime_test.go:461: SUCCESS: Regime transitioned correctly
+    integration_sonar_shm_regime_test.go:462: SHM 0.80 → OPTIMIZATION
+    integration_sonar_shm_regime_test.go:463: SHM 0.90 → STABILIZATION (production ready!)
+--- PASS: TestIntegration_RegimeTransition_OptimizationToStabilization (0.00s)
+=== RUN   TestIntegration_EndToEnd_FullPipeline
+    integration_sonar_shm_regime_test.go:480: Step 1: Running all 6 sonars...
+    integration_sonar_shm_regime_test.go:487: Step 2: Verifying sonar outputs...
+    integration_sonar_shm_regime_test.go:493: Step 3: Verifying SHM aggregation...
+    integration_sonar_shm_regime_test.go:499: Step 4: Verifying regime determination...
+    integration_sonar_shm_regime_test.go:507: Step 5: Generating dashboard...
+    integration_sonar_shm_regime_test.go:514: Step 6: Validating dashboard content...
+    integration_sonar_shm_regime_test.go:536: SUCCESS: Complete pipeline validated!
+    integration_sonar_shm_regime_test.go:537: Pipeline: App → 6 Sonars → SHM (0.654) → Regime (EXPLORATION) → Dashboard (2549 chars)
+    integration_sonar_shm_regime_test.go:541: 
+        
+        ┌─────────────────────────────────────────────────────────────┐
+        │           UNIFIED INTELLIGENCE MONITORING SYSTEM             │
+        │                  (Ananta Sonar Suite)                        │
+        └─────────────────────────────────────────────────────────────┘
+        
+        🎯 System Health Metric (SHM): 0.654
+        📊 Regime: EXPLORATION
+        ⏱️  Analysis Duration: 6.0645ms
+        
+        Regime Guide:
+          • EXPLORATION   (< 0.70): Experimenting with features, high churn expected
+          • OPTIMIZATION  (0.70-0.85): Improving quality, moderate stability
+          • STABILIZATION (≥ 0.85): Production-ready, high reliability
+        
+        ┌─────────────────────────────────────────────────────────────┐
+        │                      SIX SONAR ENGINES                       │
+        ├────────────────────┬────────┬────────┬─────────────────────┤
+        │ Sonar              │ Score  │ Weight │ Status              │
+        ├────────────────────┼────────┼────────┼─────────────────────┤
+        │ UX Sonar           │ 0.540  │ 0.250  │ WARNING     ████     │
+        │ Design Sonar       │ 0.500  │ 0.250  │ WARNING     ████     │
+        │ Code Sonar         │ 0.882  │ 0.125  │ EXCELLENT   ████████ │
+        │ Semantic Sonar     │ 0.842  │ 0.125  │ OK          ██████   │
+        │ Journey Sonar      │ 0.926  │ 0.125  │ EXCELLENT   ████████ │
+        │ State Sonar        │ 0.502  │ 0.125  │ WARNING     ████     │
+        └────────────────────┴────────┴────────┴─────────────────────┘
+        
+        💪 Strongest Dimension: Journey Sonar (0.926)
+        ⚠️  Weakest Dimension: Design Sonar (0.500)
+        
+        🔧 Top Recommendations:
+           1. Increase contrast ratio to 4.5:1 minimum (WCAG AA)
+           2. Use color contrast checker (WebAIM, Stark, etc.)
+           3. Provide high-contrast mode for low-vision users
+        
+        
+--- PASS: TestIntegration_EndToEnd_FullPipeline (0.01s)
+=== RUN   TestIntegration_SonarFailure_Graceful
+    integration_sonar_shm_regime_test.go:573: SHM calculation succeeded despite invalid app - robust implementation!
+--- PASS: TestIntegration_SonarFailure_Graceful (0.00s)
+=== RUN   TestIntegration_SHM_ToThreeRegimePlanner
+    integration_sonar_shm_regime_test.go:615: SUCCESS: SHM integrated with Three-Regime Planner
+    integration_sonar_shm_regime_test.go:616: SHM: 0.654 → Regime: EXPLORATION → Test Regime: Exploration
+    integration_sonar_shm_regime_test.go:617: Test Allocation: Exploration=33, Optimization=28, Stabilization=39
+--- PASS: TestIntegration_SHM_ToThreeRegimePlanner (0.00s)
+=== RUN   TestZeroMatchProblem
+=== RUN   TestZeroMatchProblem/create_task
+    pattern_matching_integration_test.go:85: create_task: exact=0, fuzzy=5, threshold=0.50 → 5 matches
+=== RUN   TestZeroMatchProblem/list_tasks
+    pattern_matching_integration_test.go:85: list_tasks: exact=0, fuzzy=8, threshold=0.50 → 8 matches
+=== RUN   TestZeroMatchProblem/update_task
+    pattern_matching_integration_test.go:85: update_task: exact=0, fuzzy=6, threshold=0.50 → 6 matches
+=== RUN   TestZeroMatchProblem/delete_task
+    pattern_matching_integration_test.go:85: delete_task: exact=0, fuzzy=4, threshold=0.50 → 4 matches
+=== NAME  TestZeroMatchProblem
+    pattern_matching_integration_test.go:99: 
+        Wave 8.4 Bug Fix Validation:
+    pattern_matching_integration_test.go:100:   Before fix: 0 matches (stubs generated)
+    pattern_matching_integration_test.go:101:   After fix: 23 matches (real code generated)
+    pattern_matching_integration_test.go:102:   Success: 2300.0% increase
+--- PASS: TestZeroMatchProblem (0.00s)
+    --- PASS: TestZeroMatchProblem/create_task (0.00s)
+    --- PASS: TestZeroMatchProblem/list_tasks (0.00s)
+    --- PASS: TestZeroMatchProblem/update_task (0.00s)
+    --- PASS: TestZeroMatchProblem/delete_task (0.00s)
+=== RUN   TestConfidenceRelaxationProgression
+    pattern_matching_integration_test.go:140: Confidence Relaxation Progression:
+    pattern_matching_integration_test.go:142:   Query 1: threshold = 0.50
+    pattern_matching_integration_test.go:142:   Query 2: threshold = 0.50
+    pattern_matching_integration_test.go:142:   Query 3: threshold = 0.50
+    pattern_matching_integration_test.go:142:   Query 4: threshold = 0.50
+    pattern_matching_integration_test.go:142:   Query 5: threshold = 0.50
+    pattern_matching_integration_test.go:142:   Query 6: threshold = 0.50
+    pattern_matching_integration_test.go:142:   Query 7: threshold = 0.53
+    pattern_matching_integration_test.go:142:   Query 8: threshold = 0.56
+    pattern_matching_integration_test.go:142:   Query 9: threshold = 0.59
+    pattern_matching_integration_test.go:142:   Query 10: threshold = 0.61
+    pattern_matching_integration_test.go:142:   Query 11: threshold = 0.63
+    pattern_matching_integration_test.go:142:   Query 12: threshold = 0.64
+    pattern_matching_integration_test.go:142:   Query 13: threshold = 0.65
+    pattern_matching_integration_test.go:142:   Query 14: threshold = 0.66
+    pattern_matching_integration_test.go:142:   Query 15: threshold = 0.67
+    pattern_matching_integration_test.go:142:   Query 16: threshold = 0.68
+    pattern_matching_integration_test.go:142:   Query 17: threshold = 0.68
+    pattern_matching_integration_test.go:142:   Query 18: threshold = 0.69
+    pattern_matching_integration_test.go:142:   Query 19: threshold = 0.69
+    pattern_matching_integration_test.go:142:   Query 20: threshold = 0.70
+--- PASS: TestConfidenceRelaxationProgression (0.00s)
+=== RUN   TestAppTypeClassification
+=== RUN   TestAppTypeClassification/todo
+    pattern_matching_integration_test.go:188: App Type: todo → Category: task_management_crud
+    pattern_matching_integration_test.go:189:   Detected features: [create_operation read_operation update_operation delete_operation]
+=== RUN   TestAppTypeClassification/task_manager
+    pattern_matching_integration_test.go:188: App Type: task manager → Category: task_management_crud
+    pattern_matching_integration_test.go:189:   Detected features: [create_operation read_operation update_operation delete_operation]
+=== RUN   TestAppTypeClassification/blog
+    pattern_matching_integration_test.go:188: App Type: blog → Category: content_management_crud
+    pattern_matching_integration_test.go:189:   Detected features: [create_operation read_operation update_operation delete_operation]
+=== RUN   TestAppTypeClassification/ecommerce
+    pattern_matching_integration_test.go:188: App Type: ecommerce → Category: ecommerce_crud
+    pattern_matching_integration_test.go:189:   Detected features: [create_operation read_operation update_operation delete_operation]
+--- PASS: TestAppTypeClassification (0.00s)
+    --- PASS: TestAppTypeClassification/todo (0.00s)
+    --- PASS: TestAppTypeClassification/task_manager (0.00s)
+    --- PASS: TestAppTypeClassification/blog (0.00s)
+    --- PASS: TestAppTypeClassification/ecommerce (0.00s)
+=== RUN   TestSemanticKeywordExpansion
+=== RUN   TestSemanticKeywordExpansion/add_new_items_and_edit_existing_ones
+    pattern_matching_integration_test.go:235: Keyword 'add' → Feature 'create_operation'
+    pattern_matching_integration_test.go:235: Keyword 'edit' → Feature 'update_operation'
+=== RUN   TestSemanticKeywordExpansion/view_list_of_todos_and_remove_completed_tasks
+    pattern_matching_integration_test.go:235: Keyword 'view' → Feature 'read_operation'
+    pattern_matching_integration_test.go:235: Keyword 'list' → Feature 'delete_operation'
+--- FAIL: TestSemanticKeywordExpansion (0.00s)
+    --- PASS: TestSemanticKeywordExpansion/add_new_items_and_edit_existing_ones (0.00s)
+    --- FAIL: TestSemanticKeywordExpansion/view_list_of_todos_and_remove_completed_tasks (0.00s)
+panic: runtime error: index out of range [2] with length 2 [recovered, repanicked]
+
+goroutine 182 [running]:
+testing.tRunner.func1.2({0x7ff6255ca1a0, 0xc0000182e8})
+	C:/Program Files/Go/src/testing/testing.go:1872 +0x239
+testing.tRunner.func1()
+	C:/Program Files/Go/src/testing/testing.go:1875 +0x35b
+panic({0x7ff6255ca1a0?, 0xc0000182e8?})
+	C:/Program Files/Go/src/runtime/panic.go:783 +0x132
+github.com/asymmetrica/urbanlens/pkg/intelligence.TestSemanticKeywordExpansion.func1(0xc000125c00)
+	C:/Projects/asymm_urbanlens/pkg/intelligence/pattern_matching_integration_test.go:234 +0x199
+testing.tRunner(0xc000125c00, 0xc000118a00)
+	C:/Program Files/Go/src/testing/testing.go:1934 +0xc3
+created by testing.(*T).Run in goroutine 180
+	C:/Program Files/Go/src/testing/testing.go:1997 +0x44b
+FAIL	github.com/asymmetrica/urbanlens/pkg/intelligence	65.288s
+=== RUN   TestCodeSonar_CyclomaticComplexity_Simple
+    code_sonar_exhaustive_test.go:68: ✓ Simple linear code: total=1.00, max=1.50, functions=1
+--- PASS: TestCodeSonar_CyclomaticComplexity_Simple (0.01s)
+=== RUN   TestCodeSonar_CyclomaticComplexity_SingleBranch
+    code_sonar_exhaustive_test.go:98: ✓ Single branch: total=2.00, max=3.00, functions=1
+--- PASS: TestCodeSonar_CyclomaticComplexity_SingleBranch (0.00s)
+=== RUN   TestCodeSonar_CyclomaticComplexity_MultipleBranch
+    code_sonar_exhaustive_test.go:145: ✓ Multiple branches (high CC): total=11.00, max=16.50
+--- PASS: TestCodeSonar_CyclomaticComplexity_MultipleBranch (0.01s)
+=== RUN   TestCodeSonar_CyclomaticComplexity_Formula
+=== RUN   TestCodeSonar_CyclomaticComplexity_Formula/Zero_decisions
+    code_sonar_exhaustive_test.go:206: ✓ Zero decisions: total=1.00 (expected >= 1.0)
+=== RUN   TestCodeSonar_CyclomaticComplexity_Formula/One_if
+    code_sonar_exhaustive_test.go:206: ✓ One if: total=2.00 (expected >= 2.0)
+=== RUN   TestCodeSonar_CyclomaticComplexity_Formula/Two_branches
+    code_sonar_exhaustive_test.go:206: ✓ Two branches: total=3.00 (expected >= 3.0)
+=== RUN   TestCodeSonar_CyclomaticComplexity_Formula/Logical_operators
+    code_sonar_exhaustive_test.go:206: ✓ Logical operators: total=4.00 (expected >= 3.0)
+--- PASS: TestCodeSonar_CyclomaticComplexity_Formula (0.03s)
+    --- PASS: TestCodeSonar_CyclomaticComplexity_Formula/Zero_decisions (0.00s)
+    --- PASS: TestCodeSonar_CyclomaticComplexity_Formula/One_if (0.00s)
+    --- PASS: TestCodeSonar_CyclomaticComplexity_Formula/Two_branches (0.02s)
+    --- PASS: TestCodeSonar_CyclomaticComplexity_Formula/Logical_operators (0.00s)
+=== RUN   TestCodeSonar_BugDensity_LowComplexity
+    code_sonar_exhaustive_test.go:270: ✓ Low complexity → low bug density: 0.074 (CC=2.0, dup=2.5%, cohesion=0.78)
+--- PASS: TestCodeSonar_BugDensity_LowComplexity (0.02s)
+=== RUN   TestCodeSonar_BugDensity_HighComplexity
+    code_sonar_exhaustive_test.go:292: ✓ High complexity → high bug density: 5.857 (CC=25.0, dup=8.0%, cohesion=0.65)
+--- PASS: TestCodeSonar_BugDensity_HighComplexity (0.00s)
+=== RUN   TestCodeSonar_Duplication_None
+    code_sonar_exhaustive_test.go:321: ✓ Zero duplication yields high score: 0.950
+--- PASS: TestCodeSonar_Duplication_None (0.00s)
+=== RUN   TestCodeSonar_Duplication_High
+    code_sonar_exhaustive_test.go:350: ✓ High duplication (25%) penalizes score: 0.700
+--- PASS: TestCodeSonar_Duplication_High (0.00s)
+=== RUN   TestCodeSonar_Cohesion_High
+    code_sonar_exhaustive_test.go:386: ✓ High cohesion (0.85) yields praise finding
+--- PASS: TestCodeSonar_Cohesion_High (0.00s)
+=== RUN   TestCodeSonar_Cohesion_Low
+    code_sonar_exhaustive_test.go:427: ✓ Low cohesion (0.50) flags issue with 2 recommendations
+--- PASS: TestCodeSonar_Cohesion_Low (0.00s)
+=== RUN   TestCodeSonar_PING_ParsesAST
+    code_sonar_exhaustive_test.go:480: ✓ PING collected complexity: avg=3.00, max=4.50
+--- PASS: TestCodeSonar_PING_ParsesAST (0.03s)
+=== RUN   TestCodeSonar_ECHO_ComputesMetrics
+    code_sonar_exhaustive_test.go:533: ✓ ECHO computed metrics: CC=8.5, dup=3.5%, cohesion=0.72
+--- PASS: TestCodeSonar_ECHO_ComputesMetrics (0.00s)
+=== RUN   TestCodeSonar_MAP_NormalizesTo01
+=== RUN   TestCodeSonar_MAP_NormalizesTo01/Excellent_code
+    code_sonar_exhaustive_test.go:618: ✓ Excellent code: score=0.950 (range [0.85, 1.00])
+=== RUN   TestCodeSonar_MAP_NormalizesTo01/Good_code
+    code_sonar_exhaustive_test.go:618: ✓ Good code: score=0.810 (range [0.70, 0.90])
+=== RUN   TestCodeSonar_MAP_NormalizesTo01/Moderate_code
+    code_sonar_exhaustive_test.go:618: ✓ Moderate code: score=0.647 (range [0.50, 0.75])
+=== RUN   TestCodeSonar_MAP_NormalizesTo01/Poor_code
+    code_sonar_exhaustive_test.go:618: ✓ Poor code: score=0.328 (range [0.00, 0.50])
+--- PASS: TestCodeSonar_MAP_NormalizesTo01 (0.00s)
+    --- PASS: TestCodeSonar_MAP_NormalizesTo01/Excellent_code (0.00s)
+    --- PASS: TestCodeSonar_MAP_NormalizesTo01/Good_code (0.00s)
+    --- PASS: TestCodeSonar_MAP_NormalizesTo01/Moderate_code (0.00s)
+    --- PASS: TestCodeSonar_MAP_NormalizesTo01/Poor_code (0.00s)
+=== RUN   TestCodeSonar_CRITIQUE_FlagsMonsters
+    code_sonar_exhaustive_test.go:673: ✓ Monster function (CC=65) flagged with 10 recommendations
+--- PASS: TestCodeSonar_CRITIQUE_FlagsMonsters (0.00s)
+=== RUN   TestCodeSonar_Integration_WithSHM
+    code_sonar_exhaustive_test.go:741: ✓ Code Sonar → SHM: score=0.882, contribution=0.1103 (weight=0.125)
+--- PASS: TestCodeSonar_Integration_WithSHM (0.01s)
+=== RUN   TestCodeSonar_RefactoringRecommendations
+=== RUN   TestCodeSonar_RefactoringRecommendations/High_complexity
+    code_sonar_exhaustive_test.go:822: ✓ High complexity: 7 recommendations with keywords [URGENT Break down SRP]
+=== RUN   TestCodeSonar_RefactoringRecommendations/High_duplication
+    code_sonar_exhaustive_test.go:822: ✓ High duplication: 5 recommendations with keywords [Extract DRY]
+=== RUN   TestCodeSonar_RefactoringRecommendations/Low_cohesion
+    code_sonar_exhaustive_test.go:822: ✓ Low cohesion: 2 recommendations with keywords [Restructure package-by-feature]
+--- PASS: TestCodeSonar_RefactoringRecommendations (0.00s)
+    --- PASS: TestCodeSonar_RefactoringRecommendations/High_complexity (0.00s)
+    --- PASS: TestCodeSonar_RefactoringRecommendations/High_duplication (0.00s)
+    --- PASS: TestCodeSonar_RefactoringRecommendations/Low_cohesion (0.00s)
+=== RUN   TestCodeSonar_IEEE_Standards
+=== RUN   TestCodeSonar_IEEE_Standards/Green_Zone_(CC_1-10)
+    code_sonar_exhaustive_test.go:904: ✓ IEEE Low risk: CC 5.0-8.0 → score=0.888
+=== RUN   TestCodeSonar_IEEE_Standards/Yellow_Zone_(CC_11-20)
+    code_sonar_exhaustive_test.go:904: ✓ IEEE Moderate risk: CC 15.0-18.0 → score=0.748
+=== RUN   TestCodeSonar_IEEE_Standards/Orange_Zone_(CC_21-50)
+    code_sonar_exhaustive_test.go:904: ✓ IEEE High risk: CC 30.0-45.0 → score=0.616
+=== RUN   TestCodeSonar_IEEE_Standards/Red_Zone_(CC_>_50)
+    code_sonar_exhaustive_test.go:904: ✓ IEEE Very high risk: CC 40.0-70.0 → score=0.590
+--- PASS: TestCodeSonar_IEEE_Standards (0.00s)
+    --- PASS: TestCodeSonar_IEEE_Standards/Green_Zone_(CC_1-10) (0.00s)
+    --- PASS: TestCodeSonar_IEEE_Standards/Yellow_Zone_(CC_11-20) (0.00s)
+    --- PASS: TestCodeSonar_IEEE_Standards/Orange_Zone_(CC_21-50) (0.00s)
+    --- PASS: TestCodeSonar_IEEE_Standards/Red_Zone_(CC_>_50) (0.00s)
+=== RUN   TestCodeSonar_StatusLevels
+    code_sonar_exhaustive_test.go:932: ✓ Score 0.95 → EXCELLENT
+    code_sonar_exhaustive_test.go:932: ✓ Score 0.85 → EXCELLENT
+    code_sonar_exhaustive_test.go:932: ✓ Score 0.80 → OK
+    code_sonar_exhaustive_test.go:932: ✓ Score 0.70 → OK
+    code_sonar_exhaustive_test.go:932: ✓ Score 0.65 → WARNING
+    code_sonar_exhaustive_test.go:932: ✓ Score 0.50 → WARNING
+    code_sonar_exhaustive_test.go:932: ✓ Score 0.40 → CRITICAL
+    code_sonar_exhaustive_test.go:932: ✓ Score 0.10 → CRITICAL
+--- PASS: TestCodeSonar_StatusLevels (0.00s)
+=== RUN   TestDesignSonar_GoldenRatio_Constant
+    design_sonar_exhaustive_test.go:24: ✓ Golden ratio constant: φ = 1.618033988749
+--- PASS: TestDesignSonar_GoldenRatio_Constant (0.00s)
+=== RUN   TestDesignSonar_GoldenRatio_InverseConstant
+    design_sonar_exhaustive_test.go:47: ✓ Inverse golden ratio: 1/φ = 0.618033988750237
+    design_sonar_exhaustive_test.go:48: ✓ Mathematical property verified: φ - 1 = 1/φ
+--- PASS: TestDesignSonar_GoldenRatio_InverseConstant (0.00s)
+=== RUN   TestDesignSonar_ContrastRatio_WhiteOnBlack
+    design_sonar_exhaustive_test.go:64: ✓ White-on-black contrast score: 0.85
+--- PASS: TestDesignSonar_ContrastRatio_WhiteOnBlack (0.00s)
+=== RUN   TestDesignSonar_ContrastRatio_GrayOnGray
+    design_sonar_exhaustive_test.go:81: ✓ Gray-on-gray contrast score: 0.85 (simulation)
+--- PASS: TestDesignSonar_ContrastRatio_GrayOnGray (0.00s)
+=== RUN   TestDesignSonar_WCAGCompliance_NormalText
+=== RUN   TestDesignSonar_WCAGCompliance_NormalText/White_on_Black
+    design_sonar_exhaustive_test.go:112: ✓ WCAG AA normal text threshold: 4.5:1 (test case: White on Black)
+=== RUN   TestDesignSonar_WCAGCompliance_NormalText/Black_on_White
+    design_sonar_exhaustive_test.go:112: ✓ WCAG AA normal text threshold: 4.5:1 (test case: Black on White)
+=== RUN   TestDesignSonar_WCAGCompliance_NormalText/Blue_on_White
+    design_sonar_exhaustive_test.go:112: ✓ WCAG AA normal text threshold: 4.5:1 (test case: Blue on White)
+=== RUN   TestDesignSonar_WCAGCompliance_NormalText/Light_Gray_on_White
+    design_sonar_exhaustive_test.go:112: ✓ WCAG AA normal text threshold: 4.5:1 (test case: Light Gray on White)
+--- PASS: TestDesignSonar_WCAGCompliance_NormalText (0.00s)
+    --- PASS: TestDesignSonar_WCAGCompliance_NormalText/White_on_Black (0.00s)
+    --- PASS: TestDesignSonar_WCAGCompliance_NormalText/Black_on_White (0.00s)
+    --- PASS: TestDesignSonar_WCAGCompliance_NormalText/Blue_on_White (0.00s)
+    --- PASS: TestDesignSonar_WCAGCompliance_NormalText/Light_Gray_on_White (0.00s)
+=== RUN   TestDesignSonar_WCAGCompliance_LargeText
+=== RUN   TestDesignSonar_WCAGCompliance_LargeText/Large_Heading_White_on_Light_Blue
+    design_sonar_exhaustive_test.go:145: ✓ WCAG AA large text threshold: 3.0:1 (font: 24.0pt)
+=== RUN   TestDesignSonar_WCAGCompliance_LargeText/Large_Heading_Black_on_Light_Gray
+    design_sonar_exhaustive_test.go:145: ✓ WCAG AA large text threshold: 3.0:1 (font: 20.0pt)
+=== RUN   TestDesignSonar_WCAGCompliance_LargeText/Small_Text_Gray_on_White
+    design_sonar_exhaustive_test.go:145: ✓ WCAG AA large text threshold: 3.0:1 (font: 12.0pt)
+--- PASS: TestDesignSonar_WCAGCompliance_LargeText (0.00s)
+    --- PASS: TestDesignSonar_WCAGCompliance_LargeText/Large_Heading_White_on_Light_Blue (0.00s)
+    --- PASS: TestDesignSonar_WCAGCompliance_LargeText/Large_Heading_Black_on_Light_Gray (0.00s)
+    --- PASS: TestDesignSonar_WCAGCompliance_LargeText/Small_Text_Gray_on_White (0.00s)
+=== RUN   TestDesignSonar_WCAGCompliance_AAA
+=== RUN   TestDesignSonar_WCAGCompliance_AAA/White_on_Black
+    design_sonar_exhaustive_test.go:179: ✓ WCAG AAA compliance: 7.0:1 threshold (actual: 21.0, pass: true)
+=== RUN   TestDesignSonar_WCAGCompliance_AAA/Black_on_White
+    design_sonar_exhaustive_test.go:179: ✓ WCAG AAA compliance: 7.0:1 threshold (actual: 21.0, pass: true)
+=== RUN   TestDesignSonar_WCAGCompliance_AAA/Blue_on_White
+    design_sonar_exhaustive_test.go:179: ✓ WCAG AAA compliance: 7.0:1 threshold (actual: 8.6, pass: true)
+=== RUN   TestDesignSonar_WCAGCompliance_AAA/Red_on_White
+    design_sonar_exhaustive_test.go:179: ✓ WCAG AAA compliance: 7.0:1 threshold (actual: 4.0, pass: false)
+=== RUN   TestDesignSonar_WCAGCompliance_AAA/Orange_on_White
+    design_sonar_exhaustive_test.go:179: ✓ WCAG AAA compliance: 7.0:1 threshold (actual: 2.2, pass: false)
+--- PASS: TestDesignSonar_WCAGCompliance_AAA (0.00s)
+    --- PASS: TestDesignSonar_WCAGCompliance_AAA/White_on_Black (0.00s)
+    --- PASS: TestDesignSonar_WCAGCompliance_AAA/Black_on_White (0.00s)
+    --- PASS: TestDesignSonar_WCAGCompliance_AAA/Blue_on_White (0.00s)
+    --- PASS: TestDesignSonar_WCAGCompliance_AAA/Red_on_White (0.00s)
+    --- PASS: TestDesignSonar_WCAGCompliance_AAA/Orange_on_White (0.00s)
+=== RUN   TestDesignSonar_HarmonyIndex_Perfect
+    design_sonar_exhaustive_test.go:198: ✓ Perfect color harmony score: 0.75
+--- PASS: TestDesignSonar_HarmonyIndex_Perfect (0.00s)
+=== RUN   TestDesignSonar_HarmonyIndex_Clashing
+    design_sonar_exhaustive_test.go:215: ✓ Clashing colors harmony score: 0.75 (simulation)
+--- PASS: TestDesignSonar_HarmonyIndex_Clashing (0.00s)
+=== RUN   TestDesignSonar_LayoutPHI_Adherence
+    design_sonar_exhaustive_test.go:238: ✓ Golden ratio typography scale:
+    design_sonar_exhaustive_test.go:240:   Level 0: 16.00px (φ^0)
+    design_sonar_exhaustive_test.go:240:   Level 1: 25.89px (φ^1)
+    design_sonar_exhaustive_test.go:240:   Level 2: 41.89px (φ^2)
+    design_sonar_exhaustive_test.go:240:   Level 3: 67.78px (φ^3)
+    design_sonar_exhaustive_test.go:242:   Score: 1.00
+--- PASS: TestDesignSonar_LayoutPHI_Adherence (0.00s)
+=== RUN   TestDesignSonar_PING_AnalyzesDOM
+    design_sonar_exhaustive_test.go:279: ✓ PING phase collected 4 raw data keys
+--- PASS: TestDesignSonar_PING_AnalyzesDOM (0.00s)
+=== RUN   TestDesignSonar_ECHO_ComputesMetrics
+    design_sonar_exhaustive_test.go:326: ✓ ECHO phase computed 5 metrics
+    design_sonar_exhaustive_test.go:328:   contrast_compliance: 0.85
+    design_sonar_exhaustive_test.go:328:   color_harmony: 0.75
+    design_sonar_exhaustive_test.go:328:   fibonacci_spacing: 1.00
+    design_sonar_exhaustive_test.go:328:   typography_scale: 0.67
+    design_sonar_exhaustive_test.go:328:   layout_balance: 0.90
+--- PASS: TestDesignSonar_ECHO_ComputesMetrics (0.00s)
+=== RUN   TestDesignSonar_MAP_NormalizesTo01
+=== RUN   TestDesignSonar_MAP_NormalizesTo01/Perfect_scores
+    design_sonar_exhaustive_test.go:400: ✓ MAP normalized score: 1.00 (range: [0.95, 1.00])
+=== RUN   TestDesignSonar_MAP_NormalizesTo01/Zero_scores
+    design_sonar_exhaustive_test.go:400: ✓ MAP normalized score: 0.00 (range: [0.00, 0.05])
+=== RUN   TestDesignSonar_MAP_NormalizesTo01/Mixed_scores
+    design_sonar_exhaustive_test.go:400: ✓ MAP normalized score: 0.73 (range: [0.50, 0.90])
+--- PASS: TestDesignSonar_MAP_NormalizesTo01 (0.00s)
+    --- PASS: TestDesignSonar_MAP_NormalizesTo01/Perfect_scores (0.00s)
+    --- PASS: TestDesignSonar_MAP_NormalizesTo01/Zero_scores (0.00s)
+    --- PASS: TestDesignSonar_MAP_NormalizesTo01/Mixed_scores (0.00s)
+=== RUN   TestDesignSonar_CRITIQUE_GeneratesReport
+    design_sonar_exhaustive_test.go:444: ✓ CRITIQUE generated report:
+    design_sonar_exhaustive_test.go:445:   Summary: Design Quality: 65.0% contrast, 55.0% harmony, 75.0% Fibonacci
+    design_sonar_exhaustive_test.go:446:   Findings: 3
+    design_sonar_exhaustive_test.go:447:   Recommendations: 9
+    design_sonar_exhaustive_test.go:453:     [Critical] ISSUE: Poor contrast (65.0%) - fails WCAG accessibility
+    design_sonar_exhaustive_test.go:453:     [Medium] OBSERVATION: Moderate color harmony - some jarring combinations
+    design_sonar_exhaustive_test.go:453:     [Low] OBSERVATION: Arbitrary spacing values - consider Fibonacci sequence
+--- PASS: TestDesignSonar_CRITIQUE_GeneratesReport (0.00s)
+=== RUN   TestDesignSonar_ColorblindAccessibility
+=== RUN   TestDesignSonar_ColorblindAccessibility/Red-Green_(Unsafe)
+    design_sonar_exhaustive_test.go:503: ✓ Colorblind test case: Red-Green (Unsafe)
+    design_sonar_exhaustive_test.go:504:   Colors: [#FF0000 #00FF00]
+    design_sonar_exhaustive_test.go:505:   Expected safe: false
+    design_sonar_exhaustive_test.go:506:   Reason: Most common colorblindness (deuteranopia) cannot distinguish
+=== RUN   TestDesignSonar_ColorblindAccessibility/Blue-Orange_(Safe)
+    design_sonar_exhaustive_test.go:503: ✓ Colorblind test case: Blue-Orange (Safe)
+    design_sonar_exhaustive_test.go:504:   Colors: [#0000FF #FFA500]
+    design_sonar_exhaustive_test.go:505:   Expected safe: true
+    design_sonar_exhaustive_test.go:506:   Reason: High contrast for all types of colorblindness
+=== RUN   TestDesignSonar_ColorblindAccessibility/Blue-Yellow_(Safe)
+    design_sonar_exhaustive_test.go:503: ✓ Colorblind test case: Blue-Yellow (Safe)
+    design_sonar_exhaustive_test.go:504:   Colors: [#0000FF #FFFF00]
+    design_sonar_exhaustive_test.go:505:   Expected safe: true
+    design_sonar_exhaustive_test.go:506:   Reason: Safe for deuteranopia and protanopia
+=== RUN   TestDesignSonar_ColorblindAccessibility/Purple-Green_(Unsafe)
+    design_sonar_exhaustive_test.go:503: ✓ Colorblind test case: Purple-Green (Unsafe)
+    design_sonar_exhaustive_test.go:504:   Colors: [#800080 #008000]
+    design_sonar_exhaustive_test.go:505:   Expected safe: false
+    design_sonar_exhaustive_test.go:506:   Reason: Difficult for deuteranopia
+--- PASS: TestDesignSonar_ColorblindAccessibility (0.00s)
+    --- PASS: TestDesignSonar_ColorblindAccessibility/Red-Green_(Unsafe) (0.00s)
+    --- PASS: TestDesignSonar_ColorblindAccessibility/Blue-Orange_(Safe) (0.00s)
+    --- PASS: TestDesignSonar_ColorblindAccessibility/Blue-Yellow_(Safe) (0.00s)
+    --- PASS: TestDesignSonar_ColorblindAccessibility/Purple-Green_(Unsafe) (0.00s)
+=== RUN   TestDesignSonar_Integration_WithSHM
+    design_sonar_exhaustive_test.go:532: ✓ Design Sonar → SHM integration:
+    design_sonar_exhaustive_test.go:533:   Design score: 0.85
+    design_sonar_exhaustive_test.go:534:   SHM weight: 0.25
+    design_sonar_exhaustive_test.go:535:   SHM contribution: 0.2125
+    design_sonar_exhaustive_test.go:536:   Total SHM = (Performance×0.30) + (Code×0.25) + (Design×0.25) + (Business×0.20)
+--- PASS: TestDesignSonar_Integration_WithSHM (0.00s)
+=== RUN   TestDesignSonar_FibonacciSequence_Accuracy
+=== RUN   TestDesignSonar_FibonacciSequence_Accuracy/Perfect_Fibonacci
+    design_sonar_exhaustive_test.go:584: ✓ Fibonacci alignment: 1.00 for [8 13 21 34 55 89]
+=== RUN   TestDesignSonar_FibonacciSequence_Accuracy/Close_to_Fibonacci_(±2px_tolerance)
+    design_sonar_exhaustive_test.go:584: ✓ Fibonacci alignment: 1.00 for [7 14 20 35 56 90]
+=== RUN   TestDesignSonar_FibonacciSequence_Accuracy/Random_spacing
+    design_sonar_exhaustive_test.go:580: Note: Fibonacci score 0.33 differs from expected 0.00 (±0.20 tolerance)
+    design_sonar_exhaustive_test.go:584: ✓ Fibonacci alignment: 0.33 for [10 15 25 40 60 100]
+=== RUN   TestDesignSonar_FibonacciSequence_Accuracy/Mixed_(50%_match)
+    design_sonar_exhaustive_test.go:584: ✓ Fibonacci alignment: 0.67 for [8 13 25 34 60 89]
+--- PASS: TestDesignSonar_FibonacciSequence_Accuracy (0.00s)
+    --- PASS: TestDesignSonar_FibonacciSequence_Accuracy/Perfect_Fibonacci (0.00s)
+    --- PASS: TestDesignSonar_FibonacciSequence_Accuracy/Close_to_Fibonacci_(±2px_tolerance) (0.00s)
+    --- PASS: TestDesignSonar_FibonacciSequence_Accuracy/Random_spacing (0.00s)
+    --- PASS: TestDesignSonar_FibonacciSequence_Accuracy/Mixed_(50%_match) (0.00s)
+=== RUN   TestDesignSonar_TypographyScale_PHI
+    design_sonar_exhaustive_test.go:612: ✓ Perfect modular scale (base = 16.0px):
+    design_sonar_exhaustive_test.go:614:   Level -2: 6.11px
+    design_sonar_exhaustive_test.go:614:   Level -1: 9.89px
+    design_sonar_exhaustive_test.go:614:   Level 0: 16.00px
+    design_sonar_exhaustive_test.go:614:   Level 1: 25.89px
+    design_sonar_exhaustive_test.go:614:   Level 2: 41.89px
+    design_sonar_exhaustive_test.go:616:   Detection score: 1.00
+--- PASS: TestDesignSonar_TypographyScale_PHI (0.00s)
+=== RUN   TestDesignSonar_LayoutBalance_ModernCSS
+=== RUN   TestDesignSonar_LayoutBalance_ModernCSS/Modern_layout_(Flex_+_Grid)
+    design_sonar_exhaustive_test.go:656: ✓ Layout balance: 0.90 (Modern layout (Flex + Grid))
+=== RUN   TestDesignSonar_LayoutBalance_ModernCSS/Legacy_layout
+    design_sonar_exhaustive_test.go:656: ✓ Layout balance: 0.50 (Legacy layout)
+--- PASS: TestDesignSonar_LayoutBalance_ModernCSS (0.00s)
+    --- PASS: TestDesignSonar_LayoutBalance_ModernCSS/Modern_layout_(Flex_+_Grid) (0.00s)
+    --- PASS: TestDesignSonar_LayoutBalance_ModernCSS/Legacy_layout (0.00s)
+=== RUN   TestDesignSonar_EndToEnd_FullPipeline
+    design_sonar_exhaustive_test.go:679: ✓ PING completed in 314.3µs
+    design_sonar_exhaustive_test.go:686: ✓ ECHO computed 5 metrics
+    design_sonar_exhaustive_test.go:693: ✓ MAP normalized to score: 0.50
+    design_sonar_exhaustive_test.go:700: ✓ CRITIQUE generated 3 findings, 9 recommendations
+    design_sonar_exhaustive_test.go:704: 
+        === FULL PIPELINE RESULTS ===
+    design_sonar_exhaustive_test.go:705: Final Score: 50.0%
+    design_sonar_exhaustive_test.go:706: Status: WARNING
+    design_sonar_exhaustive_test.go:707: Summary: Design Quality: 50.0% contrast, 50.0% harmony, 50.0% Fibonacci
+--- PASS: TestDesignSonar_EndToEnd_FullPipeline (0.00s)
+=== RUN   TestJourneySonar_FrustrationFormula
+=== RUN   TestJourneySonar_FrustrationFormula/HappyPath_NoFrustration
+    journey_sonar_exhaustive_test.go:103: ✅ HappyPath_NoFrustration: frustration = 0.000 (hesitation=0.0s, rage=0, backtrack=0)
+=== RUN   TestJourneySonar_FrustrationFormula/MinimalHesitation_Acceptable
+    journey_sonar_exhaustive_test.go:103: ✅ MinimalHesitation_Acceptable: frustration = 0.000 (hesitation=0.5s, rage=0, backtrack=0)
+=== RUN   TestJourneySonar_FrustrationFormula/ModerateHesitation_Concern
+    journey_sonar_exhaustive_test.go:103: ✅ ModerateHesitation_Concern: frustration = 0.100 (hesitation=3.0s, rage=0, backtrack=1)
+=== RUN   TestJourneySonar_FrustrationFormula/HighFrustration_Critical
+    journey_sonar_exhaustive_test.go:103: ✅ HighFrustration_Critical: frustration = 1.000 (hesitation=10.0s, rage=5, backtrack=3)
+--- PASS: TestJourneySonar_FrustrationFormula (0.00s)
+    --- PASS: TestJourneySonar_FrustrationFormula/HappyPath_NoFrustration (0.00s)
+    --- PASS: TestJourneySonar_FrustrationFormula/MinimalHesitation_Acceptable (0.00s)
+    --- PASS: TestJourneySonar_FrustrationFormula/ModerateHesitation_Concern (0.00s)
+    --- PASS: TestJourneySonar_FrustrationFormula/HighFrustration_Critical (0.00s)
+=== RUN   TestJourneySonar_Hesitation_None
+    journey_sonar_exhaustive_test.go:142: ✅ No hesitation: frustration = 0.060 (excellent navigation clarity)
+--- PASS: TestJourneySonar_Hesitation_None (0.00s)
+=== RUN   TestJourneySonar_Hesitation_Short
+    journey_sonar_exhaustive_test.go:178: ✅ Short hesitation: frustration = 0.100 (acceptable for moderate complexity)
+--- PASS: TestJourneySonar_Hesitation_Short (0.00s)
+=== RUN   TestJourneySonar_Hesitation_Long
+    journey_sonar_exhaustive_test.go:218: ✅ Long hesitation: frustration = 0.500 (high complexity detected)
+--- PASS: TestJourneySonar_Hesitation_Long (0.00s)
+=== RUN   TestJourneySonar_RageClicks_None
+    journey_sonar_exhaustive_test.go:257: ✅ No rage clicks: probability = 0.050 (responsive UI)
+--- PASS: TestJourneySonar_RageClicks_None (0.00s)
+=== RUN   TestJourneySonar_RageClicks_Detected
+    journey_sonar_exhaustive_test.go:279: ✅ Rage click detected: 5 clicks in 1.0s (threshold: 3)
+    journey_sonar_exhaustive_test.go:293: ✅ Rage click mitigation strategies: [Add loading spinners to all async actions Disable buttons during processing (prevent double-clicks) Show immediate feedback for all user interactions]
+--- PASS: TestJourneySonar_RageClicks_Detected (0.00s)
+=== RUN   TestJourneySonar_Backtrack_None
+    journey_sonar_exhaustive_test.go:332: ✅ No backtracking: probability = 0.120 (linear flow)
+--- PASS: TestJourneySonar_Backtrack_None (0.00s)
+=== RUN   TestJourneySonar_Backtrack_Excessive
+    journey_sonar_exhaustive_test.go:350: ✅ Excessive backtracking detected: 42.9% (threshold: 30%)
+    journey_sonar_exhaustive_test.go:360: ✅ Backtracking mitigation strategies: [Add progress indicators for multi-step flows Allow editing previous steps without backtracking Provide summary/review step before final submission Flatten information architecture (max 3 levels)]
+--- PASS: TestJourneySonar_Backtrack_Excessive (0.00s)
+=== RUN   TestJourneySonar_HappyPath_ZeroFrustration
+    journey_sonar_exhaustive_test.go:432: ✅ Happy path validated: score=0.940, frustration=0.060, status=EXCELLENT
+--- PASS: TestJourneySonar_HappyPath_ZeroFrustration (0.00s)
+=== RUN   TestJourneySonar_FrustratedPath_HighScore
+    journey_sonar_exhaustive_test.go:480: ✅ Frustrated path detected: frustration=0.500, depth=4.7, recommendations=9
+--- PASS: TestJourneySonar_FrustratedPath_HighScore (0.00s)
+=== RUN   TestJourneySonar_PING_TracksEvents
+    journey_sonar_exhaustive_test.go:520: ✅ PING tracked events: [nav_complexity frustration_points rage_click_risk backtracking_prob]
+--- PASS: TestJourneySonar_PING_TracksEvents (0.00s)
+=== RUN   TestJourneySonar_ECHO_ComputesFrustration
+    journey_sonar_exhaustive_test.go:570: ✅ ECHO computed frustration: 0.250 (valid range)
+--- PASS: TestJourneySonar_ECHO_ComputesFrustration (0.01s)
+=== RUN   TestJourneySonar_MAP_NormalizesTo01
+=== RUN   TestJourneySonar_MAP_NormalizesTo01/PerfectJourney
+    journey_sonar_exhaustive_test.go:628: ✅ PerfectJourney: score = 1.000 (normalized to 0-1)
+=== RUN   TestJourneySonar_MAP_NormalizesTo01/ProblematicJourney
+    journey_sonar_exhaustive_test.go:628: ✅ ProblematicJourney: score = 0.580 (normalized to 0-1)
+--- PASS: TestJourneySonar_MAP_NormalizesTo01 (0.00s)
+    --- PASS: TestJourneySonar_MAP_NormalizesTo01/PerfectJourney (0.00s)
+    --- PASS: TestJourneySonar_MAP_NormalizesTo01/ProblematicJourney (0.00s)
+=== RUN   TestJourneySonar_CRITIQUE_IdentifiesBottlenecks
+    journey_sonar_exhaustive_test.go:676: ✅ CRITIQUE identified bottlenecks: findings=4, recommendations=12, status=OK
+--- PASS: TestJourneySonar_CRITIQUE_IdentifiesBottlenecks (0.00s)
+=== RUN   TestJourneySonar_Integration_WithSHM
+    journey_sonar_exhaustive_test.go:704: ✅ SHM integration: journey_score=0.80, weight=0.125, contribution=0.100
+    journey_sonar_exhaustive_test.go:718: ✅ SHM validated: all_sonars=0.80, shm=0.80 (weights sum to 1.0)
+--- PASS: TestJourneySonar_Integration_WithSHM (0.00s)
+=== RUN   TestJourneySonar_DeadEndDetection
+    journey_sonar_exhaustive_test.go:754: ✅ Dead end risk detected: backtracking = 0.120
+    journey_sonar_exhaustive_test.go:762: ✅ Recommendation: Add tooltips or help text at friction points
+    journey_sonar_exhaustive_test.go:762: ✅ Recommendation: Improve form validation error messages
+    journey_sonar_exhaustive_test.go:762: ✅ Recommendation: Simplify multi-step workflows
+    journey_sonar_exhaustive_test.go:762: ✅ Recommendation: Add loading spinners to all async actions
+    journey_sonar_exhaustive_test.go:762: ✅ Recommendation: Disable buttons during processing (prevent double-clicks)
+    journey_sonar_exhaustive_test.go:762: ✅ Recommendation: Show immediate feedback for all user interactions
+--- PASS: TestJourneySonar_DeadEndDetection (0.00s)
+=== RUN   TestJourneySonar_NavigationDepth_Optimal
+    journey_sonar_exhaustive_test.go:802: ✅ Navigation depth optimal: 1.0 clicks (≤3 is excellent)
+--- PASS: TestJourneySonar_NavigationDepth_Optimal (0.00s)
+=== RUN   TestJourneySonar_NavigationDepth_TooDeep
+    journey_sonar_exhaustive_test.go:840: ✅ Navigation structure analyzed: depth=2.3 (from 7 routes)
+    journey_sonar_exhaustive_test.go:845: ⚠️  Score = 0.856 (higher than expected for deep navigation)
+--- PASS: TestJourneySonar_NavigationDepth_TooDeep (0.00s)
+=== RUN   TestSemanticSonar_AQS_Formula
+=== RUN   TestSemanticSonar_AQS_Formula/Perfect_Architecture_-_High_cohesion,_Low_coupling,_High_modularity
+=== RUN   TestSemanticSonar_AQS_Formula/Good_Architecture_-_Balanced_metrics
+=== RUN   TestSemanticSonar_AQS_Formula/Poor_Architecture_-_Low_cohesion,_High_coupling
+=== RUN   TestSemanticSonar_AQS_Formula/Monolithic_-_Very_low_modularity
+--- PASS: TestSemanticSonar_AQS_Formula (0.00s)
+    --- PASS: TestSemanticSonar_AQS_Formula/Perfect_Architecture_-_High_cohesion,_Low_coupling,_High_modularity (0.00s)
+    --- PASS: TestSemanticSonar_AQS_Formula/Good_Architecture_-_Balanced_metrics (0.00s)
+    --- PASS: TestSemanticSonar_AQS_Formula/Poor_Architecture_-_Low_cohesion,_High_coupling (0.00s)
+    --- PASS: TestSemanticSonar_AQS_Formula/Monolithic_-_Very_low_modularity (0.00s)
+=== RUN   TestSemanticSonar_CircularDependency_None
+--- PASS: TestSemanticSonar_CircularDependency_None (0.00s)
+=== RUN   TestSemanticSonar_CircularDependency_One
+--- PASS: TestSemanticSonar_CircularDependency_One (0.00s)
+=== RUN   TestSemanticSonar_CircularDependency_Many
+--- PASS: TestSemanticSonar_CircularDependency_Many (0.00s)
+=== RUN   TestSemanticSonar_Modularity_Perfect
+--- PASS: TestSemanticSonar_Modularity_Perfect (0.00s)
+=== RUN   TestSemanticSonar_Modularity_High
+--- PASS: TestSemanticSonar_Modularity_High (0.00s)
+=== RUN   TestSemanticSonar_Modularity_Low
+--- PASS: TestSemanticSonar_Modularity_Low (0.00s)
+=== RUN   TestSemanticSonar_Cohesion_High
+--- PASS: TestSemanticSonar_Cohesion_High (0.00s)
+=== RUN   TestSemanticSonar_Coupling_Low
+--- PASS: TestSemanticSonar_Coupling_Low (0.00s)
+=== RUN   TestSemanticSonar_Coupling_High
+--- PASS: TestSemanticSonar_Coupling_High (0.00s)
+=== RUN   TestSemanticSonar_PING_AnalyzesDeps
+    semantic_sonar_exhaustive_test.go:631: Duration = 0s, want > 0
+--- FAIL: TestSemanticSonar_PING_AnalyzesDeps (0.00s)
+=== RUN   TestSemanticSonar_ECHO_DetectsCycles
+--- PASS: TestSemanticSonar_ECHO_DetectsCycles (0.00s)
+=== RUN   TestSemanticSonar_MAP_NormalizesTo01
+=== RUN   TestSemanticSonar_MAP_NormalizesTo01/Perfect_metrics
+=== RUN   TestSemanticSonar_MAP_NormalizesTo01/Good_metrics
+=== RUN   TestSemanticSonar_MAP_NormalizesTo01/Average_metrics
+=== RUN   TestSemanticSonar_MAP_NormalizesTo01/Poor_metrics
+=== RUN   TestSemanticSonar_MAP_NormalizesTo01/Terrible_metrics
+--- PASS: TestSemanticSonar_MAP_NormalizesTo01 (0.00s)
+    --- PASS: TestSemanticSonar_MAP_NormalizesTo01/Perfect_metrics (0.00s)
+    --- PASS: TestSemanticSonar_MAP_NormalizesTo01/Good_metrics (0.00s)
+    --- PASS: TestSemanticSonar_MAP_NormalizesTo01/Average_metrics (0.00s)
+    --- PASS: TestSemanticSonar_MAP_NormalizesTo01/Poor_metrics (0.00s)
+    --- PASS: TestSemanticSonar_MAP_NormalizesTo01/Terrible_metrics (0.00s)
+=== RUN   TestSemanticSonar_CRITIQUE_FlagsSpaghetti
+--- PASS: TestSemanticSonar_CRITIQUE_FlagsSpaghetti (0.00s)
+=== RUN   TestSemanticSonar_Integration_WithSHM
+=== RUN   TestSemanticSonar_Integration_WithSHM/Excellent_architecture
+    semantic_sonar_exhaustive_test.go:850: Excellent architecture: score=0.915, SHM contribution=0.1144 (12.5% weight)
+=== RUN   TestSemanticSonar_Integration_WithSHM/Good_architecture
+    semantic_sonar_exhaustive_test.go:850: Good architecture: score=0.869, SHM contribution=0.1086 (12.5% weight)
+=== RUN   TestSemanticSonar_Integration_WithSHM/Warning_architecture
+    semantic_sonar_exhaustive_test.go:850: Warning architecture: score=0.502, SHM contribution=0.0628 (12.5% weight)
+=== RUN   TestSemanticSonar_Integration_WithSHM/Critical_architecture
+    semantic_sonar_exhaustive_test.go:850: Critical architecture: score=0.335, SHM contribution=0.0419 (12.5% weight)
+--- PASS: TestSemanticSonar_Integration_WithSHM (0.00s)
+    --- PASS: TestSemanticSonar_Integration_WithSHM/Excellent_architecture (0.00s)
+    --- PASS: TestSemanticSonar_Integration_WithSHM/Good_architecture (0.00s)
+    --- PASS: TestSemanticSonar_Integration_WithSHM/Warning_architecture (0.00s)
+    --- PASS: TestSemanticSonar_Integration_WithSHM/Critical_architecture (0.00s)
+=== RUN   TestSemanticSonar_SOLIDCompliance
+=== RUN   TestSemanticSonar_SOLIDCompliance/Full_SOLID_compliance
+    semantic_sonar_exhaustive_test.go:919: Good SOLID compliance (0.928), recommendations: []
+=== RUN   TestSemanticSonar_SOLIDCompliance/Good_SOLID_compliance
+    semantic_sonar_exhaustive_test.go:919: Good SOLID compliance (0.874), recommendations: []
+=== RUN   TestSemanticSonar_SOLIDCompliance/Poor_SOLID_compliance
+--- PASS: TestSemanticSonar_SOLIDCompliance (0.00s)
+    --- PASS: TestSemanticSonar_SOLIDCompliance/Full_SOLID_compliance (0.00s)
+    --- PASS: TestSemanticSonar_SOLIDCompliance/Good_SOLID_compliance (0.00s)
+    --- PASS: TestSemanticSonar_SOLIDCompliance/Poor_SOLID_compliance (0.00s)
+=== RUN   TestStateSonar_SMT_Formula
+=== RUN   TestStateSonar_SMT_Formula/minimal_state_machine_(2_states,_2_transitions)
+=== RUN   TestStateSonar_SMT_Formula/simple_login_flow_(3_states,_4_transitions)
+=== RUN   TestStateSonar_SMT_Formula/moderate_checkout_(5_states,_8_transitions)
+=== RUN   TestStateSonar_SMT_Formula/complex_admin_panel_(10_states,_15_transitions)
+=== RUN   TestStateSonar_SMT_Formula/state_explosion_threshold_(12_states,_20_transitions)
+--- PASS: TestStateSonar_SMT_Formula (0.00s)
+    --- PASS: TestStateSonar_SMT_Formula/minimal_state_machine_(2_states,_2_transitions) (0.00s)
+    --- PASS: TestStateSonar_SMT_Formula/simple_login_flow_(3_states,_4_transitions) (0.00s)
+    --- PASS: TestStateSonar_SMT_Formula/moderate_checkout_(5_states,_8_transitions) (0.00s)
+    --- PASS: TestStateSonar_SMT_Formula/complex_admin_panel_(10_states,_15_transitions) (0.00s)
+    --- PASS: TestStateSonar_SMT_Formula/state_explosion_threshold_(12_states,_20_transitions) (0.00s)
+=== RUN   TestStateSonar_SMT_SimpleFlow
+    state_sonar_exhaustive_test.go:117: EXPECTED: Login flow has moderate complexity (SMT: 32.00)
+--- PASS: TestStateSonar_SMT_SimpleFlow (0.00s)
+=== RUN   TestStateSonar_SMT_ModerateFlow
+    state_sonar_exhaustive_test.go:144: EXPECTED: Checkout has elevated complexity (SMT: 83.59)
+--- PASS: TestStateSonar_SMT_ModerateFlow (0.00s)
+=== RUN   TestStateSonar_SMT_ComplexFlow
+    state_sonar_exhaustive_test.go:168: CRITICAL: Admin panel needs simplification (SMT: 432.00 > 12 threshold)
+    state_sonar_exhaustive_test.go:169: Recommendation: Decompose into hierarchical state machines (statecharts)
+    state_sonar_exhaustive_test.go:170: Recommendation: Extract substates into separate machines
+--- PASS: TestStateSonar_SMT_ComplexFlow (0.00s)
+=== RUN   TestStateSonar_SMT_Explosive
+    state_sonar_exhaustive_test.go:197: CRITICAL: State explosion detected (SMT: 3516.20 >> 12)
+    state_sonar_exhaustive_test.go:198: URGENT: This system is unmaintainable - immediate refactor required
+    state_sonar_exhaustive_test.go:199: Apply state pattern, event sourcing, or microstate architecture
+--- PASS: TestStateSonar_SMT_Explosive (0.00s)
+=== RUN   TestStateSonar_StateCount_Small
+    state_sonar_exhaustive_test.go:219: PRAISE: Toggle is maximally simple (SMT: 4.00)
+--- PASS: TestStateSonar_StateCount_Small (0.00s)
+=== RUN   TestStateSonar_StateCount_Large
+    state_sonar_exhaustive_test.go:243: CRITICAL: Large system has severe state explosion (SMT: 6915.08)
+--- PASS: TestStateSonar_StateCount_Large (0.00s)
+=== RUN   TestStateSonar_TransitionCount
+=== RUN   TestStateSonar_TransitionCount/sparse_transitions
+    state_sonar_exhaustive_test.go:275: minimal paths (5 transitions): SMT = 58.05
+=== RUN   TestStateSonar_TransitionCount/moderate_transitions
+    state_sonar_exhaustive_test.go:275: bidirectional flow (10 transitions): SMT = 232.19
+=== RUN   TestStateSonar_TransitionCount/dense_transitions
+    state_sonar_exhaustive_test.go:275: full mesh connectivity (20 transitions): SMT = 928.77
+=== RUN   TestStateSonar_TransitionCount/explosive_transitions
+    state_sonar_exhaustive_test.go:275: combinatorial explosion (50 transitions): SMT = 5804.82
+=== NAME  TestStateSonar_TransitionCount
+    state_sonar_exhaustive_test.go:291: Verified quadratic growth: 4× transitions → 16.00× SMT (expected 16×)
+--- PASS: TestStateSonar_TransitionCount (0.00s)
+    --- PASS: TestStateSonar_TransitionCount/sparse_transitions (0.00s)
+    --- PASS: TestStateSonar_TransitionCount/moderate_transitions (0.00s)
+    --- PASS: TestStateSonar_TransitionCount/dense_transitions (0.00s)
+    --- PASS: TestStateSonar_TransitionCount/explosive_transitions (0.00s)
+=== RUN   TestStateSonar_ExplosionPrevention_Factor
+    state_sonar_exhaustive_test.go:323: Research paper formula (implemented): SMT = 432.00
+    state_sonar_exhaustive_test.go:324: Mission brief formula (not used): SMT ≈ 6.58
+    state_sonar_exhaustive_test.go:325: Implementation correctly uses Yamamoto's T² × log₂(S) formula
+--- PASS: TestStateSonar_ExplosionPrevention_Factor (0.00s)
+=== RUN   TestStateSonar_LogarithmicScaling
+    state_sonar_exhaustive_test.go:357: 2 states: SMT = 100.00 (log), would be 200.00 (linear)
+    state_sonar_exhaustive_test.go:357: 4 states (2×): SMT = 200.00 (log), would be 400.00 (linear)
+    state_sonar_exhaustive_test.go:357: 8 states (4×): SMT = 300.00 (log), would be 800.00 (linear)
+    state_sonar_exhaustive_test.go:357: 16 states (8×): SMT = 400.00 (log), would be 1600.00 (linear)
+    state_sonar_exhaustive_test.go:369: Growth ratio: SMT 2.00× vs Linear 2.00×
+    state_sonar_exhaustive_test.go:369: Growth ratio: SMT 1.50× vs Linear 2.00×
+    state_sonar_exhaustive_test.go:369: Growth ratio: SMT 1.33× vs Linear 2.00×
+    state_sonar_exhaustive_test.go:385: Logarithmic scaling verified: 8× states → 4.00× SMT (exponential damping)
+--- PASS: TestStateSonar_LogarithmicScaling (0.00s)
+=== RUN   TestStateSonar_PING_AnalyzesStateMachine
+    state_sonar_exhaustive_test.go:430: PING detected 1 state machines
+    state_sonar_exhaustive_test.go:432:   - ImplicitStateMachine: 4 states, SMT = 72.00
+--- PASS: TestStateSonar_PING_AnalyzesStateMachine (0.00s)
+=== RUN   TestStateSonar_ECHO_ComputesSMT
+    state_sonar_exhaustive_test.go:511: ECHO computed: avg_smt = 57.79, max_smt = 83.59
+--- PASS: TestStateSonar_ECHO_ComputesSMT (0.00s)
+=== RUN   TestStateSonar_MAP_NormalizesTo01
+=== RUN   TestStateSonar_MAP_NormalizesTo01/excellent_(simple_state_machines)
+    state_sonar_exhaustive_test.go:590: SMT < 5, low explosion, no dead states: score = 0.98 (avg_smt: 3.0, max_smt: 4.0, explosion: 5.0%, dead: 0)
+=== RUN   TestStateSonar_MAP_NormalizesTo01/good_(manageable_complexity)
+    state_sonar_exhaustive_test.go:590: SMT 5-10, moderate explosion: score = 0.84 (avg_smt: 7.0, max_smt: 9.0, explosion: 10.0%, dead: 0)
+=== RUN   TestStateSonar_MAP_NormalizesTo01/warning_(threshold_complexity)
+    state_sonar_exhaustive_test.go:590: SMT 10-12, elevated explosion, dead states: score = 0.63 (avg_smt: 11.0, max_smt: 12.0, explosion: 20.0%, dead: 1)
+=== RUN   TestStateSonar_MAP_NormalizesTo01/critical_(state_explosion)
+    state_sonar_exhaustive_test.go:590: SMT > 12, high explosion, multiple dead states: score = 0.35 (avg_smt: 15.0, max_smt: 20.0, explosion: 50.0%, dead: 3)
+--- PASS: TestStateSonar_MAP_NormalizesTo01 (0.00s)
+    --- PASS: TestStateSonar_MAP_NormalizesTo01/excellent_(simple_state_machines) (0.00s)
+    --- PASS: TestStateSonar_MAP_NormalizesTo01/good_(manageable_complexity) (0.00s)
+    --- PASS: TestStateSonar_MAP_NormalizesTo01/warning_(threshold_complexity) (0.00s)
+    --- PASS: TestStateSonar_MAP_NormalizesTo01/critical_(state_explosion) (0.00s)
+=== RUN   TestStateSonar_CRITIQUE_FlagsExplosion
+    state_sonar_exhaustive_test.go:631: Found explosion warning: State explosion risk (SMT: 15.00 exceeds 12 threshold)
+    state_sonar_exhaustive_test.go:645: CRITIQUE generated 4 findings, 11 recommendations
+    state_sonar_exhaustive_test.go:647: Summary: State Complexity: SMT 15.00 (max 20.00), 50.0% explosion risk
+--- PASS: TestStateSonar_CRITIQUE_FlagsExplosion (0.00s)
+=== RUN   TestStateSonar_Integration_WithSHM
+=== RUN   TestStateSonar_Integration_WithSHM/simple_app
+    state_sonar_exhaustive_test.go:688: simple app: State score = 0.97 → SHM contribution = 0.121 (weight: 0.125)
+=== RUN   TestStateSonar_Integration_WithSHM/moderate_app
+    state_sonar_exhaustive_test.go:688: moderate app: State score = 0.84 → SHM contribution = 0.106 (weight: 0.125)
+=== RUN   TestStateSonar_Integration_WithSHM/complex_app
+    state_sonar_exhaustive_test.go:688: complex app: State score = 0.72 → SHM contribution = 0.090 (weight: 0.125)
+=== RUN   TestStateSonar_Integration_WithSHM/explosive_app
+    state_sonar_exhaustive_test.go:688: explosive app: State score = 0.53 → SHM contribution = 0.067 (weight: 0.125)
+--- PASS: TestStateSonar_Integration_WithSHM (0.00s)
+    --- PASS: TestStateSonar_Integration_WithSHM/simple_app (0.00s)
+    --- PASS: TestStateSonar_Integration_WithSHM/moderate_app (0.00s)
+    --- PASS: TestStateSonar_Integration_WithSHM/complex_app (0.00s)
+    --- PASS: TestStateSonar_Integration_WithSHM/explosive_app (0.00s)
+=== RUN   TestStateSonar_SimplificationRecommendations
+    state_sonar_exhaustive_test.go:732: ✓ Found recommendation: Consider decomposing complex state machines
+    state_sonar_exhaustive_test.go:732: ✓ Found recommendation: Use hierarchical state machines (statecharts)
+    state_sonar_exhaustive_test.go:732: ✓ Found recommendation: Extract substates into separate machines
+    state_sonar_exhaustive_test.go:732: ✓ Found recommendation: Identify and refactor most complex state machine
+    state_sonar_exhaustive_test.go:732: ✓ Found recommendation: Break into multiple smaller machines
+    state_sonar_exhaustive_test.go:732: ✓ Found recommendation: Document state transitions with diagrams
+    state_sonar_exhaustive_test.go:747: CRITIQUE provided 11 recommendations for SMT = 11.50
+--- PASS: TestStateSonar_SimplificationRecommendations (0.00s)
+=== RUN   TestStateSonar_EdgeCases
+=== RUN   TestStateSonar_EdgeCases/single_state_(degenerate)
+=== RUN   TestStateSonar_EdgeCases/zero_transitions_(disconnected)
+=== RUN   TestStateSonar_EdgeCases/perfect_mesh_(all_connected)
+    state_sonar_exhaustive_test.go:790: Full mesh graph (5 states, 20 transitions): SMT = 928.77 (explosive!)
+=== RUN   TestStateSonar_EdgeCases/empty_machine_(no_states_or_transitions)
+--- PASS: TestStateSonar_EdgeCases (0.00s)
+    --- PASS: TestStateSonar_EdgeCases/single_state_(degenerate) (0.00s)
+    --- PASS: TestStateSonar_EdgeCases/zero_transitions_(disconnected) (0.00s)
+    --- PASS: TestStateSonar_EdgeCases/perfect_mesh_(all_connected) (0.00s)
+    --- PASS: TestStateSonar_EdgeCases/empty_machine_(no_states_or_transitions) (0.00s)
+=== RUN   TestStateSonar_FullPipeline
+    state_sonar_exhaustive_test.go:864: === FULL PIPELINE RESULTS ===
+    state_sonar_exhaustive_test.go:865: Score: 0.44 (CRITICAL)
+    state_sonar_exhaustive_test.go:866: Summary: State Complexity: SMT 101.06 (max 101.06), 20.0% explosion risk
+    state_sonar_exhaustive_test.go:867: Findings: 4
+    state_sonar_exhaustive_test.go:868: Recommendations: 11
+    state_sonar_exhaustive_test.go:869: Duration: 0s
+    state_sonar_exhaustive_test.go:872:   Finding 1: [Critical] State explosion risk (SMT: 101.06 exceeds 12 threshold) (101.06 vs 12.00 target)
+    state_sonar_exhaustive_test.go:872:   Finding 2: [Critical] Found extremely complex state machine (SMT: 101.06) (101.06 vs 15.00 target)
+    state_sonar_exhaustive_test.go:872:   Finding 3: [High] State explosion risk (20.0%) (0.20 vs 0.20 target)
+    state_sonar_exhaustive_test.go:872:   Finding 4: [Medium] Found 1 dead states (unreachable) (1.00 vs 0.00 target)
+    state_sonar_exhaustive_test.go:877:   Recommendation 1: URGENT: Refactor state machines to reduce complexity
+    state_sonar_exhaustive_test.go:877:   Recommendation 2: Apply state pattern to encapsulate states
+    state_sonar_exhaustive_test.go:877:   Recommendation 3: Use event sourcing instead of explicit state machines
+    state_sonar_exhaustive_test.go:877:   Recommendation 4: Identify and refactor most complex state machine
+    state_sonar_exhaustive_test.go:877:   Recommendation 5: Break into multiple smaller machines
+    state_sonar_exhaustive_test.go:877:   Recommendation 6: Document state transitions with diagrams
+    state_sonar_exhaustive_test.go:877:   Recommendation 7: Limit combinatorial state growth (avoid Cartesian product)
+    state_sonar_exhaustive_test.go:877:   Recommendation 8: Use state compression techniques
+    state_sonar_exhaustive_test.go:877:   Recommendation 9: Apply state space reduction algorithms
+    state_sonar_exhaustive_test.go:877:   Recommendation 10: Remove unreachable states from state machine
+    state_sonar_exhaustive_test.go:877:   Recommendation 11: Verify state transition logic
+    state_sonar_exhaustive_test.go:880: === END PIPELINE ===
+--- PASS: TestStateSonar_FullPipeline (0.00s)
+=== RUN   TestStateSonar_ResearchValidation
+=== RUN   TestStateSonar_ResearchValidation/simple
+    state_sonar_exhaustive_test.go:915: simple (SMT 3.0): score = 0.97, status = EXCELLENT
+=== RUN   TestStateSonar_ResearchValidation/moderate
+    state_sonar_exhaustive_test.go:915: moderate (SMT 7.0): score = 0.84, status = OK
+=== RUN   TestStateSonar_ResearchValidation/threshold
+    state_sonar_exhaustive_test.go:915: threshold (SMT 11.0): score = 0.72, status = OK
+=== RUN   TestStateSonar_ResearchValidation/explosive
+    state_sonar_exhaustive_test.go:915: explosive (SMT 15.0): score = 0.53, status = WARNING
+--- PASS: TestStateSonar_ResearchValidation (0.00s)
+    --- PASS: TestStateSonar_ResearchValidation/simple (0.00s)
+    --- PASS: TestStateSonar_ResearchValidation/moderate (0.00s)
+    --- PASS: TestStateSonar_ResearchValidation/threshold (0.00s)
+    --- PASS: TestStateSonar_ResearchValidation/explosive (0.00s)
+=== RUN   TestUXSonar_FPSCalculation_60FPS
+    ux_sonar_exhaustive_test.go:27: ✓ 60 FPS = 16.7ms per frame (59.88 FPS)
+    ux_sonar_exhaustive_test.go:28:   Nielsen: <16ms feels instant (imperceptible delay)
+--- PASS: TestUXSonar_FPSCalculation_60FPS (0.00s)
+=== RUN   TestUXSonar_FPSCalculation_30FPS
+    ux_sonar_exhaustive_test.go:43: ✓ 30 FPS = 33.3ms per frame (30.03 FPS)
+    ux_sonar_exhaustive_test.go:44:   Nielsen: 16-100ms responsive but noticeable lag
+--- PASS: TestUXSonar_FPSCalculation_30FPS (0.00s)
+=== RUN   TestUXSonar_SmoothnessScore_Perfect
+    ux_sonar_exhaustive_test.go:59: ✓ 60 FPS smoothness: 1.00 (perfect)
+--- PASS: TestUXSonar_SmoothnessScore_Perfect (0.00s)
+=== RUN   TestUXSonar_SmoothnessScore_Choppy
+    ux_sonar_exhaustive_test.go:75: ✓ 30 FPS smoothness: 0.50 (choppy)
+--- PASS: TestUXSonar_SmoothnessScore_Choppy (0.00s)
+=== RUN   TestUXSonar_SmoothnessScore_Terrible
+    ux_sonar_exhaustive_test.go:91: ✓ 15 FPS smoothness: 0.25 (terrible)
+    ux_sonar_exhaustive_test.go:92:   User will notice severe jank and stuttering
+--- PASS: TestUXSonar_SmoothnessScore_Terrible (0.00s)
+=== RUN   TestUXSonar_NielsenThreshold_Instant
+=== RUN   TestUXSonar_NielsenThreshold_Instant/Imperceptible_10ms
+    ux_sonar_exhaustive_test.go:121: ✓ Nielsen instant threshold (<100ms): 10.0ms = true
+=== RUN   TestUXSonar_NielsenThreshold_Instant/Instant_50ms
+    ux_sonar_exhaustive_test.go:121: ✓ Nielsen instant threshold (<100ms): 50.0ms = true
+=== RUN   TestUXSonar_NielsenThreshold_Instant/Instant_99ms
+    ux_sonar_exhaustive_test.go:121: ✓ Nielsen instant threshold (<100ms): 99.0ms = true
+=== RUN   TestUXSonar_NielsenThreshold_Instant/Just_over_threshold_101ms
+    ux_sonar_exhaustive_test.go:121: ✓ Nielsen instant threshold (<100ms): 101.0ms = false
+=== RUN   TestUXSonar_NielsenThreshold_Instant/Slow_200ms
+    ux_sonar_exhaustive_test.go:121: ✓ Nielsen instant threshold (<100ms): 200.0ms = false
+=== NAME  TestUXSonar_NielsenThreshold_Instant
+    ux_sonar_exhaustive_test.go:126: ✓ Nielsen: <100ms = user feels in control, no special feedback needed
+--- PASS: TestUXSonar_NielsenThreshold_Instant (0.00s)
+    --- PASS: TestUXSonar_NielsenThreshold_Instant/Imperceptible_10ms (0.00s)
+    --- PASS: TestUXSonar_NielsenThreshold_Instant/Instant_50ms (0.00s)
+    --- PASS: TestUXSonar_NielsenThreshold_Instant/Instant_99ms (0.00s)
+    --- PASS: TestUXSonar_NielsenThreshold_Instant/Just_over_threshold_101ms (0.00s)
+    --- PASS: TestUXSonar_NielsenThreshold_Instant/Slow_200ms (0.00s)
+=== RUN   TestUXSonar_NielsenThreshold_Flow
+=== RUN   TestUXSonar_NielsenThreshold_Flow/Instant_100ms
+    ux_sonar_exhaustive_test.go:154: ✓ Nielsen flow threshold (<1000ms): 100.0ms = true
+=== RUN   TestUXSonar_NielsenThreshold_Flow/Responsive_500ms
+    ux_sonar_exhaustive_test.go:154: ✓ Nielsen flow threshold (<1000ms): 500.0ms = true
+=== RUN   TestUXSonar_NielsenThreshold_Flow/Just_under_999ms
+    ux_sonar_exhaustive_test.go:154: ✓ Nielsen flow threshold (<1000ms): 999.0ms = true
+=== RUN   TestUXSonar_NielsenThreshold_Flow/Just_over_1001ms
+    ux_sonar_exhaustive_test.go:154: ✓ Nielsen flow threshold (<1000ms): 1001.0ms = false
+=== RUN   TestUXSonar_NielsenThreshold_Flow/Attention_lost_2000ms
+    ux_sonar_exhaustive_test.go:154: ✓ Nielsen flow threshold (<1000ms): 2000.0ms = false
+=== NAME  TestUXSonar_NielsenThreshold_Flow
+    ux_sonar_exhaustive_test.go:159: ✓ Nielsen: <1s = user's flow of thought stays uninterrupted
+--- PASS: TestUXSonar_NielsenThreshold_Flow (0.00s)
+    --- PASS: TestUXSonar_NielsenThreshold_Flow/Instant_100ms (0.00s)
+    --- PASS: TestUXSonar_NielsenThreshold_Flow/Responsive_500ms (0.00s)
+    --- PASS: TestUXSonar_NielsenThreshold_Flow/Just_under_999ms (0.00s)
+    --- PASS: TestUXSonar_NielsenThreshold_Flow/Just_over_1001ms (0.00s)
+    --- PASS: TestUXSonar_NielsenThreshold_Flow/Attention_lost_2000ms (0.00s)
+=== RUN   TestUXSonar_NielsenThreshold_Attention
+=== RUN   TestUXSonar_NielsenThreshold_Attention/In_flow_1000ms
+    ux_sonar_exhaustive_test.go:187: ✓ Nielsen attention threshold (<10000ms): 1000.0ms = true
+=== RUN   TestUXSonar_NielsenThreshold_Attention/Waiting_5000ms
+    ux_sonar_exhaustive_test.go:187: ✓ Nielsen attention threshold (<10000ms): 5000.0ms = true
+=== RUN   TestUXSonar_NielsenThreshold_Attention/Just_under_9999ms
+    ux_sonar_exhaustive_test.go:187: ✓ Nielsen attention threshold (<10000ms): 9999.0ms = true
+=== RUN   TestUXSonar_NielsenThreshold_Attention/Lost_attention_10001ms
+    ux_sonar_exhaustive_test.go:187: ✓ Nielsen attention threshold (<10000ms): 10001.0ms = false
+=== RUN   TestUXSonar_NielsenThreshold_Attention/User_left_20000ms
+    ux_sonar_exhaustive_test.go:187: ✓ Nielsen attention threshold (<10000ms): 20000.0ms = false
+=== NAME  TestUXSonar_NielsenThreshold_Attention
+    ux_sonar_exhaustive_test.go:192: ✓ Nielsen: <10s = user's attention stays focused, needs feedback indicator
+--- PASS: TestUXSonar_NielsenThreshold_Attention (0.00s)
+    --- PASS: TestUXSonar_NielsenThreshold_Attention/In_flow_1000ms (0.00s)
+    --- PASS: TestUXSonar_NielsenThreshold_Attention/Waiting_5000ms (0.00s)
+    --- PASS: TestUXSonar_NielsenThreshold_Attention/Just_under_9999ms (0.00s)
+    --- PASS: TestUXSonar_NielsenThreshold_Attention/Lost_attention_10001ms (0.00s)
+    --- PASS: TestUXSonar_NielsenThreshold_Attention/User_left_20000ms (0.00s)
+=== RUN   TestUXSonar_CLS_Good
+=== RUN   TestUXSonar_CLS_Good/Excellent_0.01
+    ux_sonar_exhaustive_test.go:224: ✓ CLS 0.010 → stability score: 0.90 (good: true)
+=== RUN   TestUXSonar_CLS_Good/Good_0.05
+    ux_sonar_exhaustive_test.go:224: ✓ CLS 0.050 → stability score: 0.50 (good: true)
+=== RUN   TestUXSonar_CLS_Good/Just_good_0.099
+    ux_sonar_exhaustive_test.go:224: ✓ CLS 0.099 → stability score: 0.01 (good: true)
+=== RUN   TestUXSonar_CLS_Good/Needs_improvement_0.15
+    ux_sonar_exhaustive_test.go:224: ✓ CLS 0.150 → stability score: 0.00 (good: false)
+=== RUN   TestUXSonar_CLS_Good/Poor_0.30
+    ux_sonar_exhaustive_test.go:224: ✓ CLS 0.300 → stability score: 0.00 (good: false)
+=== NAME  TestUXSonar_CLS_Good
+    ux_sonar_exhaustive_test.go:229: ✓ Google Core Web Vitals: CLS <0.1 = good (no jarring layout shifts)
+--- PASS: TestUXSonar_CLS_Good (0.00s)
+    --- PASS: TestUXSonar_CLS_Good/Excellent_0.01 (0.00s)
+    --- PASS: TestUXSonar_CLS_Good/Good_0.05 (0.00s)
+    --- PASS: TestUXSonar_CLS_Good/Just_good_0.099 (0.00s)
+    --- PASS: TestUXSonar_CLS_Good/Needs_improvement_0.15 (0.00s)
+    --- PASS: TestUXSonar_CLS_Good/Poor_0.30 (0.00s)
+=== RUN   TestUXSonar_CLS_Poor
+=== RUN   TestUXSonar_CLS_Poor/Good_0.05
+    ux_sonar_exhaustive_test.go:258: ✓ CLS 0.050 → poor: false (threshold: >0.25)
+=== RUN   TestUXSonar_CLS_Poor/Needs_improvement_0.15
+    ux_sonar_exhaustive_test.go:258: ✓ CLS 0.150 → poor: false (threshold: >0.25)
+=== RUN   TestUXSonar_CLS_Poor/Just_poor_0.26
+    ux_sonar_exhaustive_test.go:258: ✓ CLS 0.260 → poor: true (threshold: >0.25)
+=== RUN   TestUXSonar_CLS_Poor/Very_poor_0.50
+    ux_sonar_exhaustive_test.go:258: ✓ CLS 0.500 → poor: true (threshold: >0.25)
+=== RUN   TestUXSonar_CLS_Poor/Terrible_1.00
+    ux_sonar_exhaustive_test.go:258: ✓ CLS 1.000 → poor: true (threshold: >0.25)
+=== NAME  TestUXSonar_CLS_Poor
+    ux_sonar_exhaustive_test.go:263: ✓ Google Core Web Vitals: CLS >0.25 = poor (jarring shifts)
+--- PASS: TestUXSonar_CLS_Poor (0.00s)
+    --- PASS: TestUXSonar_CLS_Poor/Good_0.05 (0.00s)
+    --- PASS: TestUXSonar_CLS_Poor/Needs_improvement_0.15 (0.00s)
+    --- PASS: TestUXSonar_CLS_Poor/Just_poor_0.26 (0.00s)
+    --- PASS: TestUXSonar_CLS_Poor/Very_poor_0.50 (0.00s)
+    --- PASS: TestUXSonar_CLS_Poor/Terrible_1.00 (0.00s)
+=== RUN   TestUXSonar_PING_CollectsTelemetry
+    ux_sonar_exhaustive_test.go:311: ✓ PING collected 3 raw data keys in 1.0156ms
+--- PASS: TestUXSonar_PING_CollectsTelemetry (0.00s)
+=== RUN   TestUXSonar_ECHO_ProcessesMetrics
+    ux_sonar_exhaustive_test.go:381: ✓ ECHO processed 8 metrics
+    ux_sonar_exhaustive_test.go:383:   max_fps: 60.00
+    ux_sonar_exhaustive_test.go:383:   fps_variance: 10.00
+    ux_sonar_exhaustive_test.go:383:   cumulative_layout_shift: 0.08
+    ux_sonar_exhaustive_test.go:383:   page_load_ms: 1500.00
+    ux_sonar_exhaustive_test.go:383:   time_to_interactive_ms: 2000.00
+    ux_sonar_exhaustive_test.go:383:   first_contentful_paint_ms: 1300.00
+    ux_sonar_exhaustive_test.go:383:   avg_fps: 55.00
+    ux_sonar_exhaustive_test.go:383:   min_fps: 50.00
+--- PASS: TestUXSonar_ECHO_ProcessesMetrics (0.00s)
+=== RUN   TestUXSonar_MAP_NormalizesTo01
+=== RUN   TestUXSonar_MAP_NormalizesTo01/Perfect_scores
+    ux_sonar_exhaustive_test.go:451: ✓ MAP normalized score: 0.85 (range: [0.83, 0.87])
+=== RUN   TestUXSonar_MAP_NormalizesTo01/Poor_scores
+    ux_sonar_exhaustive_test.go:451: ✓ MAP normalized score: 0.12 (range: [0.00, 0.20])
+=== RUN   TestUXSonar_MAP_NormalizesTo01/Mixed_scores
+    ux_sonar_exhaustive_test.go:451: ✓ MAP normalized score: 0.39 (range: [0.35, 0.43])
+--- PASS: TestUXSonar_MAP_NormalizesTo01 (0.00s)
+    --- PASS: TestUXSonar_MAP_NormalizesTo01/Perfect_scores (0.00s)
+    --- PASS: TestUXSonar_MAP_NormalizesTo01/Poor_scores (0.00s)
+    --- PASS: TestUXSonar_MAP_NormalizesTo01/Mixed_scores (0.00s)
+=== RUN   TestUXSonar_CRITIQUE_GeneratesReport
+    ux_sonar_exhaustive_test.go:496: ✓ CRITIQUE generated report:
+    ux_sonar_exhaustive_test.go:497:   Summary: UX Performance: 45.0 FPS, 0.150 CLS, 2200ms load
+    ux_sonar_exhaustive_test.go:498:   Findings: 3
+    ux_sonar_exhaustive_test.go:499:   Recommendations: 9
+    ux_sonar_exhaustive_test.go:503:     [Medium] OBSERVATION: Moderate frame rate (45.0 FPS) - animations may stutter
+    ux_sonar_exhaustive_test.go:503:     [High] ISSUE: Layout shift issues (CLS: 0.150 exceeds 0.1 threshold)
+    ux_sonar_exhaustive_test.go:503:     [Medium] ISSUE: Slow page load (2200ms exceeds 2000ms target)
+--- PASS: TestUXSonar_CRITIQUE_GeneratesReport (0.00s)
+=== RUN   TestUXSonar_WeightedAverageFormula
+    ux_sonar_exhaustive_test.go:525: ✓ Weighted average formula:
+    ux_sonar_exhaustive_test.go:526:   Smoothness (FPS):      0.80 × 0.35 = 0.280
+    ux_sonar_exhaustive_test.go:527:   Stability (CLS):       0.70 × 0.35 = 0.245
+    ux_sonar_exhaustive_test.go:528:   Load Speed:            0.60 × 0.15 = 0.090
+    ux_sonar_exhaustive_test.go:529:   Interactive Speed:     0.50 × 0.15 = 0.075
+    ux_sonar_exhaustive_test.go:530:   Final Score:           0.690
+--- PASS: TestUXSonar_WeightedAverageFormula (0.00s)
+=== RUN   TestUXSonar_Integration_WithSHM
+    ux_sonar_exhaustive_test.go:559: ✓ UX Sonar → SHM integration:
+    ux_sonar_exhaustive_test.go:560:   UX score: 0.75
+    ux_sonar_exhaustive_test.go:561:   SHM weight: 0.30
+    ux_sonar_exhaustive_test.go:562:   SHM contribution: 0.2250
+    ux_sonar_exhaustive_test.go:563:   Total SHM = (UX×0.30) + (Code×0.25) + (Design×0.25) + (Business×0.20)
+--- PASS: TestUXSonar_Integration_WithSHM (0.00s)
+=== RUN   TestUXSonar_LongTasks_Detection
+=== RUN   TestUXSonar_LongTasks_Detection/Quick_task_10ms
+    ux_sonar_exhaustive_test.go:618: ✓ Task 10.0ms → long: false (No blocking)
+=== RUN   TestUXSonar_LongTasks_Detection/Acceptable_40ms
+    ux_sonar_exhaustive_test.go:618: ✓ Task 40.0ms → long: false (No blocking)
+=== RUN   TestUXSonar_LongTasks_Detection/Just_long_51ms
+    ux_sonar_exhaustive_test.go:618: ✓ Task 51.0ms → long: true (Blocks main thread, may cause jank)
+=== RUN   TestUXSonar_LongTasks_Detection/Very_long_200ms
+    ux_sonar_exhaustive_test.go:618: ✓ Task 200.0ms → long: true (Severe blocking, will cause jank)
+=== RUN   TestUXSonar_LongTasks_Detection/Catastrophic_1000ms
+    ux_sonar_exhaustive_test.go:618: ✓ Task 1000.0ms → long: true (App appears frozen)
+=== NAME  TestUXSonar_LongTasks_Detection
+    ux_sonar_exhaustive_test.go:623: ✓ Chrome Long Tasks API: >50ms blocks main thread, causes jank
+--- PASS: TestUXSonar_LongTasks_Detection (0.00s)
+    --- PASS: TestUXSonar_LongTasks_Detection/Quick_task_10ms (0.00s)
+    --- PASS: TestUXSonar_LongTasks_Detection/Acceptable_40ms (0.00s)
+    --- PASS: TestUXSonar_LongTasks_Detection/Just_long_51ms (0.00s)
+    --- PASS: TestUXSonar_LongTasks_Detection/Very_long_200ms (0.00s)
+    --- PASS: TestUXSonar_LongTasks_Detection/Catastrophic_1000ms (0.00s)
+=== RUN   TestUXSonar_FPSVariance_StutterDetection
+=== RUN   TestUXSonar_FPSVariance_StutterDetection/Perfectly_smooth
+    ux_sonar_exhaustive_test.go:682: ✓ FPS variance 1.0 (min: 59.0, max: 60.0, avg: 59.5) → stutter: false
+    ux_sonar_exhaustive_test.go:684:   Variance <2 FPS = imperceptible
+=== RUN   TestUXSonar_FPSVariance_StutterDetection/Slight_variation
+    ux_sonar_exhaustive_test.go:682: ✓ FPS variance 5.0 (min: 55.0, max: 60.0, avg: 57.5) → stutter: false
+    ux_sonar_exhaustive_test.go:684:   Variance 5 FPS = acceptable
+=== RUN   TestUXSonar_FPSVariance_StutterDetection/Noticeable_stutter
+    ux_sonar_exhaustive_test.go:682: ✓ FPS variance 20.0 (min: 40.0, max: 60.0, avg: 50.0) → stutter: true
+    ux_sonar_exhaustive_test.go:684:   Variance 20 FPS = user notices jank
+=== RUN   TestUXSonar_FPSVariance_StutterDetection/Severe_stutter
+    ux_sonar_exhaustive_test.go:682: ✓ FPS variance 40.0 (min: 20.0, max: 60.0, avg: 40.0) → stutter: true
+    ux_sonar_exhaustive_test.go:684:   Variance 40 FPS = very jarring
+--- PASS: TestUXSonar_FPSVariance_StutterDetection (0.00s)
+    --- PASS: TestUXSonar_FPSVariance_StutterDetection/Perfectly_smooth (0.00s)
+    --- PASS: TestUXSonar_FPSVariance_StutterDetection/Slight_variation (0.00s)
+    --- PASS: TestUXSonar_FPSVariance_StutterDetection/Noticeable_stutter (0.00s)
+    --- PASS: TestUXSonar_FPSVariance_StutterDetection/Severe_stutter (0.00s)
+=== RUN   TestUXSonar_EndToEnd_FullPipeline
+    ux_sonar_exhaustive_test.go:708: ✓ PING completed in 0s
+    ux_sonar_exhaustive_test.go:715: ✓ ECHO computed 8 metrics
+    ux_sonar_exhaustive_test.go:722: ✓ MAP normalized to score: 0.56
+    ux_sonar_exhaustive_test.go:729: ✓ CRITIQUE generated 3 findings, 3 recommendations
+    ux_sonar_exhaustive_test.go:733: 
+        === FULL PIPELINE RESULTS ===
+    ux_sonar_exhaustive_test.go:734: Final Score: 55.8%
+    ux_sonar_exhaustive_test.go:735: Status: WARNING
+    ux_sonar_exhaustive_test.go:736: Summary: UX Performance: 60.0 FPS, 0.150 CLS, 600ms load
+--- PASS: TestUXSonar_EndToEnd_FullPipeline (0.00s)
+=== RUN   TestUXSonar_CoreWebVitals_LCP
+=== RUN   TestUXSonar_CoreWebVitals_LCP/Excellent_1200ms
+    ux_sonar_exhaustive_test.go:790: ✓ LCP 1200ms → good
+=== RUN   TestUXSonar_CoreWebVitals_LCP/Good_2400ms
+    ux_sonar_exhaustive_test.go:790: ✓ LCP 2400ms → good
+=== RUN   TestUXSonar_CoreWebVitals_LCP/Needs_improvement_3000ms
+    ux_sonar_exhaustive_test.go:790: ✓ LCP 3000ms → needs-improvement
+=== RUN   TestUXSonar_CoreWebVitals_LCP/Poor_4500ms
+    ux_sonar_exhaustive_test.go:790: ✓ LCP 4500ms → poor
+=== RUN   TestUXSonar_CoreWebVitals_LCP/Very_poor_8000ms
+    ux_sonar_exhaustive_test.go:790: ✓ LCP 8000ms → poor
+=== NAME  TestUXSonar_CoreWebVitals_LCP
+    ux_sonar_exhaustive_test.go:794: ✓ Core Web Vitals LCP: <2.5s good, 2.5-4s needs improvement, >4s poor
+--- PASS: TestUXSonar_CoreWebVitals_LCP (0.00s)
+    --- PASS: TestUXSonar_CoreWebVitals_LCP/Excellent_1200ms (0.00s)
+    --- PASS: TestUXSonar_CoreWebVitals_LCP/Good_2400ms (0.00s)
+    --- PASS: TestUXSonar_CoreWebVitals_LCP/Needs_improvement_3000ms (0.00s)
+    --- PASS: TestUXSonar_CoreWebVitals_LCP/Poor_4500ms (0.00s)
+    --- PASS: TestUXSonar_CoreWebVitals_LCP/Very_poor_8000ms (0.00s)
+=== RUN   TestUXSonar_CoreWebVitals_FID
+=== RUN   TestUXSonar_CoreWebVitals_FID/Excellent_50ms
+    ux_sonar_exhaustive_test.go:830: ✓ FID 50ms → good
+=== RUN   TestUXSonar_CoreWebVitals_FID/Good_95ms
+    ux_sonar_exhaustive_test.go:830: ✓ FID 95ms → good
+=== RUN   TestUXSonar_CoreWebVitals_FID/Needs_improvement_200ms
+    ux_sonar_exhaustive_test.go:830: ✓ FID 200ms → needs-improvement
+=== RUN   TestUXSonar_CoreWebVitals_FID/Poor_350ms
+    ux_sonar_exhaustive_test.go:830: ✓ FID 350ms → poor
+=== RUN   TestUXSonar_CoreWebVitals_FID/Very_poor_1000ms
+    ux_sonar_exhaustive_test.go:830: ✓ FID 1000ms → poor
+=== NAME  TestUXSonar_CoreWebVitals_FID
+    ux_sonar_exhaustive_test.go:834: ✓ Core Web Vitals FID: <100ms good, 100-300ms needs improvement, >300ms poor
+--- PASS: TestUXSonar_CoreWebVitals_FID (0.00s)
+    --- PASS: TestUXSonar_CoreWebVitals_FID/Excellent_50ms (0.00s)
+    --- PASS: TestUXSonar_CoreWebVitals_FID/Good_95ms (0.00s)
+    --- PASS: TestUXSonar_CoreWebVitals_FID/Needs_improvement_200ms (0.00s)
+    --- PASS: TestUXSonar_CoreWebVitals_FID/Poor_350ms (0.00s)
+    --- PASS: TestUXSonar_CoreWebVitals_FID/Very_poor_1000ms (0.00s)
+=== RUN   TestUXSonar_RenderBlocking_Detection
+=== RUN   TestUXSonar_RenderBlocking_Detection/No_blocking
+    ux_sonar_exhaustive_test.go:882: ✓ Render blocking 0ms → blocking: false (All resources async/defer)
+=== RUN   TestUXSonar_RenderBlocking_Detection/Minimal_blocking_50ms
+    ux_sonar_exhaustive_test.go:882: ✓ Render blocking 50ms → blocking: false (Acceptable critical CSS)
+=== RUN   TestUXSonar_RenderBlocking_Detection/Moderate_blocking_200ms
+    ux_sonar_exhaustive_test.go:882: ✓ Render blocking 200ms → blocking: true (Delays FCP, optimize critical path)
+=== RUN   TestUXSonar_RenderBlocking_Detection/Severe_blocking_1000ms
+    ux_sonar_exhaustive_test.go:882: ✓ Render blocking 1000ms → blocking: true (Severe FCP delay, eliminate blocking)
+--- PASS: TestUXSonar_RenderBlocking_Detection (0.00s)
+    --- PASS: TestUXSonar_RenderBlocking_Detection/No_blocking (0.00s)
+    --- PASS: TestUXSonar_RenderBlocking_Detection/Minimal_blocking_50ms (0.00s)
+    --- PASS: TestUXSonar_RenderBlocking_Detection/Moderate_blocking_200ms (0.00s)
+    --- PASS: TestUXSonar_RenderBlocking_Detection/Severe_blocking_1000ms (0.00s)
+FAIL
+FAIL	github.com/asymmetrica/urbanlens/pkg/intelligence/sonars	1.386s
+=== RUN   TestWasteCollectorToOperationsTranslation
+
+=== Waste Collector → Operations Manager ===
+✓ route_optimization → [logistics_optimization resource_routing]
+✓ capacity_planning → [load_balancing resource_allocation]
+✓ sorting_efficiency → [process_efficiency workflow_optimization]
+--- PASS: TestWasteCollectorToOperationsTranslation (0.00s)
+=== RUN   TestStreetVendorToSalesTranslation
+
+=== Street Vendor → Sales Professional ===
+✓ pricing_strategy → [value_proposition pricing_optimization]
+✓ location_selection → [market_targeting customer_segmentation]
+✓ customer_interaction → [relationship_building needs_discovery]
+✓ inventory_management → [pipeline_management resource_allocation]
+--- PASS: TestStreetVendorToSalesTranslation (0.00s)
+=== RUN   TestBridgeWalking
+
+=== Bridge Walking ===
+Source: route_optimization (waste_management)
+Target: process_optimization (operations)
+Strength: 0.97
+Type: pattern
+Waypoints: 11
+Evidence:
+  - Very high semantic similarity (>90%)
+  - Isomorphism type: pattern (weight: 0.10)
+  - Cross-domain: waste_management → operations
+  - Common tags: [optimization]
+Quality (5 Timbres): 0.531
+--- PASS: TestBridgeWalking (0.00s)
+=== RUN   TestConceptEncoding
+
+=== Concept Encoding ===
+Concept: test_concept
+Quaternion: (0.255, 0.805, 0.190, 0.501)
+Norm: 1.000
+--- PASS: TestConceptEncoding (0.00s)
+=== RUN   TestMultipleBridgeBuilding
+
+=== Multiple Bridge Building ===
+Built 4 bridges
+Bridge 1: route_optimization → process_optimization (strength: 0.99)
+Bridge 2: route_optimization → resource_allocation (strength: 1.00)
+Bridge 3: capacity_planning → process_optimization (strength: 0.99)
+Bridge 4: capacity_planning → resource_allocation (strength: 0.99)
+Strong bridges (≥0.7): 4
+--- PASS: TestMultipleBridgeBuilding (0.00s)
+=== RUN   TestCareerTransition
+
+=== Career Transition Suggestions ===
+Current: Waste Collector
+Suggested Roles:
+1. operations_specialist (Domain: operations, Confidence: 0.75)
+2. product_management_specialist (Domain: product_management, Confidence: 0.75)
+3. system_architecture_specialist (Domain: system_architecture, Confidence: 0.75)
+--- PASS: TestCareerTransition (0.00s)
+PASS
+ok  	github.com/asymmetrica/urbanlens/pkg/isomorphism	(cached)
+=== RUN   TestMemoryGraph_BasicOperations
+--- PASS: TestMemoryGraph_BasicOperations (0.00s)
+=== RUN   TestMemoryGraph_Relationships
+--- PASS: TestMemoryGraph_Relationships (0.00s)
+=== RUN   TestDiscoveryGraph_RecordDiscovery
+--- PASS: TestDiscoveryGraph_RecordDiscovery (0.00s)
+=== RUN   TestDiscoveryGraph_UserDiscoveries
+    graph_test.go:121: Discovery graph logic needs refinement
+--- SKIP: TestDiscoveryGraph_UserDiscoveries (0.00s)
+=== RUN   TestDiscoveryGraph_Stats
+    graph_test.go:149: Stats calculation needs refinement
+--- SKIP: TestDiscoveryGraph_Stats (0.00s)
+=== RUN   TestDiscoveryGraph_Milestones
+--- PASS: TestDiscoveryGraph_Milestones (0.00s)
+=== RUN   TestConnectionGraph_Bridges
+    graph_test.go:235: Bridge detection needs refinement
+--- SKIP: TestConnectionGraph_Bridges (0.00s)
+=== RUN   TestConnectionGraph_LearningPath
+    graph_test.go:272: Learning path needs refinement
+--- SKIP: TestConnectionGraph_LearningPath (0.00s)
+=== RUN   TestSeeding_Foundations
+    graph_test.go:341: Seed stats: map[bridges:2 concepts:17 discoveries:1 domains:6 relationships:0]
+--- PASS: TestSeeding_Foundations (0.00s)
+=== RUN   TestSeeding_SampleInteractions
+--- PASS: TestSeeding_SampleInteractions (0.00s)
+=== RUN   TestJourneyGraph_CreateJourney
+--- PASS: TestJourneyGraph_CreateJourney (0.00s)
+=== RUN   TestJourneyGraph_RecordProgress
+--- PASS: TestJourneyGraph_RecordProgress (0.00s)
+=== RUN   TestJourneyGraph_ProgressReport
+    graph_test.go:466: Progress report: &{UserID:user_1 DaysActive:1 TotalTime:0 ConceptsLearned:0 DiscoveriesMade:1 ProofsVerified:1 DomainsExplored:[] StrongestDomain: MilestoneCount:0 RecentMilestones:[] AverageDepth:3 CrossDomainLinks:1 SuggestedNext:[]}
+--- PASS: TestJourneyGraph_ProgressReport (0.00s)
+=== RUN   TestJourneyGraph_Snapshots
+--- PASS: TestJourneyGraph_Snapshots (0.00s)
+=== RUN   TestJourneyGraph_WeeklyActivity
+    graph_test.go:524: Weekly activity: [{Week:4 StartDate:2025-11-29 08:19:33.8689284 +0530 IST EndDate:2025-12-06 08:19:33.8689284 +0530 IST TimeSpent:0 ConceptsVisited:0 DiscoveriesMade:0 ProofsCompleted:0} {Week:3 StartDate:2025-12-06 08:19:33.8689284 +0530 IST EndDate:2025-12-13 08:19:33.8689284 +0530 IST TimeSpent:0 ConceptsVisited:0 DiscoveriesMade:0 ProofsCompleted:0} {Week:2 StartDate:2025-12-13 08:19:33.8689284 +0530 IST EndDate:2025-12-20 08:19:33.8689284 +0530 IST TimeSpent:0 ConceptsVisited:0 DiscoveriesMade:0 ProofsCompleted:0} {Week:1 StartDate:2025-12-20 08:19:33.8689284 +0530 IST EndDate:2025-12-27 08:19:33.8689284 +0530 IST TimeSpent:0 ConceptsVisited:0 DiscoveriesMade:0 ProofsCompleted:0}]
+--- PASS: TestJourneyGraph_WeeklyActivity (0.00s)
+=== RUN   TestFullWorkflow_IceFloats
+    graph_test.go:548: Created journey for alice at 2025-12-27 08:19:33.8689284 +0530 IST m=+0.005168701
+    graph_test.go:571: Recorded discovery: Ice floats because hydrogen bonding creates an open crystalline structure
+    graph_test.go:575: Earned 2 milestones
+    graph_test.go:583: Progress Report:
+    graph_test.go:584:   Discoveries: 1
+    graph_test.go:585:   Domains: []
+    graph_test.go:586:   Average depth: 4.0
+    graph_test.go:587:   Cross-domain links: 1
+    graph_test.go:591: Snapshot taken at 2025-12-27 08:19:33.8689284 +0530 IST m=+0.005168701
+    graph_test.go:599: 
+        
+        🌟 Learning Journey Summary for alice
+        
+        📊 STATS:
+          • Active for 1 days
+          • Total learning time: 0 minutes
+          • Concepts explored: 0
+          • Discoveries made: 1
+          • Proofs verified: 0
+        
+        🎯 DOMAINS:
+          • Explored: []
+          • Strongest: 
+        
+        🏆 ACHIEVEMENTS:
+          • Milestones earned: 0
+          • Cross-domain links: 1
+          • Average "why" depth: 4.0
+        
+--- PASS: TestFullWorkflow_IceFloats (0.00s)
+PASS
+ok  	github.com/asymmetrica/urbanlens/pkg/knowledge	1.024s
+=== RUN   TestExtractEntities
+    translator_test.go:13: Entity extraction patterns need enhancement - skipping for now
+--- SKIP: TestExtractEntities (0.00s)
+=== RUN   TestSelectPatternForInsight
+=== RUN   TestSelectPatternForInsight/conservation_law
+=== RUN   TestSelectPatternForInsight/transitivity
+=== RUN   TestSelectPatternForInsight/induction
+=== RUN   TestSelectPatternForInsight/equivalence
+=== RUN   TestSelectPatternForInsight/contradiction
+=== RUN   TestSelectPatternForInsight/existence
+--- PASS: TestSelectPatternForInsight (0.00s)
+    --- PASS: TestSelectPatternForInsight/conservation_law (0.00s)
+    --- PASS: TestSelectPatternForInsight/transitivity (0.00s)
+    --- PASS: TestSelectPatternForInsight/induction (0.00s)
+    --- PASS: TestSelectPatternForInsight/equivalence (0.00s)
+    --- PASS: TestSelectPatternForInsight/contradiction (0.00s)
+    --- PASS: TestSelectPatternForInsight/existence (0.00s)
+=== RUN   TestTranslateToLean_Conservation
+--- PASS: TestTranslateToLean_Conservation (0.00s)
+=== RUN   TestTranslateToLean_Transitivity
+--- PASS: TestTranslateToLean_Transitivity (0.00s)
+=== RUN   TestTranslateToLean_Induction
+--- PASS: TestTranslateToLean_Induction (0.00s)
+=== RUN   TestTranslateToLean_Equivalence
+--- PASS: TestTranslateToLean_Equivalence (0.00s)
+=== RUN   TestGenerateTheoremName
+=== RUN   TestGenerateTheoremName/Energy_is_conserved_in_closed_systems
+=== RUN   TestGenerateTheoremName/The_sum_of_even_numbers_is_even
+=== RUN   TestGenerateTheoremName/Prime_numbers_are_infinite
+--- PASS: TestGenerateTheoremName (0.00s)
+    --- PASS: TestGenerateTheoremName/Energy_is_conserved_in_closed_systems (0.00s)
+    --- PASS: TestGenerateTheoremName/The_sum_of_even_numbers_is_even (0.00s)
+    --- PASS: TestGenerateTheoremName/Prime_numbers_are_infinite (0.00s)
+=== RUN   TestInferDomain
+=== RUN   TestInferDomain/Energy_and_momentum_are_conserved
+=== RUN   TestInferDomain/The_probability_of_two_independent_events
+=== RUN   TestInferDomain/A_circle_has_constant_curvature
+=== RUN   TestInferDomain/Prime_numbers_have_unique_factorization
+=== RUN   TestInferDomain/The_function_is_continuous_at_x_=_0
+--- PASS: TestInferDomain (0.00s)
+    --- PASS: TestInferDomain/Energy_and_momentum_are_conserved (0.00s)
+    --- PASS: TestInferDomain/The_probability_of_two_independent_events (0.00s)
+    --- PASS: TestInferDomain/A_circle_has_constant_curvature (0.00s)
+    --- PASS: TestInferDomain/Prime_numbers_have_unique_factorization (0.00s)
+    --- PASS: TestInferDomain/The_function_is_continuous_at_x_=_0 (0.00s)
+=== RUN   TestDetectMathematicalStructure
+=== RUN   TestDetectMathematicalStructure/universal_quantifier
+=== RUN   TestDetectMathematicalStructure/existential_quantifier
+=== RUN   TestDetectMathematicalStructure/biconditional
+=== RUN   TestDetectMathematicalStructure/implication
+=== RUN   TestDetectMathematicalStructure/induction
+--- PASS: TestDetectMathematicalStructure (0.00s)
+    --- PASS: TestDetectMathematicalStructure/universal_quantifier (0.00s)
+    --- PASS: TestDetectMathematicalStructure/existential_quantifier (0.00s)
+    --- PASS: TestDetectMathematicalStructure/biconditional (0.00s)
+    --- PASS: TestDetectMathematicalStructure/implication (0.00s)
+    --- PASS: TestDetectMathematicalStructure/induction (0.00s)
+=== RUN   TestExtractHypothesisConclusion
+=== RUN   TestExtractHypothesisConclusion/if-then
+=== RUN   TestExtractHypothesisConclusion/implies
+--- PASS: TestExtractHypothesisConclusion (0.00s)
+    --- PASS: TestExtractHypothesisConclusion/if-then (0.00s)
+    --- PASS: TestExtractHypothesisConclusion/implies (0.00s)
+=== RUN   TestTranslationConfidence
+=== RUN   TestTranslationConfidence/clear_conservation
+=== RUN   TestTranslationConfidence/clear_equivalence
+=== RUN   TestTranslationConfidence/ambiguous
+--- PASS: TestTranslationConfidence (0.00s)
+    --- PASS: TestTranslationConfidence/clear_conservation (0.00s)
+    --- PASS: TestTranslationConfidence/clear_equivalence (0.00s)
+    --- PASS: TestTranslationConfidence/ambiguous (0.00s)
+=== RUN   TestFullTranslationPipeline
+    translator_test.go:452: Generated Lean code:
+        import Mathlib.Analysis.SpecialFunctions.Exp
+        import Mathlib.Tactic
+        
+        -- When roti is covered, heat is trapped and prevents steam formation
+        theorem roti_covered_heat_trapped : sorry := by
+          use witness; sorry
+    translator_test.go:453: Pattern: construction
+    translator_test.go:454: Confidence: 0.50
+    translator_test.go:455: Suggestions: [Selected pattern: construction - Constructive proof - explicitly build the object Suggested tactics: use witness; sorry Consider using previous results as lemmas]
+--- PASS: TestFullTranslationPipeline (0.00s)
+=== RUN   TestTranslateToLean_EmptyStatement
+    translator_test.go:476: Empty statement handling needs refinement
+--- SKIP: TestTranslateToLean_EmptyStatement (0.00s)
+=== RUN   TestTranslateToLean_ComplexStatement
+    translator_test.go:488: Complex statement detection needs enhancement
+--- SKIP: TestTranslateToLean_ComplexStatement (0.00s)
+=== RUN   ExampleBridge_Verify
+--- PASS: ExampleBridge_Verify (0.00s)
+=== RUN   ExampleTranslateToLean
+--- PASS: ExampleTranslateToLean (0.01s)
+=== RUN   ExampleSelectPatternForInsight
+--- PASS: ExampleSelectPatternForInsight (0.00s)
+=== RUN   ExampleRenderTemplate
+--- PASS: ExampleRenderTemplate (0.00s)
+=== RUN   ExampleDetectMathematicalStructure
+--- PASS: ExampleDetectMathematicalStructure (0.00s)
+=== RUN   ExampleTranslateToLean_domainInference
+--- PASS: ExampleTranslateToLean_domainInference (0.00s)
+=== RUN   ExampleTemplateBuilder
+--- PASS: ExampleTemplateBuilder (0.00s)
+=== RUN   Example_rotiThermodynamics
+--- PASS: Example_rotiThermodynamics (0.00s)
+=== RUN   Example_waveInterference
+--- PASS: Example_waveInterference (0.00s)
+=== RUN   Example_poissonArrivals
+--- PASS: Example_poissonArrivals (0.00s)
+=== RUN   ExampleListAllPatterns
+--- PASS: ExampleListAllPatterns (0.00s)
+=== RUN   Example_moonRoundness
+--- PASS: Example_moonRoundness (0.00s)
+PASS
+ok  	github.com/asymmetrica/urbanlens/pkg/lean	1.315s
+=== RUN   TestCommitAnalyzer_FindCompilationFixCommits
+    commit_analyzer_test.go:26: Found 0 compilation fix commits
+--- PASS: TestCommitAnalyzer_FindCompilationFixCommits (0.07s)
+=== RUN   TestCommitAnalyzer_AnalyzeCommit
+    commit_analyzer_test.go:76: No compilation fix commits found
+--- SKIP: TestCommitAnalyzer_AnalyzeCommit (0.05s)
+=== RUN   TestCommitInfo_Structure
+--- PASS: TestCommitInfo_Structure (0.00s)
+=== RUN   TestNewCommitAnalyzer
+--- PASS: TestNewCommitAnalyzer (0.00s)
+=== RUN   TestScorePattern
+=== RUN   TestScorePattern/high_quality_pattern
+    confidence_scorer_test.go:62: Pattern score: 0.861
+=== RUN   TestScorePattern/low_quality_pattern
+    confidence_scorer_test.go:62: Pattern score: 0.279
+--- PASS: TestScorePattern (0.00s)
+    --- PASS: TestScorePattern/high_quality_pattern (0.00s)
+    --- PASS: TestScorePattern/low_quality_pattern (0.00s)
+=== RUN   TestCalculateRepoScore
+=== RUN   TestCalculateRepoScore/stars=\x00
+=== RUN   TestCalculateRepoScore/stars=d
+=== RUN   TestCalculateRepoScore/stars=Ϩ
+=== RUN   TestCalculateRepoScore/stars=✐
+=== RUN   TestCalculateRepoScore/stars=썐
+--- PASS: TestCalculateRepoScore (0.00s)
+    --- PASS: TestCalculateRepoScore/stars=\x00 (0.00s)
+    --- PASS: TestCalculateRepoScore/stars=d (0.00s)
+    --- PASS: TestCalculateRepoScore/stars=Ϩ (0.00s)
+    --- PASS: TestCalculateRepoScore/stars=✐ (0.00s)
+    --- PASS: TestCalculateRepoScore/stars=썐 (0.00s)
+=== RUN   TestCalculateCommitScore
+=== RUN   TestCalculateCommitScore/excellent_commit
+    confidence_scorer_test.go:142: Commit 'Fix: Handle nil pointer error in database connection (#142)' score: 1.000
+=== RUN   TestCalculateCommitScore/good_commit
+    confidence_scorer_test.go:139: CommitScore("Fixed error handling in user authentication") = 0.950, want [0.500, 0.800]
+    confidence_scorer_test.go:142: Commit 'Fixed error handling in user authentication' score: 0.950
+=== RUN   TestCalculateCommitScore/neutral_commit
+    confidence_scorer_test.go:142: Commit 'Update code' score: 0.300
+=== RUN   TestCalculateCommitScore/bad_commit
+    confidence_scorer_test.go:142: Commit 'wip' score: 0.000
+=== RUN   TestCalculateCommitScore/terrible_commit
+    confidence_scorer_test.go:142: Commit 'TODO test tmp' score: 0.000
+--- FAIL: TestCalculateCommitScore (0.00s)
+    --- PASS: TestCalculateCommitScore/excellent_commit (0.00s)
+    --- FAIL: TestCalculateCommitScore/good_commit (0.00s)
+    --- PASS: TestCalculateCommitScore/neutral_commit (0.00s)
+    --- PASS: TestCalculateCommitScore/bad_commit (0.00s)
+    --- PASS: TestCalculateCommitScore/terrible_commit (0.00s)
+=== RUN   TestCalculateSolutionScore
+=== RUN   TestCalculateSolutionScore/generic_solution
+    confidence_scorer_test.go:190: Solution score: 0.800
+=== RUN   TestCalculateSolutionScore/specific_solution
+    confidence_scorer_test.go:190: Solution score: 0.633
+=== RUN   TestCalculateSolutionScore/too_simple
+    confidence_scorer_test.go:190: Solution score: 0.400
+=== RUN   TestCalculateSolutionScore/empty_solution
+    confidence_scorer_test.go:190: Solution score: 0.000
+--- PASS: TestCalculateSolutionScore (0.00s)
+    --- PASS: TestCalculateSolutionScore/generic_solution (0.00s)
+    --- PASS: TestCalculateSolutionScore/specific_solution (0.00s)
+    --- PASS: TestCalculateSolutionScore/too_simple (0.00s)
+    --- PASS: TestCalculateSolutionScore/empty_solution (0.00s)
+=== RUN   TestCalculateFrequencyScore
+=== RUN   TestCalculateFrequencyScore/freq=\x01
+    confidence_scorer_test.go:216: FrequencyScore(1, 10) = 0.495, want [0.300, 0.300]
+=== RUN   TestCalculateFrequencyScore/freq=\x03
+    confidence_scorer_test.go:216: FrequencyScore(3, 10) = 0.691, want [0.500, 0.650]
+=== RUN   TestCalculateFrequencyScore/freq=\x05
+    confidence_scorer_test.go:216: FrequencyScore(5, 10) = 0.805, want [0.650, 0.750]
+=== RUN   TestCalculateFrequencyScore/freq=_
+    confidence_scorer_test.go:216: FrequencyScore(10, 10) = 0.975, want [0.800, 0.950]
+=== RUN   TestCalculateFrequencyScore/freq=_#01
+--- FAIL: TestCalculateFrequencyScore (0.00s)
+    --- FAIL: TestCalculateFrequencyScore/freq=\x01 (0.00s)
+    --- FAIL: TestCalculateFrequencyScore/freq=\x03 (0.00s)
+    --- FAIL: TestCalculateFrequencyScore/freq=\x05 (0.00s)
+    --- FAIL: TestCalculateFrequencyScore/freq=_ (0.00s)
+    --- PASS: TestCalculateFrequencyScore/freq=_#01 (0.00s)
+=== RUN   TestDeduplicatePatterns_ExactDuplicates
+--- PASS: TestDeduplicatePatterns_ExactDuplicates (0.00s)
+=== RUN   TestDeduplicatePatterns_SimilarPatterns
+--- PASS: TestDeduplicatePatterns_SimilarPatterns (0.00s)
+=== RUN   TestDeduplicatePatterns_DistinctPatterns
+--- PASS: TestDeduplicatePatterns_DistinctPatterns (0.00s)
+=== RUN   TestMergePatterns
+--- PASS: TestMergePatterns (0.00s)
+=== RUN   TestAreDuplicates
+=== RUN   TestAreDuplicates/exact_hash_match
+=== RUN   TestAreDuplicates/different_signatures
+=== RUN   TestAreDuplicates/similar_solutions
+=== RUN   TestAreDuplicates/different_solutions
+--- PASS: TestAreDuplicates (0.00s)
+    --- PASS: TestAreDuplicates/exact_hash_match (0.00s)
+    --- PASS: TestAreDuplicates/different_signatures (0.00s)
+    --- PASS: TestAreDuplicates/similar_solutions (0.00s)
+    --- PASS: TestAreDuplicates/different_solutions (0.00s)
+=== RUN   TestDeduplicationStats_String
+    deduplicator_test.go:341: Stats: Original: 100, Duplicates: 30, Merged: 20, Final: 50 (50.0% reduction)
+--- PASS: TestDeduplicationStats_String (0.00s)
+=== RUN   TestAgent03_CompleteDemo
+Applied migration 1: initial_schema
+✓ Database created with schema
+✓ Error 1 classified: 8:f149d6e9 (type: compile, DR: 8)
+✓ Error 2 classified: 8:f149d6e9 (type: compile, DR: 8)
+✓ Error 3 classified: 3:895c404a (type: compile, DR: 3)
+✓ Same error different files → SAME signature (VERIFIED)
+✓ Pattern added to database (ID: 1)
+✓ Pattern found: import "fmt" (confidence: 0.95)
+✓ Application recorded (outcome: success)
+✓ Pattern success count incremented
+
+=== AGENT 0.3 COMPLETE DEMO: ALL SYSTEMS OPERATIONAL ===
+--- PASS: TestAgent03_CompleteDemo (0.10s)
+=== RUN   TestDiffParser_ParseSimpleDiff
+--- PASS: TestDiffParser_ParseSimpleDiff (0.00s)
+=== RUN   TestDiffParser_ParseMultiFileDiff
+--- PASS: TestDiffParser_ParseMultiFileDiff (0.00s)
+=== RUN   TestDiffParser_ExtractErrorContext
+--- PASS: TestDiffParser_ExtractErrorContext (0.00s)
+=== RUN   TestDiffParser_ExtractFix
+--- PASS: TestDiffParser_ExtractFix (0.00s)
+=== RUN   TestDetectLanguage
+--- PASS: TestDetectLanguage (0.00s)
+=== RUN   TestDiffParser_ParseHunkHeader
+--- PASS: TestDiffParser_ParseHunkHeader (0.00s)
+=== RUN   TestDiffParser_ParseMultiHunkDiff
+--- PASS: TestDiffParser_ParseMultiHunkDiff (0.00s)
+=== RUN   TestDigitalRoot
+--- PASS: TestDigitalRoot (0.00s)
+=== RUN   TestClassifyError
+=== RUN   TestClassifyError/simple_error
+=== RUN   TestClassifyError/complex_error
+=== RUN   TestClassifyError/runtime_error
+--- PASS: TestClassifyError (0.00s)
+    --- PASS: TestClassifyError/simple_error (0.00s)
+    --- PASS: TestClassifyError/complex_error (0.00s)
+    --- PASS: TestClassifyError/runtime_error (0.00s)
+=== RUN   TestDetermineErrorType
+=== RUN   TestDetermineErrorType/undefined:_fmt
+=== RUN   TestDetermineErrorType/cannot_use_x_(type_int)_as_type_string
+=== RUN   TestDetermineErrorType/syntax_error:_unexpected_}
+=== RUN   TestDetermineErrorType/type_MyStruct_has_no_field_Name
+=== RUN   TestDetermineErrorType/missing_return_at_end_of_function
+=== RUN   TestDetermineErrorType/panic:_runtime_error:_index_out_of_range
+=== RUN   TestDetermineErrorType/panic:_nil_pointer_dereference
+=== RUN   TestDetermineErrorType/fatal_error:_concurrent_map_writes
+=== RUN   TestDetermineErrorType/goroutine_1_[running]:
+=== RUN   TestDetermineErrorType/FAIL:_TestMyFunction
+=== RUN   TestDetermineErrorType/test_failed:_got_42,_want_21
+=== RUN   TestDetermineErrorType/assertion_failed:_expected_true
+=== RUN   TestDetermineErrorType/should_have_comment
+=== RUN   TestDetermineErrorType/exported_function_should_have_doc_comment
+=== RUN   TestDetermineErrorType/unused_variable_x
+=== RUN   TestDetermineErrorType/ineffective_assignment
+=== RUN   TestDetermineErrorType/some_random_error
+--- PASS: TestDetermineErrorType (0.00s)
+    --- PASS: TestDetermineErrorType/undefined:_fmt (0.00s)
+    --- PASS: TestDetermineErrorType/cannot_use_x_(type_int)_as_type_string (0.00s)
+    --- PASS: TestDetermineErrorType/syntax_error:_unexpected_} (0.00s)
+    --- PASS: TestDetermineErrorType/type_MyStruct_has_no_field_Name (0.00s)
+    --- PASS: TestDetermineErrorType/missing_return_at_end_of_function (0.00s)
+    --- PASS: TestDetermineErrorType/panic:_runtime_error:_index_out_of_range (0.00s)
+    --- PASS: TestDetermineErrorType/panic:_nil_pointer_dereference (0.00s)
+    --- PASS: TestDetermineErrorType/fatal_error:_concurrent_map_writes (0.00s)
+    --- PASS: TestDetermineErrorType/goroutine_1_[running]: (0.00s)
+    --- PASS: TestDetermineErrorType/FAIL:_TestMyFunction (0.00s)
+    --- PASS: TestDetermineErrorType/test_failed:_got_42,_want_21 (0.00s)
+    --- PASS: TestDetermineErrorType/assertion_failed:_expected_true (0.00s)
+    --- PASS: TestDetermineErrorType/should_have_comment (0.00s)
+    --- PASS: TestDetermineErrorType/exported_function_should_have_doc_comment (0.00s)
+    --- PASS: TestDetermineErrorType/unused_variable_x (0.00s)
+    --- PASS: TestDetermineErrorType/ineffective_assignment (0.00s)
+    --- PASS: TestDetermineErrorType/some_random_error (0.00s)
+=== RUN   TestClassifyFullError
+--- PASS: TestClassifyFullError (0.00s)
+=== RUN   TestSameErrorDifferentFiles
+--- PASS: TestSameErrorDifferentFiles (0.00s)
+=== RUN   TestDifferentErrorsDifferentSignatures
+--- PASS: TestDifferentErrorsDifferentSignatures (0.00s)
+=== RUN   TestCompareErrors
+--- PASS: TestCompareErrors (0.00s)
+=== RUN   TestComputeSignatureDirect
+--- PASS: TestComputeSignatureDirect (0.00s)
+=== RUN   TestRemoveFilePaths
+    error_normalizer_test.go:28: RemoveFilePaths("github.com/user/repo/pkg/file.go:10") = "<FILE>:10", want "github.com/user/repo/pkg/<FILE>:10"
+--- FAIL: TestRemoveFilePaths (0.00s)
+=== RUN   TestRemoveLineNumbers
+--- PASS: TestRemoveLineNumbers (0.00s)
+=== RUN   TestRemoveVariableNames
+    error_normalizer_test.go:68: RemoveVariableNames("cannot use userName") = "cannot use userName", want "cannot use <VAR>"
+--- FAIL: TestRemoveVariableNames (0.00s)
+=== RUN   TestRemoveTypeNames
+--- PASS: TestRemoveTypeNames (0.00s)
+=== RUN   TestRemovePackagePaths
+    error_normalizer_test.go:108: RemovePackagePaths("gopkg.in/yaml.v2") = "gopkg.in/yaml.v2", want "<PKG>"
+--- FAIL: TestRemovePackagePaths (0.00s)
+=== RUN   TestRemoveMemoryAddresses
+--- PASS: TestRemoveMemoryAddresses (0.00s)
+=== RUN   TestNormalizeError
+=== RUN   TestNormalizeError/simple_undefined_error
+=== RUN   TestNormalizeError/type_error
+=== RUN   TestNormalizeError/package_import_error
+=== RUN   TestNormalizeError/runtime_panic
+=== RUN   TestNormalizeError/multiple_file_paths
+--- PASS: TestNormalizeError (0.00s)
+    --- PASS: TestNormalizeError/simple_undefined_error (0.00s)
+    --- PASS: TestNormalizeError/type_error (0.00s)
+    --- PASS: TestNormalizeError/package_import_error (0.00s)
+    --- PASS: TestNormalizeError/runtime_panic (0.00s)
+    --- PASS: TestNormalizeError/multiple_file_paths (0.00s)
+=== RUN   TestNormalizeErrorConsistency
+--- PASS: TestNormalizeErrorConsistency (0.00s)
+=== RUN   TestAggressiveNormalization
+    error_normalizer_test.go:213: AggressiveNormalization("main.go:42: error \"invalid syntax\" with value 123") = "<FILE>:<LINE> error <STR> with value <NUM>"
+--- PASS: TestAggressiveNormalization (0.00s)
+=== RUN   TestNormalizeSolution
+=== RUN   TestNormalizeSolution/Remove_comments
+=== RUN   TestNormalizeSolution/Replace_literals
+=== RUN   TestNormalizeSolution/Replace_identifiers
+=== RUN   TestNormalizeSolution/Preserve_keywords
+=== RUN   TestNormalizeSolution/Function_calls
+--- PASS: TestNormalizeSolution (0.00s)
+    --- PASS: TestNormalizeSolution/Remove_comments (0.00s)
+    --- PASS: TestNormalizeSolution/Replace_literals (0.00s)
+    --- PASS: TestNormalizeSolution/Replace_identifiers (0.00s)
+    --- PASS: TestNormalizeSolution/Preserve_keywords (0.00s)
+    --- PASS: TestNormalizeSolution/Function_calls (0.00s)
+=== RUN   TestStructuralSimilarity
+=== RUN   TestStructuralSimilarity/Identical_strings
+=== RUN   TestStructuralSimilarity/Similar_strings
+=== RUN   TestStructuralSimilarity/Different_strings
+=== RUN   TestStructuralSimilarity/Empty_strings
+--- PASS: TestStructuralSimilarity (0.00s)
+    --- PASS: TestStructuralSimilarity/Identical_strings (0.00s)
+    --- PASS: TestStructuralSimilarity/Similar_strings (0.00s)
+    --- PASS: TestStructuralSimilarity/Different_strings (0.00s)
+    --- PASS: TestStructuralSimilarity/Empty_strings (0.00s)
+=== RUN   TestAreSimilar
+=== RUN   TestAreSimilar/Exact_hash_match
+=== RUN   TestAreSimilar/Structural_similarity
+=== RUN   TestAreSimilar/Different_patterns
+--- PASS: TestAreSimilar (0.00s)
+    --- PASS: TestAreSimilar/Exact_hash_match (0.00s)
+    --- PASS: TestAreSimilar/Structural_similarity (0.00s)
+    --- PASS: TestAreSimilar/Different_patterns (0.00s)
+=== RUN   TestCalculateConfidence
+=== RUN   TestCalculateConfidence/High_confidence_(frequent,_proven,_recent)
+=== RUN   TestCalculateConfidence/Medium_confidence_(moderate_frequency,_some_failures)
+=== RUN   TestCalculateConfidence/Low_confidence_(rare,_unproven)
+--- PASS: TestCalculateConfidence (0.00s)
+    --- PASS: TestCalculateConfidence/High_confidence_(frequent,_proven,_recent) (0.00s)
+    --- PASS: TestCalculateConfidence/Medium_confidence_(moderate_frequency,_some_failures) (0.00s)
+    --- PASS: TestCalculateConfidence/Low_confidence_(rare,_unproven) (0.00s)
+=== RUN   TestCalculateRepoFrequency
+=== RUN   TestCalculateRepoFrequency/10_repos_(saturated)
+=== RUN   TestCalculateRepoFrequency/5_repos_(half)
+=== RUN   TestCalculateRepoFrequency/1_repo_(rare)
+=== RUN   TestCalculateRepoFrequency/0_repos_(none)
+--- PASS: TestCalculateRepoFrequency (0.00s)
+    --- PASS: TestCalculateRepoFrequency/10_repos_(saturated) (0.00s)
+    --- PASS: TestCalculateRepoFrequency/5_repos_(half) (0.00s)
+    --- PASS: TestCalculateRepoFrequency/1_repo_(rare) (0.00s)
+    --- PASS: TestCalculateRepoFrequency/0_repos_(none) (0.00s)
+=== RUN   TestCalculatePatternQuality
+=== RUN   TestCalculatePatternQuality/Perfect_quality_(all_successes)
+=== RUN   TestCalculatePatternQuality/Good_quality_(75%_success)
+=== RUN   TestCalculatePatternQuality/Poor_quality_(25%_success)
+=== RUN   TestCalculatePatternQuality/Neutral_(unapplied)
+--- PASS: TestCalculatePatternQuality (0.00s)
+    --- PASS: TestCalculatePatternQuality/Perfect_quality_(all_successes) (0.00s)
+    --- PASS: TestCalculatePatternQuality/Good_quality_(75%_success) (0.00s)
+    --- PASS: TestCalculatePatternQuality/Poor_quality_(25%_success) (0.00s)
+    --- PASS: TestCalculatePatternQuality/Neutral_(unapplied) (0.00s)
+=== RUN   TestCalculateRecency
+=== RUN   TestCalculateRecency/Fresh_(today)
+=== RUN   TestCalculateRecency/6_months_old
+=== RUN   TestCalculateRecency/1_year_old
+=== RUN   TestCalculateRecency/2_years_old
+--- PASS: TestCalculateRecency (0.00s)
+    --- PASS: TestCalculateRecency/Fresh_(today) (0.00s)
+    --- PASS: TestCalculateRecency/6_months_old (0.00s)
+    --- PASS: TestCalculateRecency/1_year_old (0.00s)
+    --- PASS: TestCalculateRecency/2_years_old (0.00s)
+=== RUN   TestClassifyConfidence
+--- PASS: TestClassifyConfidence (0.00s)
+=== RUN   TestCalculateDistribution
+--- PASS: TestCalculateDistribution (0.00s)
+=== RUN   TestFrequencyAnalyzerIntegration
+Applied migration 1: initial_schema
+    frequency_analyzer_test.go:538: Distribution: HIGH=0, MEDIUM=0, LOW=3, AvgConfidence=0.261
+--- PASS: TestFrequencyAnalyzerIntegration (0.16s)
+=== RUN   TestGroupSimilarPatterns
+--- PASS: TestGroupSimilarPatterns (0.00s)
+=== RUN   TestProcessApplicationOutcome
+Applied migration 1: initial_schema
+--- PASS: TestProcessApplicationOutcome (0.15s)
+=== RUN   TestTemporalDecay
+Applied migration 1: initial_schema
+--- PASS: TestTemporalDecay (0.07s)
+=== RUN   TestHumanPatternInput
+Applied migration 1: initial_schema
+--- PASS: TestHumanPatternInput (0.24s)
+=== RUN   TestLearningLoopSimulation
+Applied migration 1: initial_schema
+    learning_loop_test.go:428: === SIMULATION RESULTS ===
+    learning_loop_test.go:429: Total Patterns: 51
+    learning_loop_test.go:430: High Confidence: 5
+    learning_loop_test.go:431: Medium Confidence: 20
+    learning_loop_test.go:432: Low Confidence: 26
+    learning_loop_test.go:433: Total Applications: 101
+    learning_loop_test.go:434: Success Rate: 67.03%
+    learning_loop_test.go:435: Human Patterns: 1
+    learning_loop_test.go:436: Average Confidence: 0.576
+--- PASS: TestLearningLoopSimulation (5.85s)
+=== RUN   TestCalculateQualityScore
+=== RUN   TestCalculateQualityScore/All_strong_dimensions
+=== RUN   TestCalculateQualityScore/One_weak_dimension
+=== RUN   TestCalculateQualityScore/All_perfect
+=== RUN   TestCalculateQualityScore/Empty_scores
+--- PASS: TestCalculateQualityScore (0.00s)
+    --- PASS: TestCalculateQualityScore/All_strong_dimensions (0.00s)
+    --- PASS: TestCalculateQualityScore/One_weak_dimension (0.00s)
+    --- PASS: TestCalculateQualityScore/All_perfect (0.00s)
+    --- PASS: TestCalculateQualityScore/Empty_scores (0.00s)
+=== RUN   TestDecayConfidence
+=== RUN   TestDecayConfidence/0.80_0days
+=== RUN   TestDecayConfidence/0.80_90days
+=== RUN   TestDecayConfidence/0.80_180days
+=== RUN   TestDecayConfidence/0.60_365days
+=== RUN   TestDecayConfidence/0.15_180days
+--- PASS: TestDecayConfidence (0.00s)
+    --- PASS: TestDecayConfidence/0.80_0days (0.00s)
+    --- PASS: TestDecayConfidence/0.80_90days (0.00s)
+    --- PASS: TestDecayConfidence/0.80_180days (0.00s)
+    --- PASS: TestDecayConfidence/0.60_365days (0.00s)
+    --- PASS: TestDecayConfidence/0.15_180days (0.00s)
+=== RUN   TestMergePatterns_NewPatterns
+    merger_test.go:72: Merge stats: New: 2, Updated: 0, Skipped: 0, Total: 0 → 2
+--- PASS: TestMergePatterns_NewPatterns (0.03s)
+=== RUN   TestMergePatterns_UpdateExisting
+    merger_test.go:154: Expected frequency 8 (5+3), got 6
+    merger_test.go:159: Expected success count 7 (4+3), got 0
+    merger_test.go:164: Expected 4 repo sources, got 2
+--- FAIL: TestMergePatterns_UpdateExisting (0.02s)
+=== RUN   TestMergePatterns_SkipLowConfidence
+--- PASS: TestMergePatterns_SkipLowConfidence (0.01s)
+=== RUN   TestUpdateExistingPattern
+--- PASS: TestUpdateExistingPattern (0.00s)
+=== RUN   TestOpenDB
+--- PASS: TestOpenDB (0.00s)
+=== RUN   TestMigrations
+Applied migration 1: initial_schema
+--- PASS: TestMigrations (0.02s)
+=== RUN   TestAddAndGetRepo
+Applied migration 1: initial_schema
+--- PASS: TestAddAndGetRepo (0.03s)
+=== RUN   TestAddAndFindPatterns
+Applied migration 1: initial_schema
+--- PASS: TestAddAndFindPatterns (0.03s)
+=== RUN   TestUpdatePatternConfidence
+Applied migration 1: initial_schema
+--- PASS: TestUpdatePatternConfidence (0.04s)
+=== RUN   TestRecordApplication
+Applied migration 1: initial_schema
+--- PASS: TestRecordApplication (0.03s)
+=== RUN   TestAddToLearningQueue
+Applied migration 1: initial_schema
+--- PASS: TestAddToLearningQueue (0.03s)
+=== RUN   TestFindPatternsWithMinConfidence
+Applied migration 1: initial_schema
+    pattern_db_test.go:322: Pattern with confidence 0.3 should not be found (minConfidence=0.5), got 2
+--- FAIL: TestFindPatternsWithMinConfidence (0.04s)
+=== RUN   TestWilliamsBatchSize
+=== RUN   TestWilliamsBatchSize/Zero_files
+=== RUN   TestWilliamsBatchSize/One_file
+=== RUN   TestWilliamsBatchSize/Ten_files
+=== RUN   TestWilliamsBatchSize/Hundred_files
+=== RUN   TestWilliamsBatchSize/Thousand_files
+--- PASS: TestWilliamsBatchSize (0.00s)
+    --- PASS: TestWilliamsBatchSize/Zero_files (0.00s)
+    --- PASS: TestWilliamsBatchSize/One_file (0.00s)
+    --- PASS: TestWilliamsBatchSize/Ten_files (0.00s)
+    --- PASS: TestWilliamsBatchSize/Hundred_files (0.00s)
+    --- PASS: TestWilliamsBatchSize/Thousand_files (0.00s)
+=== RUN   TestLanguageExtensions
+=== RUN   TestLanguageExtensions/Go
+=== RUN   TestLanguageExtensions/TypeScript
+=== RUN   TestLanguageExtensions/JavaScript
+=== RUN   TestLanguageExtensions/Python
+=== RUN   TestLanguageExtensions/Rust
+=== RUN   TestLanguageExtensions/Unknown
+--- PASS: TestLanguageExtensions (0.00s)
+    --- PASS: TestLanguageExtensions/Go (0.00s)
+    --- PASS: TestLanguageExtensions/TypeScript (0.00s)
+    --- PASS: TestLanguageExtensions/JavaScript (0.00s)
+    --- PASS: TestLanguageExtensions/Python (0.00s)
+    --- PASS: TestLanguageExtensions/Rust (0.00s)
+    --- PASS: TestLanguageExtensions/Unknown (0.00s)
+=== RUN   TestNormalizeCodePattern
+=== RUN   TestNormalizeCodePattern/Trim_whitespace
+=== RUN   TestNormalizeCodePattern/Normalize_tabs
+=== RUN   TestNormalizeCodePattern/Empty_string
+--- PASS: TestNormalizeCodePattern (0.00s)
+    --- PASS: TestNormalizeCodePattern/Trim_whitespace (0.00s)
+    --- PASS: TestNormalizeCodePattern/Normalize_tabs (0.00s)
+    --- PASS: TestNormalizeCodePattern/Empty_string (0.00s)
+=== RUN   TestFindSourceFiles
+--- PASS: TestFindSourceFiles (0.01s)
+=== RUN   TestExtractFromFile_Go
+--- PASS: TestExtractFromFile_Go (0.01s)
+=== RUN   TestReadCodeSnippet
+=== RUN   TestReadCodeSnippet/Single_line
+=== RUN   TestReadCodeSnippet/Multiple_lines
+=== RUN   TestReadCodeSnippet/All_lines
+=== RUN   TestReadCodeSnippet/Invalid_start_line
+--- PASS: TestReadCodeSnippet (0.00s)
+    --- PASS: TestReadCodeSnippet/Single_line (0.00s)
+    --- PASS: TestReadCodeSnippet/Multiple_lines (0.00s)
+    --- PASS: TestReadCodeSnippet/All_lines (0.00s)
+    --- PASS: TestReadCodeSnippet/Invalid_start_line (0.00s)
+=== RUN   TestPatternGenerator_GeneratePattern
+    pattern_generator_test.go:65: Generated pattern: UNDEFINED_SYMBOL / 7:03ecaf55 / 4:043d8ab2
+    pattern_generator_test.go:66: Solution: import "foo"
+        Foo()
+--- PASS: TestPatternGenerator_GeneratePattern (0.00s)
+=== RUN   TestPatternGenerator_ClassifyErrorType
+--- PASS: TestPatternGenerator_ClassifyErrorType (0.00s)
+=== RUN   TestPatternGenerator_GenerateErrorSignature
+    pattern_generator_test.go:164: Signature examples: 4:43517a1c, 4:31a1368c
+--- PASS: TestPatternGenerator_GenerateErrorSignature (0.00s)
+=== RUN   TestPatternGenerator_GenerateSolutionTemplate
+    pattern_generator_test.go:189: Generated template: import "foo"
+        func Bar() {}
+--- PASS: TestPatternGenerator_GenerateSolutionTemplate (0.00s)
+=== RUN   TestPatternGenerator_HashSolution
+    pattern_generator_test.go:214: Hash examples: f357d23b76678703, 5a87a6b08f9cebd8
+--- PASS: TestPatternGenerator_HashSolution (0.00s)
+=== RUN   TestIsKeyword
+--- PASS: TestIsKeyword (0.00s)
+=== RUN   TestIsBuiltinType
+--- PASS: TestIsBuiltinType (0.00s)
+=== RUN   TestPatternGenerator_EmptyDiff
+--- PASS: TestPatternGenerator_EmptyDiff (0.00s)
+=== RUN   TestPatternGenerator_NoHunks
+--- PASS: TestPatternGenerator_NoHunks (0.00s)
+=== RUN   TestPatternLearner_LearnSuccess
+    pattern_learner_test.go:62: Failed to add pattern: failed to add pattern: SQL logic error: no such table: patterns (1)
+--- FAIL: TestPatternLearner_LearnSuccess (0.00s)
+=== RUN   TestPatternLearner_LearnSuccess_ConfidenceCapped
+--- FAIL: TestPatternLearner_LearnSuccess_ConfidenceCapped (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal 0xc0000005 code=0x0 addr=0x68 pc=0x7ff7426344ba]
+
+goroutine 256 [running]:
+testing.tRunner.func1.2({0x7ff74267e3c0, 0x7ff742a0a850})
+	C:/Program Files/Go/src/testing/testing.go:1872 +0x239
+testing.tRunner.func1()
+	C:/Program Files/Go/src/testing/testing.go:1875 +0x35b
+panic({0x7ff74267e3c0?, 0x7ff742a0a850?})
+	C:/Program Files/Go/src/runtime/panic.go:783 +0x132
+github.com/asymmetrica/urbanlens/pkg/learning.TestPatternLearner_LearnSuccess_ConfidenceCapped(0xc000003dc0)
+	C:/Projects/asymm_urbanlens/pkg/learning/pattern_learner_test.go:143 +0x3ba
+testing.tRunner(0xc000003dc0, 0x7ff7426f1730)
+	C:/Program Files/Go/src/testing/testing.go:1934 +0xc3
+created by testing.(*T).Run in goroutine 1
+	C:/Program Files/Go/src/testing/testing.go:1997 +0x44b
+FAIL	github.com/asymmetrica/urbanlens/pkg/learning	8.749s
+?   	github.com/asymmetrica/urbanlens/pkg/learning/parsers	[no test files]
+testing: warning: no tests to run
+PASS
+ok  	github.com/asymmetrica/urbanlens/pkg/linguistics	0.842s [no tests to run]
+=== RUN   TestFuzzyMatcher_ExactMatch
+--- PASS: TestFuzzyMatcher_ExactMatch (0.00s)
+=== RUN   TestFuzzyMatcher_FuzzyMatch
+--- PASS: TestFuzzyMatcher_FuzzyMatch (0.00s)
+=== RUN   TestFuzzyMatcher_DigitalRootFilter
+--- PASS: TestFuzzyMatcher_DigitalRootFilter (0.00s)
+=== RUN   TestStructuralSimilarity
+--- PASS: TestStructuralSimilarity (0.00s)
+=== RUN   TestQuaternionSimilarity
+--- PASS: TestQuaternionSimilarity (0.00s)
+=== RUN   TestNormalizeSolution
+    matching_test.go:152: NormalizeSolution("if err != nil { return fmt.Errorf(\"error: %v\", err) }") missing "<FUNC>", got: "if <VAR> != nil { return <VAR>.<TYPE>(<LITERAL>, <VAR>) }"
+--- FAIL: TestNormalizeSolution (0.00s)
+=== RUN   TestTemplateEngine_Instantiate
+--- PASS: TestTemplateEngine_Instantiate (0.00s)
+=== RUN   TestTemplateEngine_ExtractBindings
+    matching_test.go:186: ExtractBindings failed: placeholder count mismatch: expected 2, got 3
+--- FAIL: TestTemplateEngine_ExtractBindings (0.00s)
+=== RUN   TestPatternRanker_RankPatterns
+--- PASS: TestPatternRanker_RankPatterns (0.00s)
+=== RUN   TestPatternRanker_FilterByQuality
+--- PASS: TestPatternRanker_FilterByQuality (0.00s)
+=== RUN   TestAreSimilar
+--- PASS: TestAreSimilar (0.00s)
+=== RUN   TestGetStandardPatterns
+--- PASS: TestGetStandardPatterns (0.00s)
+=== RUN   TestEncodeToQuaternion
+--- PASS: TestEncodeToQuaternion (0.00s)
+=== RUN   Example_basicFuzzyMatching
+--- FAIL: Example_basicFuzzyMatching (0.00s)
+got:
+Found 2 match(es)
+Best match: error_check (score: 1.00)
+want:
+Found 1 match(es)
+Best match: error_check (score: 0.94)
+=== RUN   Example_templateEngine
+--- FAIL: Example_templateEngine (0.00s)
+got:
+Instantiated: if err != nil { return fmt.Errorf(err) }
+Extracted bindings: var=<nil>, func=<nil>
+want:
+Instantiated: if err != nil { return fmt.Errorf(err) }
+Extracted bindings: var=err, func=fmt.Errorf
+=== RUN   Example_patternRanking
+--- FAIL: Example_patternRanking (0.00s)
+got:
+Rank 1: high_quality (quality: 0.900)
+Rank 2: low_quality (quality: 0.116)
+want:
+Rank 1: high_quality (quality: 0.547)
+Rank 2: low_quality (quality: 0.030)
+=== RUN   Example_standardPatterns
+--- FAIL: Example_standardPatterns (0.00s)
+got:
+Loaded 3 standard patterns
+Categories:
+  - control_flow
+  - error_handling
+  - validation
+want:
+Loaded 3 standard patterns
+Categories:
+  - error_handling
+  - validation
+  - control_flow
+=== RUN   Example_customConfig
+--- PASS: Example_customConfig (0.00s)
+=== RUN   Example_multiTierMatching
+--- FAIL: Example_multiTierMatching (0.00s)
+got:
+Tier 1 (exact): algorithm=exact, score=1.00
+want:
+Tier 1 (exact): algorithm=exact, score=1.00
+Tier 2 (fuzzy): algorithm=fuzzy, score=1.00
+FAIL
+FAIL	github.com/asymmetrica/urbanlens/pkg/matching	1.043s
+?   	github.com/asymmetrica/urbanlens/pkg/math	[no test files]
+=== RUN   TestFFmpegProcessor_Availability
+    media_test.go:11: FFmpeg status: map[available:true capabilities:[audio_extraction video_conversion transcription_prep format_conversion trimming] version:ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers]
+--- PASS: TestFFmpegProcessor_Availability (0.11s)
+=== RUN   TestFFmpegProcessor_SupportedFormats
+--- PASS: TestFFmpegProcessor_SupportedFormats (0.08s)
+PASS
+ok  	github.com/asymmetrica/urbanlens/pkg/media	1.332s
+=== RUN   TestDocumentOCR_Initialize
+--- PASS: TestDocumentOCR_Initialize (0.00s)
+=== RUN   TestDocumentOCR_CustomConfig
+--- PASS: TestDocumentOCR_CustomConfig (0.00s)
+PASS
+ok  	github.com/asymmetrica/urbanlens/pkg/ocr	1.207s
+=== RUN   TestBridge_New
+--- PASS: TestBridge_New (0.03s)
+=== RUN   TestBridge_IsAvailable
+    bridge_test.go:20: Asymmetrica.Runtime available: false
+--- PASS: TestBridge_IsAvailable (0.00s)
+=== RUN   TestBridge_GetStatus
+--- PASS: TestBridge_GetStatus (0.00s)
+=== RUN   TestBridge_CustomURL
+--- PASS: TestBridge_CustomURL (3.42s)
+PASS
+ok  	github.com/asymmetrica/urbanlens/pkg/office	4.942s
+=== RUN   TestPlugin_New
+--- PASS: TestPlugin_New (0.00s)
+=== RUN   TestPlugin_GetManifest
+--- PASS: TestPlugin_GetManifest (0.00s)
+=== RUN   TestPlugin_GetToolDefinitions
+--- PASS: TestPlugin_GetToolDefinitions (0.00s)
+=== RUN   TestPlugin_GetStatus
+--- PASS: TestPlugin_GetStatus (0.00s)
+PASS
+ok  	github.com/asymmetrica/urbanlens/pkg/opencode	0.730s
+?   	github.com/asymmetrica/urbanlens/pkg/orchestrator	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/reasoning	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/research	[no test files]
+FAIL	github.com/asymmetrica/urbanlens/pkg/streaming [build failed]
+?   	github.com/asymmetrica/urbanlens/pkg/swarm	[no test files]
+=== RUN   TestWhisperClient_Status
+--- PASS: TestWhisperClient_Status (0.08s)
+=== RUN   TestWhisperClient_SupportedLanguages
+--- PASS: TestWhisperClient_SupportedLanguages (0.08s)
+=== RUN   TestDetectLanguageFromText
+=== RUN   TestDetectLanguageFromText/en
+=== RUN   TestDetectLanguageFromText/hi
+=== RUN   TestDetectLanguageFromText/ta
+=== RUN   TestDetectLanguageFromText/te
+=== RUN   TestDetectLanguageFromText/kn
+--- PASS: TestDetectLanguageFromText (0.00s)
+    --- PASS: TestDetectLanguageFromText/en (0.00s)
+    --- PASS: TestDetectLanguageFromText/hi (0.00s)
+    --- PASS: TestDetectLanguageFromText/ta (0.00s)
+    --- PASS: TestDetectLanguageFromText/te (0.00s)
+    --- PASS: TestDetectLanguageFromText/kn (0.00s)
+=== RUN   TestGenerateSRT
+--- PASS: TestGenerateSRT (0.00s)
+PASS
+ok  	github.com/asymmetrica/urbanlens/pkg/transcription	1.111s
+?   	github.com/asymmetrica/urbanlens/pkg/urban	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/vedic	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/verification	[no test files]
+=== RUN   TestVQC_Initialization
+=== RUN   TestVQC_Initialization/GPUAccelerator_Creation
+=== RUN   TestVQC_Initialization/GPUAccelerator_StatusCheck
+    vqc_gpu_test.go:61: GPU Status: map[backend:CPU (fallback) gpu_available:false stats:map[cpu_ops:0 gpu_ops:0 ops_per_second:0 total_ops:0]]
+=== RUN   TestVQC_Initialization/QuaternionPrimitives_Available
+--- PASS: TestVQC_Initialization (0.00s)
+    --- PASS: TestVQC_Initialization/GPUAccelerator_Creation (0.00s)
+    --- PASS: TestVQC_Initialization/GPUAccelerator_StatusCheck (0.00s)
+    --- PASS: TestVQC_Initialization/QuaternionPrimitives_Available (0.00s)
+=== RUN   TestVQC_QuaternionMultiplication
+=== RUN   TestVQC_QuaternionMultiplication/Identity_Multiplication
+=== RUN   TestVQC_QuaternionMultiplication/NonCommutative_Property
+    vqc_gpu_test.go:116: Verified: q1 × q2 ≠ q2 × q1 (non-commutative)
+=== RUN   TestVQC_QuaternionMultiplication/Batch_Multiplication
+--- PASS: TestVQC_QuaternionMultiplication (0.00s)
+    --- PASS: TestVQC_QuaternionMultiplication/Identity_Multiplication (0.00s)
+    --- PASS: TestVQC_QuaternionMultiplication/NonCommutative_Property (0.00s)
+    --- PASS: TestVQC_QuaternionMultiplication/Batch_Multiplication (0.00s)
+=== RUN   TestVQC_QuaternionNormalization
+=== RUN   TestVQC_QuaternionNormalization/Normalize_ArbitraryQuaternion
+=== RUN   TestVQC_QuaternionNormalization/Normalize_ZeroQuaternion
+=== RUN   TestVQC_QuaternionNormalization/Batch_Normalization
+--- PASS: TestVQC_QuaternionNormalization (0.00s)
+    --- PASS: TestVQC_QuaternionNormalization/Normalize_ArbitraryQuaternion (0.00s)
+    --- PASS: TestVQC_QuaternionNormalization/Normalize_ZeroQuaternion (0.00s)
+    --- PASS: TestVQC_QuaternionNormalization/Batch_Normalization (0.00s)
+=== RUN   TestVQC_SLERP_Interpolation
+=== RUN   TestVQC_SLERP_Interpolation/SLERP_Endpoints
+=== RUN   TestVQC_SLERP_Interpolation/SLERP_Midpoint
+=== RUN   TestVQC_SLERP_Interpolation/Batch_SLERP
+--- PASS: TestVQC_SLERP_Interpolation (0.00s)
+    --- PASS: TestVQC_SLERP_Interpolation/SLERP_Endpoints (0.00s)
+    --- PASS: TestVQC_SLERP_Interpolation/SLERP_Midpoint (0.00s)
+    --- PASS: TestVQC_SLERP_Interpolation/Batch_SLERP (0.00s)
+=== RUN   TestVQC_BatchProcessing
+=== RUN   TestVQC_BatchProcessing/Williams_OptimalBatchSize
+=== RUN   TestVQC_BatchProcessing/Williams_BatchOptimizer
+    vqc_gpu_test.go:315: Processed 10K items using Williams batching
+--- PASS: TestVQC_BatchProcessing (0.00s)
+    --- PASS: TestVQC_BatchProcessing/Williams_OptimalBatchSize (0.00s)
+    --- PASS: TestVQC_BatchProcessing/Williams_BatchOptimizer (0.00s)
+=== RUN   TestVQC_DigitalRootFiltering
+=== RUN   TestVQC_DigitalRootFiltering/DigitalRoot_BasicProperties
+=== RUN   TestVQC_DigitalRootFiltering/DigitalRoot_Filtering_88_9_Percent
+    vqc_gpu_test.go:359: Filtered 10000 → 1111 (elimination ratio: 88.89%)
+--- PASS: TestVQC_DigitalRootFiltering (0.00s)
+    --- PASS: TestVQC_DigitalRootFiltering/DigitalRoot_BasicProperties (0.00s)
+    --- PASS: TestVQC_DigitalRootFiltering/DigitalRoot_Filtering_88_9_Percent (0.00s)
+=== RUN   TestVQC_Performance_1M_Ops
+    vqc_gpu_test.go:398: Starting 1M SLERP operations...
+    vqc_gpu_test.go:406: ✅ 1M SLERP operations completed in 36.1132ms
+    vqc_gpu_test.go:407: ✅ Throughput: 27690705.89 ops/sec (27.69 M ops/sec)
+    vqc_gpu_test.go:410: Stats: &{TotalOps:1000000 GPUOps:0 CPUOps:1000000 TotalDuration:36.1132ms OpsPerSecond:2.7690705891474586e+07}
+--- PASS: TestVQC_Performance_1M_Ops (0.19s)
+=== RUN   TestVQC_Performance_10M_Ops
+    vqc_gpu_test.go:437: Starting 10M SLERP operations (10 batches of 1000000)...
+    vqc_gpu_test.go:456:   Batch 1/10 complete (1000000 total ops)
+    vqc_gpu_test.go:456:   Batch 3/10 complete (3000000 total ops)
+    vqc_gpu_test.go:456:   Batch 5/10 complete (5000000 total ops)
+    vqc_gpu_test.go:456:   Batch 7/10 complete (7000000 total ops)
+    vqc_gpu_test.go:456:   Batch 9/10 complete (9000000 total ops)
+    vqc_gpu_test.go:463: ✅ 10M SLERP operations completed in 1.886766s
+    vqc_gpu_test.go:464: ✅ Throughput: 5.30 M ops/sec
+    vqc_gpu_test.go:467: Stats: &{TotalOps:10000000 GPUOps:0 CPUOps:10000000 TotalDuration:210.4261ms OpsPerSecond:4.752262195611666e+07}
+    vqc_gpu_test.go:473: Current: 5.30 M ops/sec, Target: 10 M ops/sec
+--- PASS: TestVQC_Performance_10M_Ops (1.89s)
+=== RUN   TestVQC_Throughput_OpsPerSecond
+    vqc_gpu_test.go:492: Measuring throughput for 5s...
+    vqc_gpu_test.go:511: ✅ Sustained throughput: 5828000.00 ops/sec (5.83 M ops/sec)
+    vqc_gpu_test.go:515: ✅ Stats OpsPerSecond: 54764409.67
+    vqc_gpu_test.go:516: ✅ GPU available: false
+--- PASS: TestVQC_Throughput_OpsPerSecond (5.00s)
+=== RUN   TestVQC_MemoryEfficiency
+    vqc_gpu_test.go:549: ✅ Processed 100000 pairs
+    vqc_gpu_test.go:550: ✅ Estimated memory: 4.58 MB
+    vqc_gpu_test.go:551: ✅ Memory per operation: 48 bytes
+    vqc_gpu_test.go:556: ✅ Williams batching would reduce memory by 19.04x
+--- PASS: TestVQC_MemoryEfficiency (0.01s)
+=== RUN   TestVQC_GPUAcceleration_Available
+    vqc_gpu_test.go:568: GPU Acceleration Available: false
+    vqc_gpu_test.go:576: Backend: CPU (fallback)
+    vqc_gpu_test.go:581: ℹ️  GPU not available, using CPU fallback (expected on most dev machines)
+--- PASS: TestVQC_GPUAcceleration_Available (0.00s)
+=== RUN   TestVQC_GPUvsCPU_Speedup
+    vqc_gpu_test.go:594: GPU not available, skipping speedup test
+--- SKIP: TestVQC_GPUvsCPU_Speedup (0.00s)
+=== RUN   TestVQC_Integration_WithSonars
+=== RUN   TestVQC_Integration_WithSonars/ConversationEnhancer_Integration
+    vqc_gpu_test.go:667: Conversation processed successfully
+    vqc_gpu_test.go:668: User state: UserState[Coherence=0.54, Focus=0.84, Creativity=0.00, Persistence=0.07]
+    vqc_gpu_test.go:669: Pacing: focused (intensity: 0.90)
+=== RUN   TestVQC_Integration_WithSonars/ThreeRegime_Stability
+    vqc_gpu_test.go:694: Warning: Damping may need tuning, R3 = 0.19
+=== RUN   TestVQC_Integration_WithSonars/GPU_Accelerated_Sonar_Processing
+    vqc_gpu_test.go:715: Processed 10000 sonar samples in 0s
+    vqc_gpu_test.go:716: Throughput: +Inf samples/sec
+--- PASS: TestVQC_Integration_WithSonars (0.00s)
+    --- PASS: TestVQC_Integration_WithSonars/ConversationEnhancer_Integration (0.00s)
+    --- PASS: TestVQC_Integration_WithSonars/ThreeRegime_Stability (0.00s)
+    --- PASS: TestVQC_Integration_WithSonars/GPU_Accelerated_Sonar_Processing (0.00s)
+=== RUN   TestWilliamsOptimizer
+=== RUN   TestWilliamsOptimizer/OptimalBatchSize
+=== RUN   TestWilliamsOptimizer/SavingsRatio
+    vqc_test.go:41: Savings ratio threshold needs calibration
+=== RUN   TestWilliamsOptimizer/OptimizeBatch
+--- PASS: TestWilliamsOptimizer (0.00s)
+    --- PASS: TestWilliamsOptimizer/OptimalBatchSize (0.00s)
+    --- SKIP: TestWilliamsOptimizer/SavingsRatio (0.00s)
+    --- PASS: TestWilliamsOptimizer/OptimizeBatch (0.00s)
+=== RUN   TestDigitalRoot
+=== RUN   TestDigitalRoot/BasicProperties
+=== RUN   TestDigitalRoot/ArithmeticPreservation
+=== RUN   TestDigitalRoot/FilteringEfficiency
+=== RUN   TestDigitalRoot/ClusterConsistency
+--- PASS: TestDigitalRoot (0.00s)
+    --- PASS: TestDigitalRoot/BasicProperties (0.00s)
+    --- PASS: TestDigitalRoot/ArithmeticPreservation (0.00s)
+    --- PASS: TestDigitalRoot/FilteringEfficiency (0.00s)
+    --- PASS: TestDigitalRoot/ClusterConsistency (0.00s)
+=== RUN   TestThreeRegime
+=== RUN   TestThreeRegime/Normalization
+=== RUN   TestThreeRegime/TargetDistribution
+=== RUN   TestThreeRegime/StabilityDetection
+=== RUN   TestThreeRegime/Convergence
+=== RUN   TestThreeRegime/Damping
+--- PASS: TestThreeRegime (0.00s)
+    --- PASS: TestThreeRegime/Normalization (0.00s)
+    --- PASS: TestThreeRegime/TargetDistribution (0.00s)
+    --- PASS: TestThreeRegime/StabilityDetection (0.00s)
+    --- PASS: TestThreeRegime/Convergence (0.00s)
+    --- PASS: TestThreeRegime/Damping (0.00s)
+=== RUN   TestUserQuaternion
+=== RUN   TestUserQuaternion/Normalization
+=== RUN   TestUserQuaternion/MessageAnalysis
+=== RUN   TestUserQuaternion/MessageToQuaternion
+=== RUN   TestUserQuaternion/RegimeConversion
+=== RUN   TestUserQuaternion/Evolution
+--- PASS: TestUserQuaternion (0.00s)
+    --- PASS: TestUserQuaternion/Normalization (0.00s)
+    --- PASS: TestUserQuaternion/MessageAnalysis (0.00s)
+    --- PASS: TestUserQuaternion/MessageToQuaternion (0.00s)
+    --- PASS: TestUserQuaternion/RegimeConversion (0.00s)
+    --- PASS: TestUserQuaternion/Evolution (0.00s)
+=== RUN   TestSATOrigami
+    vqc_test.go:329: SAT origami constants need calibration
+--- SKIP: TestSATOrigami (0.00s)
+=== RUN   TestConversationEnhancer
+=== RUN   TestConversationEnhancer/Initialization
+=== RUN   TestConversationEnhancer/MessageProcessing
+=== RUN   TestConversationEnhancer/StabilityMonitoring
+=== RUN   TestConversationEnhancer/Analytics
+--- PASS: TestConversationEnhancer (0.00s)
+    --- PASS: TestConversationEnhancer/Initialization (0.00s)
+    --- PASS: TestConversationEnhancer/MessageProcessing (0.00s)
+    --- PASS: TestConversationEnhancer/StabilityMonitoring (0.00s)
+    --- PASS: TestConversationEnhancer/Analytics (0.00s)
+=== RUN   TestFullIntegration
+=== RUN   TestFullIntegration/ConversationWorkflow
+=== RUN   TestFullIntegration/EntityOptimization
+--- PASS: TestFullIntegration (0.00s)
+    --- PASS: TestFullIntegration/ConversationWorkflow (0.00s)
+    --- PASS: TestFullIntegration/EntityOptimization (0.00s)
+PASS
+ok  	github.com/asymmetrica/urbanlens/pkg/vqc	7.867s
+?   	github.com/asymmetrica/urbanlens/scripts	[no test files]
+=== RUN   TestHealthChecker
+=== RUN   TestHealthChecker/QuickCheck
+=== RUN   TestHealthChecker/FullCheck
+--- PASS: TestHealthChecker (0.21s)
+    --- PASS: TestHealthChecker/QuickCheck (0.00s)
+    --- PASS: TestHealthChecker/FullCheck (0.21s)
+=== RUN   TestAPIResponses
+=== RUN   TestAPIResponses/JSON_Response
+=== RUN   TestAPIResponses/Error_Response
+=== RUN   TestAPIResponses/ToolUnavailable_Response
+--- PASS: TestAPIResponses (0.00s)
+    --- PASS: TestAPIResponses/JSON_Response (0.00s)
+    --- PASS: TestAPIResponses/Error_Response (0.00s)
+    --- PASS: TestAPIResponses/ToolUnavailable_Response (0.00s)
+=== RUN   TestFeatureRegistry
+=== RUN   TestFeatureRegistry/Register_and_Get
+=== RUN   TestFeatureRegistry/Unknown_Feature
+=== RUN   TestFeatureRegistry/IsAvailable
+--- PASS: TestFeatureRegistry (0.00s)
+    --- PASS: TestFeatureRegistry/Register_and_Get (0.00s)
+    --- PASS: TestFeatureRegistry/Unknown_Feature (0.00s)
+    --- PASS: TestFeatureRegistry/IsAvailable (0.00s)
+=== RUN   TestFeatureHelpers
+=== RUN   TestFeatureHelpers/PandocFeature_Available
+=== RUN   TestFeatureHelpers/PandocFeature_Unavailable
+=== RUN   TestFeatureHelpers/FFmpegFeature
+--- PASS: TestFeatureHelpers (0.00s)
+    --- PASS: TestFeatureHelpers/PandocFeature_Available (0.00s)
+    --- PASS: TestFeatureHelpers/PandocFeature_Unavailable (0.00s)
+    --- PASS: TestFeatureHelpers/FFmpegFeature (0.00s)
+PASS
+ok  	github.com/asymmetrica/urbanlens/tests	1.608s
+FAIL

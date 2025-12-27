@@ -22,7 +22,7 @@ import (
     "fmt"
     "log"
 
-    "github.com/asymm_urbanlens/urbanlens/pkg/verification"
+    "github.com/asymmetrica/urbanlens/pkg/verification"
 )
 
 func main() {
@@ -189,8 +189,8 @@ Score Range    | Grade      | Decision
 
 ```go
 import (
-    "github.com/asymm_urbanlens/urbanlens/pkg/reasoning"
-    "github.com/asymm_urbanlens/urbanlens/pkg/verification"
+    "github.com/asymmetrica/urbanlens/pkg/reasoning"
+    "github.com/asymmetrica/urbanlens/pkg/verification"
 )
 
 // Mathematical reasoning generates hypothesis

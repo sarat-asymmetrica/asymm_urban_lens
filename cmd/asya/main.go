@@ -77,8 +77,10 @@ func main() {
 
 	// Start HTTP server in goroutine
 	go func() {
-		fmt.Printf("\n🚀 ASYA server started on http://localhost%s\n", cfg.Port)
-		fmt.Println("\nEndpoints:")
+		fmt.Println()
+		fmt.Printf("🚀 ASYA server started on http://localhost%s\n", cfg.Port)
+		fmt.Println()
+		fmt.Println("Endpoints:")
 		fmt.Println("  GET  /                      - API info")
 		fmt.Println("  GET  /health                - Health check")
 		fmt.Println("  POST /api/sessions          - Create new conversation")
@@ -102,9 +104,12 @@ func main() {
 
 	// Wait for interrupt signal
 	<-stop
-	fmt.Println("\n\n👋 Shutting down ASYA gracefully...")
+	fmt.Println()
+	fmt.Println()
+	fmt.Println("👋 Shutting down ASYA gracefully...")
 	time.Sleep(500 * time.Millisecond)
-	fmt.Println("✨ Goodbye!\n")
+	fmt.Println("✨ Goodbye!")
+	fmt.Println()
 }
 
 func printBanner() {

@@ -12,7 +12,7 @@ package verification
 import (
 	"time"
 
-	"github.com/asymm_urbanlens/urbanlens/pkg/reasoning"
+	"github.com/asymmetrica/urbanlens/pkg/reasoning"
 )
 
 // VerificationResult captures outcome of fix verification

@@ -14,7 +14,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/asymm_urbanlens/urbanlens/pkg/reasoning"
+	"github.com/asymmetrica/urbanlens/pkg/reasoning"
 )
 
 // CompilationVerifier runs compiler and validates results

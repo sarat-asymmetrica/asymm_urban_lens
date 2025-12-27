@@ -18,7 +18,8 @@ func main() {
 		fmt.Println("⚠️  AIMLAPI_KEY not set. Set it to run real API calls.")
 		fmt.Println("   export AIMLAPI_KEY='your-key-here'")
 		fmt.Println()
-		fmt.Println("Running in DEMO MODE (no actual API calls)\n")
+		fmt.Println("Running in DEMO MODE (no actual API calls)")
+	fmt.Println()
 		demoMode()
 		return
 	}
@@ -30,7 +31,8 @@ func main() {
 func demoMode() {
 	fmt.Println("═══════════════════════════════════════════════════════════")
 	fmt.Println("  AIMLAPI Multi-Model Router - DEMO MODE")
-	fmt.Println("═══════════════════════════════════════════════════════════\n")
+	fmt.Println("═══════════════════════════════════════════════════════════")
+	fmt.Println()
 
 	client := aimlapi.NewClient("")
 
@@ -90,15 +92,18 @@ func demoMode() {
 	fmt.Println("   ✅ Exponential backoff retry")
 	fmt.Println("   ✅ Cost estimation and optimization")
 
-	fmt.Println("\n═══════════════════════════════════════════════════════════")
+	fmt.Println()
+	fmt.Println("═══════════════════════════════════════════════════════════")
 	fmt.Println("  Set AIMLAPI_KEY to run live API demo!")
-	fmt.Println("═══════════════════════════════════════════════════════════\n")
+	fmt.Println("═══════════════════════════════════════════════════════════")
+	fmt.Println()
 }
 
 func liveDemo(apiKey string) {
 	fmt.Println("═══════════════════════════════════════════════════════════")
 	fmt.Println("  AIMLAPI Multi-Model Router - LIVE DEMO")
-	fmt.Println("═══════════════════════════════════════════════════════════\n")
+	fmt.Println("═══════════════════════════════════════════════════════════")
+	fmt.Println()
 
 	client := aimlapi.NewClient(apiKey)
 	ctx := context.Background()
@@ -108,7 +113,8 @@ func liveDemo(apiKey string) {
 	if err := client.HealthCheck(ctx); err != nil {
 		log.Fatalf("Health check failed: %v", err)
 	}
-	fmt.Println("   ✅ AIMLAPI is healthy\n")
+	fmt.Println("   ✅ AIMLAPI is healthy")
+	fmt.Println()
 
 	// Test 2: Simple Chat
 	fmt.Println("💬 Simple Chat (gpt-4o-mini)...")
@@ -221,7 +227,8 @@ func liveDemo(apiKey string) {
 
 	fmt.Println("═══════════════════════════════════════════════════════════")
 	fmt.Println("  ALL TESTS COMPLETE! ✅")
-	fmt.Println("═══════════════════════════════════════════════════════════\n")
+	fmt.Println("═══════════════════════════════════════════════════════════")
+	fmt.Println()
 }
 
 // calculateDemoBatchSize demonstrates Williams batching calculation

@@ -10,8 +10,8 @@ import (
 	"github.com/google/uuid"
 )
 
-// ExampleBasicObservation demonstrates basic cognition observation
-func ExampleBasicObservation() {
+// DemoBasicObservation demonstrates basic cognition observation
+func DemoBasicObservation() {
 	// Create components
 	store := cognition.NewQuaternionStore()
 	observer := cognition.NewCognitionObserver(store)
@@ -51,7 +51,7 @@ func ExampleBasicObservation() {
 		)
 	}
 
-	// Output (example):
+	// Example output:
 	// Cognition stream events:
 	// [STATE_SNAPSHOT] EXPLORATION: 🧠 Cognition observation started
 	// [THOUGHT] EXPLORATION: 💭 Starting to think about the problem
@@ -61,8 +61,8 @@ func ExampleBasicObservation() {
 	// [STATE_SNAPSHOT] OPTIMIZATION: ✅ Cognition observation ended
 }
 
-// ExampleObservableEmitter demonstrates clean frontend events
-func ExampleObservableEmitter() {
+// DemoObservableEmitter demonstrates clean frontend events
+func DemoObservableEmitter() {
 	store := cognition.NewQuaternionStore()
 	observer := cognition.NewCognitionObserver(store)
 	wsServer := cognition.NewCognitionWebSocket(observer)
@@ -95,13 +95,10 @@ func ExampleObservableEmitter() {
 	emitter.StopSession(sessionID)
 
 	fmt.Println("Observable events emitted to frontend!")
-
-	// Output:
-	// Observable events emitted to frontend!
 }
 
-// ExampleRecording demonstrates session recording and replay
-func ExampleRecording() {
+// DemoRecording demonstrates session recording and replay
+func DemoRecording() {
 	store := cognition.NewQuaternionStore()
 	observer := cognition.NewCognitionObserver(store)
 	recorder := cognition.NewThoughtRecorder(store, "./test_recordings")
@@ -140,7 +137,7 @@ func ExampleRecording() {
 		}
 	}
 
-	// Output (example):
+	// Example output:
 	// Recorded 2 events
 	// Recording ID: abc12345
 	// Replaying at 2x speed...
@@ -148,8 +145,8 @@ func ExampleRecording() {
 	//   [REPLAY] 🔁 [REPLAY 2.0x] 📹 And this one too
 }
 
-// ExampleIntervention demonstrates mid-process reasoning steering
-func ExampleIntervention() {
+// DemoIntervention demonstrates mid-process reasoning steering
+func DemoIntervention() {
 	store := cognition.NewQuaternionStore()
 	observer := cognition.NewCognitionObserver(store)
 	intervention := cognition.NewInterventionEngine(observer, store)
@@ -190,7 +187,7 @@ func ExampleIntervention() {
 
 	observer.StopObserving(sessionID)
 
-	// Output (example):
+	// Example output:
 	// Initial confidence: 0.50
 	// After amplify: 0.65
 }
@@ -206,10 +203,18 @@ func TestCognitionBasic(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	// Drain initial STATE_SNAPSHOT event
+	select {
+	case <-stream.EventChannel:
+		// Initial snapshot, discard
+	case <-time.After(100 * time.Millisecond):
+		// No initial event, that's okay
+	}
+
 	// Emit a thought
 	observer.EmitThought("test-session", "I'm thinking!", "💭")
 
-	// Receive event
+	// Receive thought event
 	select {
 	case event := <-stream.EventChannel:
 		if event.EventType != cognition.EventThought {

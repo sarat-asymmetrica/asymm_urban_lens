@@ -12,7 +12,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/asymm_urbanlens/urbanlens/pkg/reasoning"
+	"github.com/asymmetrica/urbanlens/pkg/reasoning"
 )
 
 // OutputParser converts compiler output to structured errors

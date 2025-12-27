@@ -9,7 +9,7 @@ package verification
 import (
 	"strings"
 
-	"github.com/asymm_urbanlens/urbanlens/pkg/reasoning"
+	"github.com/asymmetrica/urbanlens/pkg/reasoning"
 )
 
 // RegressionDetector identifies bad fixes

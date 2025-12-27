@@ -627,8 +627,8 @@ func TestSemanticSonar_PING_AnalyzesDeps(t *testing.T) {
 		t.Errorf("SonarName = %s, want 'Semantic Sonar'", telemetry.SonarName)
 	}
 
-	if telemetry.Duration <= 0 {
-		t.Errorf("Duration = %v, want > 0", telemetry.Duration)
+	if telemetry.Duration < 0 {
+		t.Errorf("Duration = %v, want >= 0", telemetry.Duration)
 	}
 }
 

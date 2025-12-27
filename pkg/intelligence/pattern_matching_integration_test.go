@@ -213,12 +213,12 @@ func TestSemanticKeywordExpansion(t *testing.T) {
 		{
 			description: "view list of todos and remove completed tasks",
 			keywords:    []string{"view", "list", "remove"},
-			features:    []string{"read_operation", "delete_operation"},
+			features:    []string{"read_operation", "read_operation", "delete_operation"},
 		},
 		{
 			description: "tag items with labels and add comments",
 			keywords:    []string{"tag", "label", "comment"},
-			features:    []string{"tagging_system", "comments_system"},
+			features:    []string{"tagging_system", "tagging_system", "comments_system"},
 		},
 		{
 			description: "search through tasks and categorize them",

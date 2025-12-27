@@ -1,0 +1,205 @@
+?   	github.com/asymmetrica/urbanlens/cmd/aimlapi_demo	[no test files]
+?   	github.com/asymmetrica/urbanlens/cmd/asya	[no test files]
+?   	github.com/asymmetrica/urbanlens/cmd/quality-gate	[no test files]
+?   	github.com/asymmetrica/urbanlens/cmd/urbanlens	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/aiml	[no test files]
+ok  	github.com/asymmetrica/urbanlens/pkg/aimlapi	(cached)
+?   	github.com/asymmetrica/urbanlens/pkg/alchemy	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/algorithms	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/api	[no test files]
+ok  	github.com/asymmetrica/urbanlens/pkg/chat	(cached)
+?   	github.com/asymmetrica/urbanlens/pkg/climate	[no test files]
+ok  	github.com/asymmetrica/urbanlens/pkg/cognition	4.786s
+?   	github.com/asymmetrica/urbanlens/pkg/config	[no test files]
+ok  	github.com/asymmetrica/urbanlens/pkg/conversation	(cached)
+?   	github.com/asymmetrica/urbanlens/pkg/cultural	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/dilr	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/ecosystem	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/generation	[no test files]
+ok  	github.com/asymmetrica/urbanlens/pkg/gpu	(cached)
+?   	github.com/asymmetrica/urbanlens/pkg/healing	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/healing/parsers	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/i18n	[no test files]
+--- FAIL: TestWilliamsThresholdEvolution (0.00s)
+    pattern_matching_integration_test.go:260: Williams Threshold Evolution:
+    pattern_matching_integration_test.go:263:   t=1: threshold=0.00, efficiency=+Infx
+    pattern_matching_integration_test.go:263:   t=5: threshold=5.19, efficiency=0.96x
+    pattern_matching_integration_test.go:263:   t=10: threshold=10.50, efficiency=0.95x
+    pattern_matching_integration_test.go:263:   t=20: threshold=19.33, efficiency=1.03x
+    pattern_matching_integration_test.go:263:   t=50: threshold=39.91, efficiency=1.25x
+    pattern_matching_integration_test.go:263:   t=100: threshold=66.44, efficiency=1.51x
+    pattern_matching_integration_test.go:263:   t=200: threshold=108.10, efficiency=1.85x
+    pattern_matching_integration_test.go:276: Threshold not sublinear: 5.19 >= 5
+    pattern_matching_integration_test.go:276: Threshold not sublinear: 10.50 >= 10
+--- FAIL: TestDriftCalculateConfidenceMultiplier (0.00s)
+    --- FAIL: TestDriftCalculateConfidenceMultiplier/Moderate_fields,_optimization (0.00s)
+        williams_drift_detector_test.go:149: CalculateConfidenceMultiplier(10, optimization) = 0.8555, want [0.8600, 0.9000]
+    --- FAIL: TestDriftCalculateConfidenceMultiplier/Many_fields,_stabilization (0.00s)
+        williams_drift_detector_test.go:149: CalculateConfidenceMultiplier(20, stabilization) = 0.8560, want [0.8800, 0.9500]
+    --- FAIL: TestDriftCalculateConfidenceMultiplier/Very_many_fields,_stabilization (0.00s)
+        williams_drift_detector_test.go:149: CalculateConfidenceMultiplier(50, stabilization) = 0.8571, want [0.9000, 1.0000]
+--- FAIL: TestShouldRelaxConfidence (0.00s)
+    --- FAIL: TestShouldRelaxConfidence/Higher_than_baseline_(NO_RELAX) (0.00s)
+        williams_drift_detector_test.go:232: ShouldRelax = true, want false (drift: 12.53%)
+        williams_drift_detector_test.go:239: RelaxedThreshold = 0.83, want [0.80, 0.80]
+--- FAIL: TestCheckMergeDrift (0.00s)
+    --- FAIL: TestCheckMergeDrift/Very_close_to_baseline_(APPROVE) (0.00s)
+        williams_drift_detector_test.go:305: Approved = false, want true (drift: 0.00%, threshold: 0.00%)
+    --- FAIL: TestCheckMergeDrift/Slightly_below_baseline_(APPROVE) (0.00s)
+        williams_drift_detector_test.go:305: Approved = false, want true (drift: 10.00%, threshold: 0.00%)
+    --- FAIL: TestCheckMergeDrift/Slightly_above_baseline_(APPROVE) (0.00s)
+        williams_drift_detector_test.go:305: Approved = false, want true (drift: 10.00%, threshold: 0.00%)
+    --- FAIL: TestCheckMergeDrift/Moderately_below_baseline_(depends_on_Williams_threshold) (0.00s)
+        williams_drift_detector_test.go:305: Approved = false, want true (drift: 30.00%, threshold: 0.00%)
+--- FAIL: TestFibonacciCascade (0.00s)
+    --- FAIL: TestFibonacciCascade/Drift=3 (0.00s)
+        williams_drift_detector_test.go:415: Fibonacci Cascade: drift=3, threshold=0.78, want [0.70, 0.78]
+        williams_drift_detector_test.go:419: Drift=3: Relaxed 0.80 → 0.78 (7.5% drift)
+    --- FAIL: TestFibonacciCascade/Drift=7 (0.00s)
+        williams_drift_detector_test.go:415: Fibonacci Cascade: drift=7, threshold=0.76, want [0.60, 0.75]
+        williams_drift_detector_test.go:419: Drift=7: Relaxed 0.80 → 0.76 (17.5% drift)
+    --- FAIL: TestFibonacciCascade/Drift=10 (0.00s)
+        williams_drift_detector_test.go:415: Fibonacci Cascade: drift=10, threshold=0.75, want [0.50, 0.70]
+        williams_drift_detector_test.go:419: Drift=10: Relaxed 0.80 → 0.75 (25.1% drift)
+--- FAIL: TestCalculateConfidenceMultiplier (0.00s)
+    williams_space_optimizer_test.go:106: Fields=1: Expected confidence in [0.85, 0.86], got 0.86
+    williams_space_optimizer_test.go:106: Fields=5: Expected confidence in [0.87, 0.90], got 0.86
+    williams_space_optimizer_test.go:106: Fields=10: Expected confidence in [0.90, 0.95], got 0.86
+    williams_space_optimizer_test.go:106: Fields=15: Expected confidence in [0.95, 1.00], got 0.86
+    williams_space_optimizer_test.go:106: Fields=20: Expected confidence in [0.98, 1.00], got 0.87
+--- FAIL: TestOptimizeBatchSize (0.00s)
+    --- FAIL: TestOptimizeBatchSize/100_items,_small_memory_(constrained) (0.00s)
+        williams_space_optimizer_test.go:151: Expected batch size in [1, 2], got 66
+--- FAIL: TestBoostOCRConfidence (0.00s)
+    --- FAIL: TestBoostOCRConfidence/High_base,_high_extraction (0.00s)
+        williams_space_optimizer_test.go:298: Expected boosted confidence in [0.90, 1.00], got 0.78
+    --- FAIL: TestBoostOCRConfidence/Low_base,_low_extraction (0.00s)
+        williams_space_optimizer_test.go:298: Expected boosted confidence in [0.59, 0.61], got 0.62
+FAIL
+FAIL	github.com/asymmetrica/urbanlens/pkg/intelligence	64.912s
+ok  	github.com/asymmetrica/urbanlens/pkg/intelligence/sonars	0.983s
+ok  	github.com/asymmetrica/urbanlens/pkg/isomorphism	(cached)
+ok  	github.com/asymmetrica/urbanlens/pkg/knowledge	(cached)
+ok  	github.com/asymmetrica/urbanlens/pkg/lean	(cached)
+--- FAIL: TestCalculateCommitScore (0.00s)
+    --- FAIL: TestCalculateCommitScore/good_commit (0.00s)
+        confidence_scorer_test.go:139: CommitScore("Fixed error handling in user authentication") = 0.950, want [0.500, 0.800]
+        confidence_scorer_test.go:142: Commit 'Fixed error handling in user authentication' score: 0.950
+--- FAIL: TestCalculateFrequencyScore (0.00s)
+    --- FAIL: TestCalculateFrequencyScore/freq=\x01 (0.00s)
+        confidence_scorer_test.go:216: FrequencyScore(1, 10) = 0.495, want [0.300, 0.300]
+    --- FAIL: TestCalculateFrequencyScore/freq=\x03 (0.00s)
+        confidence_scorer_test.go:216: FrequencyScore(3, 10) = 0.691, want [0.500, 0.650]
+    --- FAIL: TestCalculateFrequencyScore/freq=\x05 (0.00s)
+        confidence_scorer_test.go:216: FrequencyScore(5, 10) = 0.805, want [0.650, 0.750]
+    --- FAIL: TestCalculateFrequencyScore/freq=_ (0.00s)
+        confidence_scorer_test.go:216: FrequencyScore(10, 10) = 0.975, want [0.800, 0.950]
+Applied migration 1: initial_schema
+✓ Database created with schema
+✓ Error 1 classified: 8:f149d6e9 (type: compile, DR: 8)
+✓ Error 2 classified: 8:f149d6e9 (type: compile, DR: 8)
+✓ Error 3 classified: 3:895c404a (type: compile, DR: 3)
+✓ Same error different files → SAME signature (VERIFIED)
+✓ Pattern added to database (ID: 1)
+✓ Pattern found: import "fmt" (confidence: 0.95)
+✓ Application recorded (outcome: success)
+✓ Pattern success count incremented
+
+=== AGENT 0.3 COMPLETE DEMO: ALL SYSTEMS OPERATIONAL ===
+--- FAIL: TestRemoveFilePaths (0.00s)
+    error_normalizer_test.go:28: RemoveFilePaths("github.com/user/repo/pkg/file.go:10") = "<FILE>:10", want "github.com/user/repo/pkg/<FILE>:10"
+--- FAIL: TestRemoveVariableNames (0.00s)
+    error_normalizer_test.go:68: RemoveVariableNames("cannot use userName") = "cannot use userName", want "cannot use <VAR>"
+--- FAIL: TestRemovePackagePaths (0.00s)
+    error_normalizer_test.go:108: RemovePackagePaths("gopkg.in/yaml.v2") = "gopkg.in/yaml.v2", want "<PKG>"
+Applied migration 1: initial_schema
+Applied migration 1: initial_schema
+Applied migration 1: initial_schema
+Applied migration 1: initial_schema
+Applied migration 1: initial_schema
+--- FAIL: TestMergePatterns_UpdateExisting (0.02s)
+    merger_test.go:154: Expected frequency 8 (5+3), got 6
+    merger_test.go:159: Expected success count 7 (4+3), got 0
+    merger_test.go:164: Expected 4 repo sources, got 2
+Applied migration 1: initial_schema
+Applied migration 1: initial_schema
+Applied migration 1: initial_schema
+Applied migration 1: initial_schema
+Applied migration 1: initial_schema
+Applied migration 1: initial_schema
+Applied migration 1: initial_schema
+--- FAIL: TestFindPatternsWithMinConfidence (0.03s)
+    pattern_db_test.go:322: Pattern with confidence 0.3 should not be found (minConfidence=0.5), got 2
+--- FAIL: TestPatternLearner_LearnSuccess (0.00s)
+    pattern_learner_test.go:62: Failed to add pattern: failed to add pattern: SQL logic error: no such table: patterns (1)
+--- FAIL: TestPatternLearner_LearnSuccess_ConfidenceCapped (0.00s)
+panic: runtime error: invalid memory address or nil pointer dereference [recovered, repanicked]
+[signal 0xc0000005 code=0x0 addr=0x68 pc=0x7ff62a9545ba]
+
+goroutine 186 [running]:
+testing.tRunner.func1.2({0x7ff62a99e3c0, 0x7ff62ad2a850})
+	C:/Program Files/Go/src/testing/testing.go:1872 +0x239
+testing.tRunner.func1()
+	C:/Program Files/Go/src/testing/testing.go:1875 +0x35b
+panic({0x7ff62a99e3c0?, 0x7ff62ad2a850?})
+	C:/Program Files/Go/src/runtime/panic.go:783 +0x132
+github.com/asymmetrica/urbanlens/pkg/learning.TestPatternLearner_LearnSuccess_ConfidenceCapped(0xc000086700)
+	C:/Projects/asymm_urbanlens/pkg/learning/pattern_learner_test.go:143 +0x3ba
+testing.tRunner(0xc000086700, 0x7ff62aa117a8)
+	C:/Program Files/Go/src/testing/testing.go:1934 +0xc3
+created by testing.(*T).Run in goroutine 1
+	C:/Program Files/Go/src/testing/testing.go:1997 +0x44b
+FAIL	github.com/asymmetrica/urbanlens/pkg/learning	5.836s
+?   	github.com/asymmetrica/urbanlens/pkg/learning/parsers	[no test files]
+ok  	github.com/asymmetrica/urbanlens/pkg/linguistics	(cached) [no tests to run]
+--- FAIL: TestNormalizeSolution (0.00s)
+    matching_test.go:152: NormalizeSolution("if err != nil { return fmt.Errorf(\"error: %v\", err) }") missing "<FUNC>", got: "if <VAR> != nil { return <VAR>.<TYPE>(<LITERAL>, <VAR>) }"
+--- FAIL: TestTemplateEngine_ExtractBindings (0.00s)
+    matching_test.go:186: ExtractBindings failed: placeholder count mismatch: expected 2, got 3
+--- FAIL: Example_basicFuzzyMatching (0.00s)
+got:
+Found 2 match(es)
+Best match: error_check (score: 1.00)
+want:
+Found 1 match(es)
+Best match: error_check (score: 0.94)
+--- FAIL: Example_templateEngine (0.00s)
+got:
+Instantiated: if err != nil { return fmt.Errorf(err) }
+Extracted bindings: var=<nil>, func=<nil>
+want:
+Instantiated: if err != nil { return fmt.Errorf(err) }
+Extracted bindings: var=err, func=fmt.Errorf
+--- FAIL: Example_patternRanking (0.00s)
+got:
+Rank 1: high_quality (quality: 0.900)
+Rank 2: low_quality (quality: 0.116)
+want:
+Rank 1: high_quality (quality: 0.547)
+Rank 2: low_quality (quality: 0.030)
+--- FAIL: Example_multiTierMatching (0.00s)
+got:
+Tier 1 (exact): algorithm=exact, score=1.00
+want:
+Tier 1 (exact): algorithm=exact, score=1.00
+Tier 2 (fuzzy): algorithm=fuzzy, score=1.00
+FAIL
+FAIL	github.com/asymmetrica/urbanlens/pkg/matching	0.996s
+?   	github.com/asymmetrica/urbanlens/pkg/math	[no test files]
+ok  	github.com/asymmetrica/urbanlens/pkg/media	(cached)
+ok  	github.com/asymmetrica/urbanlens/pkg/ocr	(cached)
+ok  	github.com/asymmetrica/urbanlens/pkg/office	(cached)
+ok  	github.com/asymmetrica/urbanlens/pkg/opencode	(cached)
+?   	github.com/asymmetrica/urbanlens/pkg/orchestrator	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/reasoning	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/research	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/streaming	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/swarm	[no test files]
+ok  	github.com/asymmetrica/urbanlens/pkg/transcription	(cached)
+?   	github.com/asymmetrica/urbanlens/pkg/urban	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/vedic	[no test files]
+?   	github.com/asymmetrica/urbanlens/pkg/verification	[no test files]
+ok  	github.com/asymmetrica/urbanlens/pkg/vqc	(cached)
+?   	github.com/asymmetrica/urbanlens/scripts	[no test files]
+ok  	github.com/asymmetrica/urbanlens/tests	(cached)
+FAIL
