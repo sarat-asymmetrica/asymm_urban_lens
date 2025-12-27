@@ -1,0 +1,1 @@
+Replace executeChatRequest with executeChatRequestWithTimeout in utils.go line 104

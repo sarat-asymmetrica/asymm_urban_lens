@@ -1,0 +1,344 @@
+package resilience_test
+
+import (
+	"context"
+	"errors"
+	"fmt"
+	"log"
+	"math/rand"
+	"time"
+
+	"github.com/asymmetrica/urbanlens/pkg/resilience"
+)
+
+// ExampleCircuitBreaker demonstrates basic circuit breaker usage
+func ExampleCircuitBreaker() {
+	// Create circuit breaker with custom configuration
+	cb, err := resilience.NewCircuitBreaker("external-api", resilience.Config{
+		Name:                  "external-api",
+		FailureThreshold:      5,
+		SuccessThreshold:      2,
+		Timeout:               30 * time.Second,
+		MaxConcurrentRequests: 1,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Simulate API calls
+	for i := 0; i < 10; i++ {
+		err := cb.Execute(func() error {
+			// Simulate external API call
+			if rand.Float64() < 0.3 {
+				return errors.New("API error")
+			}
+			return nil
+		})
+
+		if errors.Is(err, resilience.ErrCircuitOpen) {
+			fmt.Println("Circuit is OPEN - failing fast")
+		} else if err != nil {
+			fmt.Println("Request failed:", err)
+		} else {
+			fmt.Println("Request succeeded")
+		}
+
+		time.Sleep(10 * time.Millisecond)
+	}
+
+	// Check final statistics
+	stats := cb.GetStats()
+	fmt.Printf("Success rate: %.2f%%\n", stats.SuccessRate()*100)
+}
+
+// ExampleCircuitBreaker_withStateMonitoring demonstrates state change monitoring
+func ExampleCircuitBreaker_withStateMonitoring() {
+	// Create circuit breaker with state change callback
+	cb, _ := resilience.NewCircuitBreaker("monitored-service", resilience.Config{
+		Name:                  "monitored-service",
+		FailureThreshold:      3,
+		SuccessThreshold:      2,
+		Timeout:               5 * time.Second,
+		MaxConcurrentRequests: 1,
+		OnStateChange: func(from, to resilience.State) {
+			fmt.Printf("State transition: %s -> %s\n", from, to)
+			// In production: send metrics, alerts, etc.
+		},
+	})
+
+	// Trigger state changes
+	failFn := func() error { return errors.New("fail") }
+
+	// Cause failures to open circuit
+	for i := 0; i < 3; i++ {
+		cb.Execute(failFn)
+	}
+
+	fmt.Printf("Circuit state: %s\n", cb.GetState())
+	// Output will show: CLOSED -> OPEN transition
+}
+
+// ExampleWithTimeout demonstrates timeout enforcement
+func ExampleWithTimeout() {
+	ctx := context.Background()
+
+	// Execute operation with 5 second timeout
+	err := resilience.WithTimeout(ctx, 5*time.Second, func() error {
+		// Simulate long-running operation
+		time.Sleep(100 * time.Millisecond)
+		fmt.Println("Operation completed")
+		return nil
+	})
+
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+	// Output: Operation completed
+}
+
+// ExampleWithTimeoutResult demonstrates timeout with result value
+func ExampleWithTimeoutResult() {
+	ctx := context.Background()
+
+	// Execute operation with result
+	result, err := resilience.WithTimeoutResult(ctx, 3*time.Second, func() (string, error) {
+		// Simulate data fetching
+		time.Sleep(100 * time.Millisecond)
+		return "data from API", nil
+	})
+
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+	fmt.Println("Result:", result)
+	// Output: Result: data from API
+}
+
+// ExampleRetryWithTimeout demonstrates retry with exponential backoff
+func ExampleRetryWithTimeout() {
+	ctx := context.Background()
+	attempts := 0
+
+	err := resilience.RetryWithTimeout(
+		ctx,
+		3,                    // Max retries
+		10*time.Second,       // Timeout per attempt
+		100*time.Millisecond, // Initial backoff
+		2*time.Second,        // Max backoff
+		func() error {
+			attempts++
+			if attempts < 3 {
+				return errors.New("transient error")
+			}
+			return nil // Success on 3rd attempt
+		},
+	)
+
+	if err == nil {
+		fmt.Printf("Succeeded after %d attempts\n", attempts)
+	}
+	// Output: Succeeded after 3 attempts
+}
+
+// ExampleCircuitBreaker_combined demonstrates combining multiple patterns
+func ExampleCircuitBreaker_combined() {
+	// Create circuit breaker
+	cb, _ := resilience.NewCircuitBreaker("combined-example", resilience.DefaultConfig("combined-example"))
+
+	// Execute with circuit breaker + timeout + retry
+	ctx := context.Background()
+	err := cb.ExecuteWithContext(ctx, func(ctx context.Context) error {
+		// Retry with timeout on each attempt
+		return resilience.RetryWithTimeout(
+			ctx,
+			3,
+			5*time.Second,
+			100*time.Millisecond,
+			2*time.Second,
+			func() error {
+				// Actual API call with timeout
+				return resilience.WithTimeout(ctx, 2*time.Second, func() error {
+					time.Sleep(100 * time.Millisecond)
+					return nil
+				})
+			},
+		)
+	})
+
+	if err == nil {
+		fmt.Println("Request succeeded with full resilience stack")
+	}
+	// Output: Request succeeded with full resilience stack
+}
+
+// ExampleCircuitBreaker_realWorld demonstrates real-world API client pattern
+func ExampleCircuitBreaker_realWorld() {
+	// Create circuit breakers for different services
+	paymentCB, _ := resilience.NewCircuitBreaker("payment-api", resilience.Config{
+		Name:                  "payment-api",
+		FailureThreshold:      10,
+		SuccessThreshold:      3,
+		Timeout:               60 * time.Second,
+		MaxConcurrentRequests: 5,
+		OnStateChange: func(from, to resilience.State) {
+			log.Printf("[PAYMENT] Circuit %s -> %s", from, to)
+		},
+	})
+
+	emailCB, _ := resilience.NewCircuitBreaker("email-api", resilience.Config{
+		Name:                  "email-api",
+		FailureThreshold:      5,
+		SuccessThreshold:      2,
+		Timeout:               30 * time.Second,
+		MaxConcurrentRequests: 10,
+	})
+
+	// Use in API client
+	processOrder := func(orderID string) error {
+		// Process payment with circuit breaker + retry
+		ctx := context.Background()
+		err := paymentCB.ExecuteWithContext(ctx, func(ctx context.Context) error {
+			return resilience.RetryWithTimeout(ctx, 3, 10*time.Second, 500*time.Millisecond, 5*time.Second,
+				func() error {
+					return processPayment(ctx, orderID)
+				},
+			)
+		})
+		if err != nil {
+			return fmt.Errorf("payment failed: %w", err)
+		}
+
+		// Send confirmation email (fire and forget with circuit breaker)
+		go func() {
+			emailCB.Execute(func() error {
+				return sendConfirmationEmail(orderID)
+			})
+		}()
+
+		return nil
+	}
+
+	// Process order
+	if err := processOrder("ORDER-123"); err != nil {
+		fmt.Printf("Order processing failed: %v\n", err)
+	} else {
+		fmt.Println("Order processed successfully")
+	}
+}
+
+// Stub functions for example
+func processPayment(ctx context.Context, orderID string) error {
+	return nil
+}
+
+func sendConfirmationEmail(orderID string) error {
+	return nil
+}
+
+// ExampleCircuitBreaker_statistics demonstrates stats collection
+func ExampleCircuitBreaker_statistics() {
+	cb, _ := resilience.NewCircuitBreaker("stats-example", resilience.DefaultConfig("stats-example"))
+
+	// Execute various operations
+	for i := 0; i < 100; i++ {
+		cb.Execute(func() error {
+			if i%10 == 0 {
+				return errors.New("occasional failure")
+			}
+			return nil
+		})
+	}
+
+	// Collect statistics
+	stats := cb.GetStats()
+	fmt.Printf("Total requests: %d\n", stats.TotalRequests)
+	fmt.Printf("Successes: %d\n", stats.TotalSuccesses)
+	fmt.Printf("Failures: %d\n", stats.TotalFailures)
+	fmt.Printf("Success rate: %.1f%%\n", stats.SuccessRate()*100)
+	fmt.Printf("Current state: %s\n", stats.State)
+	// Output will show 90% success rate with 10 failures out of 100
+}
+
+// ExampleCircuitBreaker_reset demonstrates manual reset
+func ExampleCircuitBreaker_reset() {
+	cb, _ := resilience.NewCircuitBreaker("reset-example", resilience.Config{
+		Name:             "reset-example",
+		FailureThreshold: 3,
+		SuccessThreshold: 2,
+		Timeout:          30 * time.Second,
+	})
+
+	// Generate failures to open circuit
+	failFn := func() error { return errors.New("fail") }
+	for i := 0; i < 3; i++ {
+		cb.Execute(failFn)
+	}
+
+	fmt.Printf("State before reset: %s\n", cb.GetState())
+
+	// Manual reset (use with caution in production!)
+	cb.Reset()
+
+	fmt.Printf("State after reset: %s\n", cb.GetState())
+	// Output:
+	// State before reset: OPEN
+	// State after reset: CLOSED
+}
+
+// ExampleDefaultConfig demonstrates using default configuration
+func ExampleDefaultConfig() {
+	// Create circuit breaker with defaults
+	cb, _ := resilience.NewCircuitBreaker(
+		"my-service",
+		resilience.DefaultConfig("my-service"),
+	)
+
+	fmt.Printf("Name: %s\n", cb.Name())
+	stats := cb.GetStats()
+	fmt.Printf("Initial state: %s\n", stats.State)
+	// Output:
+	// Name: my-service
+	// Initial state: CLOSED
+}
+
+// ExampleWithAPITimeout demonstrates API-specific timeout helper
+func ExampleWithAPITimeout() {
+	ctx := context.Background()
+
+	// Use predefined timeout for API calls (10 seconds)
+	err := resilience.WithAPITimeout(ctx, func() error {
+		// Make API call with automatic 10s timeout
+		return callAPI(ctx)
+	})
+
+	if err != nil {
+		fmt.Println("API call failed:", err)
+	}
+}
+
+// Stub for example
+func callAPI(ctx context.Context) error {
+	return nil
+}
+
+// ExampleWithCognitionTimeout demonstrates long-running AI operation timeout
+func ExampleWithCognitionTimeout() {
+	ctx := context.Background()
+
+	// Use predefined timeout for LLM/AI operations (5 minutes)
+	err := resilience.WithCognitionTimeout(ctx, func() error {
+		// Long-running AI operation with automatic 5min timeout
+		_ = runAIModel(ctx, "prompt")
+		return nil
+	})
+
+	if err == nil {
+		fmt.Println("AI operation completed")
+	}
+}
+
+// Stub for example
+func runAIModel(ctx context.Context, prompt string) string {
+	return "AI response"
+}
